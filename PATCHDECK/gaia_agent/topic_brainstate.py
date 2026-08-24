@@ -95,7 +95,7 @@
       "name": "test",
       "persons_count": 0,
       "objects": {},
-      "lastUpdate": 1787590237300,
+      "lastUpdate": 1787590263845,
       "people": [],
       "main_user": null,
       "_mediapipe": true,
@@ -110,5 +110,5 @@
       "currentEmotion": "neutral"
     }
   },
-  "ts": 1787590237315
+  "ts": 1787590264319
 }

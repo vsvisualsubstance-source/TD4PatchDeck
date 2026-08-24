@@ -471,48 +471,6 @@
   ],
   "diary": [
     {
-      "ts": 1787590132850,
-      "source": "hue",
-      "category": "battery_level",
-      "value": 71,
-      "person": null
-    },
-    {
-      "ts": 1787590132850,
-      "source": "hue",
-      "category": "battery_low",
-      "value": false,
-      "person": null
-    },
-    {
-      "ts": 1787590142109,
-      "source": "hue",
-      "category": "ambient_light",
-      "value": 2184,
-      "person": null
-    },
-    {
-      "ts": 1787590142113,
-      "source": "hue",
-      "category": "ambient_light",
-      "value": 1.653103327237014,
-      "person": null
-    },
-    {
-      "ts": 1787590142113,
-      "source": "hue",
-      "category": "darkness",
-      "value": true,
-      "person": null
-    },
-    {
-      "ts": 1787590142113,
-      "source": "hue",
-      "category": "daylight",
-      "value": false,
-      "person": null
-    },
-    {
       "ts": 1787590142113,
       "source": "hue",
       "category": "battery_level",
@@ -609,8 +567,50 @@
       "category": "battery_low",
       "value": false,
       "person": null
+    },
+    {
+      "ts": 1787590242156,
+      "source": "hue",
+      "category": "ambient_light",
+      "value": 0,
+      "person": null
+    },
+    {
+      "ts": 1787590242160,
+      "source": "hue",
+      "category": "ambient_light",
+      "value": 0.9997697679981565,
+      "person": null
+    },
+    {
+      "ts": 1787590242161,
+      "source": "hue",
+      "category": "darkness",
+      "value": true,
+      "person": null
+    },
+    {
+      "ts": 1787590242161,
+      "source": "hue",
+      "category": "daylight",
+      "value": false,
+      "person": null
+    },
+    {
+      "ts": 1787590242161,
+      "source": "hue",
+      "category": "battery_level",
+      "value": 70,
+      "person": null
+    },
+    {
+      "ts": 1787590242161,
+      "source": "hue",
+      "category": "battery_low",
+      "value": false,
+      "person": null
     }
   ],
   "voiceCommands": [],
-  "ts": 1787590238498
+  "ts": 1787590264503
 }
