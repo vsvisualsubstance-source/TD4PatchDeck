@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blend Installation Loop</title>
+<style>
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+}
+video {
+  display: none;
+}
+</style>
+</head>
+<body>
+<video id="vid" src="export_1920x1080%20%2819%29-moshed-03-20-01-14-05-304.mp4" muted loop autoplay playsinline preload="auto" crossorigin="anonymous"></video>
+<canvas id="c"></canvas>
+
+<script>
+const canvas = document.getElementById('c')
+const ctx = canvas.getContext('2d')
+const video = document.getElementById('vid')
+
+let W = 1920
+let H = 1080
+let DPR = Math.min(window.devicePixelRatio || 1, 2)
+
+function resize(){
+  const ww = window.innerWidth
+  const hh = window.innerHeight
+  canvas.width = Math.floor(ww * DPR)
+  canvas.height = Math.floor(hh * DPR)
+  canvas.style.width = ww + 'px'
+  canvas.style.height = hh + 'px'
+  ctx.setTransform(DPR,0,0,DPR,0,0)
+  W = ww
+  H = hh
+}
+window.addEventListener('resize', resize)
+resize()
+
+function rnd(a,b){ return a + Math.random()*(b-a) }
+function pick(a){ return a[Math.floor(Math.random()*a.length)] }
+
+const colors = {
+  keyword: '#c586c0',
+  number: '#f78c6c',
+  func: '#82aaff',
+  var: '#d4d4d4',
+  operator: '#f07178',
+  symbol: '#aaaaaa',
+  phrase: '#7CFF5B',
+  phraseSoft: '#caffba'
+}
+
+const keywords = ['let','const','if','for','return','while']
+const funcs = ['Math.sin','noise','fbm','hash2','sqrt']
+const vars = ['x','y','dx','dy','pts','time','speed','index','buffer']
+const operators = ['+','-','*','/','=','=>','&&','||']
+const symbols = ['{','}','(',')','[',']',';']
+
+const poetic = [
+  "Am I awake?",
+  "Is it a dream?",
+  "is this reality?",
+  "look, breath, think",
+  "feel free.",
+  "have no regrets.",
+  "deeper and deeper.",
+  "feel feel feel",
+  "rage, rage",
+  "the dying of the light",
+  "the force that through",
+  "light breaks where no sun shines",
+  "time held me green",
+  "the close and holy darkness",
+  "before I knocked",
+  "the grief ago"
+]
+
+function generateLine(){
+  let parts = []
+
+  if (Math.random() < 0.15){
+    let text = pick(poetic)
+    return [{ t: text, c: colors.phrase, full: true }]
+  }
+
+  let count = Math.floor(rnd(6,16))
+  for(let i=0;i<count;i++){
+    let r = Math.random()
+    if (r < 0.15) parts.push({t:pick(keywords), c:colors.keyword})
+    else if (r < 0.30) parts.push({t:pick(funcs), c:colors.func})
+    else if (r < 0.60) parts.push({t:pick(vars), c:colors.var})
+    else if (r < 0.75) parts.push({t:(Math.random()*100).toFixed(2), c:colors.number})
+    else if (r < 0.9) parts.push({t:pick(operators), c:colors.operator})
+    else parts.push({t:pick(symbols), c:colors.symbol})
+  }
+  return parts
+}
+
+let lines = []
+let spacing = 38
+function build(){
+  lines = []
+  let y = -2200
+  while(y < H + 2200){
+    y += spacing * rnd(0.75,1.2)
+    lines.push({
+      y,
+      tokens: generateLine(),
+      speed: rnd(0.9, 2.4),
+      phase: rnd(0, Math.PI*2)
+    })
+  }
+}
+build()
+window.addEventListener('resize', build)
+
+let time = 0
+
+function ensurePlayback(){
+  if (video.paused) {
+    video.play().catch(() => {})
+  }
+}
+video.addEventListener('ended', () => {
+  video.currentTime = 0
+  ensurePlayback()
+})
+video.addEventListener('canplay', ensurePlayback)
+video.addEventListener('loadeddata', ensurePlayback)
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) ensurePlayback()
+})
+window.addEventListener('pageshow', ensurePlayback)
+window.addEventListener('focus', ensurePlayback)
+window.addEventListener('pointerdown', ensurePlayback, { once: true })
+window.addEventListener('touchstart', ensurePlayback, { once: true })
+ensurePlayback()
+
+function drawVideoLayer(){
+  if (video.readyState < 2) return
+  const vw = video.videoWidth || 1920
+  const vh = video.videoHeight || 1080
+  const scale = Math.max(W / vw, H / vh)
+  const dw = vw * scale
+  const dh = vh * scale
+  const dx = (W - dw) * 0.5
+  const dy = (H - dh) * 0.5
+
+  ctx.save()
+  ctx.globalAlpha = 0.42
+  ctx.filter = 'contrast(1.1) saturate(1.05) brightness(0.9)'
+  ctx.drawImage(video, dx, dy, dw, dh)
+  ctx.restore()
+
+  ctx.fillStyle = 'rgba(0,0,0,0.16)'
+  ctx.fillRect(0,0,W,H)
+}
+
+function drawBackgroundGeometry(){
+  ctx.save()
+  ctx.globalCompositeOperation = 'lighter'
+  ctx.strokeStyle = 'rgba(124,255,91,0.38)'
+  ctx.lineWidth = 2.1
+  const stepX = 36
+  const stepY = 28
+
+  for(let x=0; x<=W; x+=stepX){
+    ctx.beginPath()
+    ctx.moveTo(x + 0.5, 0)
+    ctx.lineTo(x + 0.5, H)
+    ctx.stroke()
+  }
+
+  for(let y=0; y<=H; y+=stepY){
+    ctx.beginPath()
+    ctx.moveTo(0, y + 0.5)
+    ctx.lineTo(W, y + 0.5)
+    ctx.stroke()
+  }
+
+  ctx.strokeStyle = 'rgba(124,255,91,0.62)'
+  ctx.lineWidth = 2.1
+  for(let i=0;i<8;i++){
+    const yy = (time * (0.55 + i*0.03) + i*140) % (H + 120) - 60
+    ctx.beginPath()
+    ctx.moveTo(0, yy)
+    ctx.lineTo(W, yy)
+    ctx.stroke()
+  }
+  ctx.restore()
+}
+
+function drawDiagonalGeometry(){
+  ctx.save()
+  ctx.globalCompositeOperation = 'screen'
+  ctx.strokeStyle = 'rgba(124,255,91,0.22)'
+  ctx.lineWidth = 1.6
+
+  for(let i=-H; i<W+H; i+=54){
+    ctx.beginPath()
+    ctx.moveTo(i, 0)
+    ctx.lineTo(i - H*0.35, H)
+    ctx.stroke()
+  }
+
+  ctx.strokeStyle = 'rgba(210,255,185,0.12)'
+  for(let i=-H; i<W+H; i+=90){
+    ctx.beginPath()
+    ctx.moveTo(i, 0)
+    ctx.lineTo(i - H*0.18, H)
+    ctx.stroke()
+  }
+  ctx.restore()
+}
+
+function drawAtmosphere(){
+  ctx.strokeStyle = 'rgba(124,255,91,0.58)'
+  ctx.lineWidth = 2.1
+  for(let i=0;i<14;i++){
+    const tt = time*0.013 + i*0.35
+    const w = 180 + Math.sin(tt*0.9)*120
+    const h = 18 + Math.cos(tt*1.1)*14
+    const y = H*0.5 + Math.sin(tt+i)*H*0.22
+    ctx.beginPath()
+    ctx.ellipse(W*0.5, y, Math.abs(w), Math.abs(h), 0, 0, Math.PI*2)
+    ctx.stroke()
+    ctx.strokeStyle = 'rgba(210,255,185,0.34)'
+    ctx.beginPath()
+    ctx.ellipse(W*0.5, y, Math.abs(w)*0.72, Math.abs(h)*0.72, 0, 0, Math.PI*2)
+    ctx.stroke()
+    ctx.strokeStyle = 'rgba(124,255,91,0.58)'
+  }
+}
+
+function drawTextLayer(){
+  ctx.save()
+  ctx.font = '28px Menlo, Monaco, monospace'
+  ctx.textBaseline = 'middle'
+
+  for(let l of lines){
+    const isPhraseLine = l.tokens.length === 1 && l.tokens[0].full
+    const localSpeed = isPhraseLine ? l.speed * 0.42 : l.speed
+    let y = l.y + (time * localSpeed) % 2600
+    while(y > H+100) y -= 5200
+    while(y < -100) y += 5200
+
+    let pulse = 0.5 + 0.5*Math.sin(time*0.04 + l.phase)
+
+    let totalWidth = 0
+    for (let tok of l.tokens){
+      totalWidth += ctx.measureText(tok.t).width + 18
+    }
+    totalWidth = Math.max(0, totalWidth - 18)
+    let x = Math.max(40, (W - totalWidth) * 0.5)
+
+    for(let tok of l.tokens){
+      ctx.fillStyle = tok.c
+      ctx.globalAlpha = 0.88 * (0.42 + pulse * 0.62)
+
+      if(tok.full){
+        ctx.font = '35px Menlo, Monaco, monospace'
+        let w = ctx.measureText(tok.t).width
+        let cx = (W - w) * 0.5
+        ctx.fillStyle = '#7CFF5B'
+        ctx.globalAlpha = Math.min(1, 0.88 * (0.56 + pulse * 0.52))
+        ctx.fillText(tok.t, cx, y)
+        ctx.font = '28px Menlo, Monaco, monospace'
+        break
+      }
+
+      ctx.fillText(tok.t, x, y)
+      x += ctx.measureText(tok.t).width + 18
+    }
+
+    if (pulse > 0.962){
+      ctx.fillStyle = 'rgba(255,255,255,0.22)'
+      ctx.fillRect(0, y, W, 1.5)
+    }
+  }
+
+  ctx.restore()
+}
+
+function draw(){
+  ctx.fillStyle = '#000'
+  ctx.fillRect(0,0,W,H)
+
+  drawVideoLayer()
+  drawBackgroundGeometry()
+  drawDiagonalGeometry()
+  drawAtmosphere()
+  drawTextLayer()
+
+  time += 1
+  requestAnimationFrame(draw)
+}
+draw()
+</script>
+</body>
+</html>

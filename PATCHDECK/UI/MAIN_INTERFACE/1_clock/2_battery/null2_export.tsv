@@ -1,0 +1,5 @@
+name	index	path	parameter	enable
+ac_line_status	0	switch1	index	1
+battery_charging	1	switch3	index	1
+ac_line_status	0	switch2	index	0
+ac_line_status	0	switch3	index	1

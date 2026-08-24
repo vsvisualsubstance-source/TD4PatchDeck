@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Machine Scroll — Clean FG 175%</title>
+<style>
+html, body { margin:0; width:100%; height:100%; overflow:hidden; background:black; }
+canvas { display:block; width:100vw; height:100vh; background:black; }
+#hint { position:fixed; left:12px; bottom:10px; color:rgba(255,255,255,0.45); font:12px Arial; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hint">F fullscreen</div>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+let W,H;
+function resize(){
+  W=innerWidth; H=innerHeight;
+  canvas.width=W; canvas.height=H;
+}
+addEventListener('resize',resize);
+resize();
+
+function rnd(a,b){return a+Math.random()*(b-a);}
+
+const FG='rgba(124,255,91,1)';
+const FG_SOFT='rgba(124,255,91,0.6)';
+const FG_DIM='rgba(124,255,91,0.2)';
+
+let cols=[];
+let numCols=30;
+let t=0;
+
+function build(){
+  cols=[];
+  const margin=60;
+  const spacing=(W-margin*2)/(numCols-1);
+
+  for(let i=0;i<numCols;i++){
+    let x=margin+i*spacing;
+    let events=[];
+    let y=-2000;
+    while(y<H+2000){
+      y+=rnd(30,90);
+      events.push({
+        y,
+        type:Math.floor(rnd(0,4)),
+        size:rnd(20,80)
+      });
+    }
+    cols.push({x,speed:rnd(1,3),events});
+  }
+}
+build();
+
+function drawEvent(x,y,e){
+  ctx.lineWidth=2;
+
+  switch(e.type){
+    case 0:
+      ctx.strokeStyle=FG;
+      ctx.beginPath();
+      ctx.moveTo(x,y-e.size);
+      ctx.lineTo(x,y+e.size);
+      ctx.stroke();
+      break;
+
+    case 1:
+      ctx.strokeStyle=FG_SOFT;
+      ctx.strokeRect(x-12,y-e.size*0.5,24,e.size);
+      break;
+
+    case 2:
+      ctx.fillStyle=FG;
+      ctx.beginPath();
+      ctx.arc(x,y,4,0,Math.PI*2);
+      ctx.fill();
+      break;
+
+    case 3:
+      ctx.strokeStyle=FG;
+      ctx.beginPath();
+      ctx.moveTo(x-20,y);
+      ctx.lineTo(x+20,y);
+      ctx.stroke();
+      break;
+  }
+}
+
+function draw(){
+  ctx.fillStyle='black';
+  ctx.fillRect(0,0,W,H);
+
+  for(let c of cols){
+    let off=(t*c.speed)%2000;
+    for(let e of c.events){
+      let y=e.y+off;
+      while(y>H) y-=4000;
+      while(y<0) y+=4000;
+      drawEvent(c.x,y,e);
+    }
+  }
+
+  t+=1;
+  requestAnimationFrame(draw);
+}
+
+draw();
+
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='f'){
+    document.documentElement.requestFullscreen();
+  }
+});
+</script>
+</body>
+</html>

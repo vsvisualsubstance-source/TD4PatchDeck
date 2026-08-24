@@ -1,0 +1,13 @@
+name	index	path	parameter	enable
+Inputfiltertype	3	blurDown	inputfiltertype	1
+Blurtype	1	blurDown	type	1
+Preshrink	4	blurDown	preshrink	1
+Blursize	0	blurDown	size	1
+Samplestep	5	blurDown	offset1	1
+Samplestep	5	blurDown	offset2	1
+Blurtype	1	blurUp	type	1
+Preshrink	4	blurUp	preshrink	1
+Blursize	0	blurUp	size	1
+Samplestep	5	blurUp	offset1	0
+Samplestep	5	blurUp	offset2	0
+	-1			0

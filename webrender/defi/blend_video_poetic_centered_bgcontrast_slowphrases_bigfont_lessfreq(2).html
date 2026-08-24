@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blend HTML — video moshed + poetic code</title>
+<style>
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+}
+#ui {
+  position: fixed;
+  left: 12px;
+  bottom: 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.35);
+  color: rgba(255,255,255,0.85);
+  font: 12px Arial, sans-serif;
+  backdrop-filter: blur(4px);
+}
+#ui input {
+  width: 90px;
+}
+button {
+  background: #111;
+  color: #d7ffd1;
+  border: 1px solid rgba(124,255,91,0.35);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+label {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+</style>
+</head>
+<body>
+<video id="vid" src="export_1920x1080%20%2819%29-moshed-03-20-01-14-05-304.mp4" muted loop playsinline crossorigin="anonymous" style="display:none"></video>
+<canvas id="c"></canvas>
+
+<div id="ui">
+  <button id="playBtn">Play</button>
+  <button id="fullscreenBtn">Fullscreen</button>
+  <label>Video <input id="videoMix" type="range" min="0" max="1" step="0.01" value="0.72"></label>
+  <label>Text <input id="textMix" type="range" min="0" max="1" step="0.01" value="0.88"></label>
+</div>
+
+<script>
+const canvas = document.getElementById('c')
+const ctx = canvas.getContext('2d')
+const video = document.getElementById('vid')
+
+const playBtn = document.getElementById('playBtn')
+const fullscreenBtn = document.getElementById('fullscreenBtn')
+const videoMix = document.getElementById('videoMix')
+const textMix = document.getElementById('textMix')
+
+let W = 1920
+let H = 1080
+let DPR = Math.min(window.devicePixelRatio || 1, 2)
+
+function resize(){
+  const ww = window.innerWidth
+  const hh = window.innerHeight
+  canvas.width = Math.floor(ww * DPR)
+  canvas.height = Math.floor(hh * DPR)
+  canvas.style.width = ww + 'px'
+  canvas.style.height = hh + 'px'
+  ctx.setTransform(DPR,0,0,DPR,0,0)
+  W = ww
+  H = hh
+}
+window.addEventListener('resize', resize)
+resize()
+
+function rnd(a,b){ return a + Math.random()*(b-a) }
+function pick(a){ return a[Math.floor(Math.random()*a.length)] }
+
+const colors = {
+  keyword: '#c586c0',
+  number: '#f78c6c',
+  func: '#82aaff',
+  var: '#d4d4d4',
+  operator: '#f07178',
+  symbol: '#aaaaaa',
+  phrase: '#7CFF5B',
+  phraseSoft: '#caffba'
+}
+
+const keywords = ['let','const','if','for','return','while']
+const funcs = ['Math.sin','noise','fbm','hash2','sqrt']
+const vars = ['x','y','dx','dy','pts','time','speed','index','buffer']
+const operators = ['+','-','*','/','=','=>','&&','||']
+const symbols = ['{','}','(',')','[',']',';']
+
+const poetic = [
+  "Am I awake?",
+  "Is it a dream?",
+  "is this reality?",
+  "look, breath, think",
+  "feel free.",
+  "have no regrets.",
+  "deeper and deeper.",
+  "feel feel feel"
+]
+
+function generateLine(){
+  let parts = []
+
+  if (Math.random() < 0.15){
+    let text = pick(poetic)
+    return [{ t: text, c: colors.phrase, full: true }]
+  }
+
+  let count = Math.floor(rnd(6,16))
+  for(let i=0;i<count;i++){
+    let r = Math.random()
+    if (r < 0.15) parts.push({t:pick(keywords), c:colors.keyword})
+    else if (r < 0.30) parts.push({t:pick(funcs), c:colors.func})
+    else if (r < 0.60) parts.push({t:pick(vars), c:colors.var})
+    else if (r < 0.75) parts.push({t:(Math.random()*100).toFixed(2), c:colors.number})
+    else if (r < 0.9) parts.push({t:pick(operators), c:colors.operator})
+    else parts.push({t:pick(symbols), c:colors.symbol})
+  }
+  return parts
+}
+
+let lines = []
+let spacing = 38
+function build(){
+  lines = []
+  let y = -2200
+  while(y < H + 2200){
+    y += spacing * rnd(0.75,1.2)
+    lines.push({
+      y,
+      tokens: generateLine(),
+      speed: rnd(0.9, 2.4),
+      phase: rnd(0, Math.PI*2)
+    })
+  }
+}
+build()
+window.addEventListener('resize', build)
+
+let time = 0
+
+function drawVideoLayer(){
+  if (video.readyState < 2) return
+  const vw = video.videoWidth || 1920
+  const vh = video.videoHeight || 1080
+  const scale = Math.max(W / vw, H / vh)
+  const dw = vw * scale
+  const dh = vh * scale
+  const dx = (W - dw) * 0.5
+  const dy = (H - dh) * 0.5
+
+  ctx.save()
+  ctx.globalAlpha = parseFloat(videoMix.value)
+  ctx.filter = 'contrast(1.1) saturate(1.05) brightness(0.9)'
+  ctx.drawImage(video, dx, dy, dw, dh)
+  ctx.restore()
+
+  // slight dark wash for readability
+  ctx.fillStyle = 'rgba(0,0,0,0.28)'
+  ctx.fillRect(0,0,W,H)
+}
+
+function drawTextLayer(){
+  ctx.save()
+  ctx.globalAlpha = parseFloat(textMix.value)
+  ctx.font = '28px Menlo, Monaco, monospace'
+  ctx.textBaseline = 'middle'
+
+  for(let l of lines){
+    const isPhraseLine = l.tokens.length === 1 && l.tokens[0].full
+    const localSpeed = isPhraseLine ? l.speed * 0.42 : l.speed
+    let y = l.y + (time * localSpeed) % 2600
+    while(y > H+100) y -= 5200
+    while(y < -100) y += 5200
+
+    let pulse = 0.5 + 0.5*Math.sin(time*0.04 + l.phase)
+    let totalWidth = 0
+    for (let tok of l.tokens){
+      totalWidth += ctx.measureText(tok.t).width + 18
+    }
+    totalWidth = Math.max(0, totalWidth - 18)
+    let x = Math.max(40, (W - totalWidth) * 0.5)
+
+    for(let tok of l.tokens){
+      ctx.fillStyle = tok.c
+      ctx.globalAlpha = parseFloat(textMix.value) * (0.42 + pulse * 0.62)
+
+      if(tok.full){
+        let w = ctx.measureText(tok.t).width
+        let cx = (W - w) * 0.5
+        ctx.fillStyle = '#7CFF5B'
+        ctx.font = '35px Menlo, Monaco, monospace'
+        ctx.globalAlpha = Math.min(1, parseFloat(textMix.value) * (0.56 + pulse * 0.52))
+        ctx.fillText(tok.t, cx, y)
+        break
+      }
+      ctx.font = '28px Menlo, Monaco, monospace'
+
+      ctx.fillText(tok.t, x, y)
+      x += ctx.measureText(tok.t).width + 18
+    }
+
+    if (pulse > 0.962){
+      ctx.fillStyle = 'rgba(255,255,255,0.22)'
+      ctx.fillRect(0, y, W, 1.5)
+    }
+  }
+
+  ctx.restore()
+}
+
+function drawBackgroundGeometry(){
+  ctx.strokeStyle = 'rgba(124,255,91,0.08)'
+  ctx.lineWidth = 1
+  const stepX = 64
+  const stepY = 48
+
+  for(let x=0; x<=W; x+=stepX){
+    ctx.beginPath()
+    ctx.moveTo(x + 0.5, 0)
+    ctx.lineTo(x + 0.5, H)
+    ctx.stroke()
+  }
+
+  for(let y=0; y<=H; y+=stepY){
+    ctx.beginPath()
+    ctx.moveTo(0, y + 0.5)
+    ctx.lineTo(W, y + 0.5)
+    ctx.stroke()
+  }
+
+  ctx.strokeStyle = 'rgba(124,255,91,0.14)'
+  ctx.lineWidth = 1.1
+  for(let i=0;i<8;i++){
+    const yy = (time * (0.55 + i*0.03) + i*140) % (H + 120) - 60
+    ctx.beginPath()
+    ctx.moveTo(0, yy)
+    ctx.lineTo(W, yy)
+    ctx.stroke()
+  }
+}
+
+function drawAtmosphere(){
+  ctx.strokeStyle = 'rgba(124,255,91,0.16)'
+  ctx.lineWidth = 1
+  for(let i=0;i<14;i++){
+    const t = time*0.013 + i*0.35
+    const w = 180 + Math.sin(t*0.9)*120
+    const h = 18 + Math.cos(t*1.1)*14
+    const y = H*0.5 + Math.sin(t+i)*H*0.22
+    ctx.beginPath()
+    ctx.ellipse(W*0.5, y, Math.abs(w), Math.abs(h), 0, 0, Math.PI*2)
+    ctx.stroke()
+    ctx.strokeStyle = 'rgba(210,255,185,0.06)'
+    ctx.beginPath()
+    ctx.ellipse(W*0.5, y, Math.abs(w)*0.72, Math.abs(h)*0.72, 0, 0, Math.PI*2)
+    ctx.stroke()
+  }
+}
+
+function draw(){
+  ctx.fillStyle = '#000'
+  ctx.fillRect(0,0,W,H)
+
+  drawVideoLayer()
+  drawBackgroundGeometry()
+  drawAtmosphere()
+  drawTextLayer()
+
+  time += 1
+  requestAnimationFrame(draw)
+}
+draw()
+
+playBtn.addEventListener('click', async () => {
+  if (video.paused) {
+    try {
+      await video.play()
+      playBtn.textContent = 'Pause'
+    } catch (e) {
+      console.error(e)
+    }
+  } else {
+    video.pause()
+    playBtn.textContent = 'Play'
+  }
+})
+
+fullscreenBtn.addEventListener('click', async () => {
+  if(!document.fullscreenElement){
+    await document.documentElement.requestFullscreen().catch(()=>{})
+  } else {
+    await document.exitFullscreen().catch(()=>{})
+  }
+})
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'f' || e.key === 'F'){
+    if(!document.fullscreenElement){
+      document.documentElement.requestFullscreen().catch(()=>{})
+    } else {
+      document.exitFullscreen().catch(()=>{})
+    }
+  }
+})
+</script>
+</body>
+</html>

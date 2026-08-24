@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Machine Column</title>
+
+<style>
+html, body {
+  margin: 0;
+  background: #0b0b0f;
+  overflow: hidden;
+}
+canvas {
+  display: block;
+}
+</style>
+</head>
+
+<body>
+<canvas id="c"></canvas>
+
+<script>
+const canvas = document.getElementById('c')
+const ctx = canvas.getContext('2d')
+
+let W, H, DPR = Math.min(devicePixelRatio || 1, 2)
+
+function resize(){
+  W = innerWidth
+  H = innerHeight
+  canvas.width = W * DPR
+  canvas.height = H * DPR
+  canvas.style.width = W + 'px'
+  canvas.style.height = H + 'px'
+  ctx.setTransform(DPR,0,0,DPR,0,0)
+}
+addEventListener('resize', resize)
+resize()
+
+function rnd(a,b){ return a + Math.random()*(b-a) }
+function pick(a){ return a[Math.floor(Math.random()*a.length)] }
+
+// 🎨 colori codice
+const colors = {
+  keyword: '#c586c0',
+  number: '#f78c6c',
+  func: '#82aaff',
+  var: '#d4d4d4',
+  operator: '#f07178',
+  symbol: '#aaaaaa'
+}
+
+const keywords = ['let','const','if','for','return','while']
+const funcs = ['Math.sin','noise','fbm','hash2']
+const vars = ['x','y','dx','dy','pts','time','speed']
+const operators = ['+','-','*','/','=','=>']
+const symbols = ['{','}','(',')',';']
+
+function generateLine(){
+  let parts = []
+  let count = Math.floor(rnd(2,5))
+
+  for(let i=0;i<count;i++){
+    let r = Math.random()
+    if (r < 0.2) parts.push({t:pick(keywords), c:colors.keyword})
+    else if (r < 0.4) parts.push({t:pick(funcs), c:colors.func})
+    else if (r < 0.65) parts.push({t:pick(vars), c:colors.var})
+    else if (r < 0.8) parts.push({t:(Math.random()*10).toFixed(2), c:colors.number})
+    else if (r < 0.9) parts.push({t:pick(operators), c:colors.operator})
+    else parts.push({t:pick(symbols), c:colors.symbol})
+  }
+
+  return parts
+}
+
+// 📡 eventi verticali
+let lines = []
+let baseSpacing = 60
+
+function build(){
+  lines = []
+  let y = -2000
+
+  while(y < H + 2000){
+    y += baseSpacing * rnd(0.8,1.4)
+
+    lines.push({
+      y,
+      tokens: generateLine(),
+      speed: rnd(1.2, 3.2),
+      phase: rnd(0, Math.PI*2)
+    })
+  }
+}
+build()
+addEventListener('resize', build)
+
+let time = 0
+
+function draw(){
+  ctx.fillStyle = '#0b0b0f'
+  ctx.fillRect(0,0,W,H)
+
+  // colonna centrale
+  let centerX = W * 0.5
+
+  ctx.font = '42px Menlo, Monaco, monospace'
+  ctx.textBaseline = 'middle'
+
+  for(let l of lines){
+
+    let y = l.y + (time * l.speed) % 2200
+
+    while(y > H+100) y -= 4400
+    while(y < -100) y += 4400
+
+    let pulse = 0.5 + 0.5 * Math.sin(time*0.04 + l.phase)
+
+    let x = centerX - 200
+
+    for(let tok of l.tokens){
+      ctx.fillStyle = tok.c
+      ctx.globalAlpha = 0.5 + pulse * 0.5
+      ctx.fillText(tok.t, x, y)
+      x += ctx.measureText(tok.t).width + 20
+    }
+
+    ctx.globalAlpha = 1
+
+    // linea guida centrale
+    ctx.strokeStyle = 'rgba(255,255,255,0.08)'
+    ctx.beginPath()
+    ctx.moveTo(centerX, 0)
+    ctx.lineTo(centerX, H)
+    ctx.stroke()
+
+    // scanner
+    if (pulse > 0.96){
+      ctx.fillStyle = '#ffffff'
+      ctx.fillRect(centerX-20, y-2, 40, 4)
+    }
+  }
+
+  time += 1
+  requestAnimationFrame(draw)
+}
+
+draw()
+
+document.addEventListener('keydown', e=>{
+  if(e.key === 'f'){
+    if(!document.fullscreenElement){
+      document.documentElement.requestFullscreen()
+    } else {
+      document.exitFullscreen()
+    }
+  }
+})
+</script>
+</body>
+</html>

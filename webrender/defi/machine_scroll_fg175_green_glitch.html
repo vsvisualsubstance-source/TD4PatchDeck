@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Machine Scroll — FG +75% Green Glitch</title>
+<style>
+html, body { margin:0; width:100%; height:100%; overflow:hidden; background:black; }
+canvas { display:block; width:100vw; height:100vh; background:black; }
+#hint { position:fixed; left:12px; bottom:10px; color:rgba(255,255,255,0.45); font:12px Arial; letter-spacing:.08em; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hint">F fullscreen</div>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+let W=1920,H=1080;
+let DPR=Math.min(window.devicePixelRatio||1,2);
+
+function resize(){
+  const ww=window.innerWidth, hh=window.innerHeight;
+  canvas.width=Math.floor(ww*DPR);
+  canvas.height=Math.floor(hh*DPR);
+  canvas.style.width=ww+'px';
+  canvas.style.height=hh+'px';
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  W=ww; H=hh;
+}
+window.addEventListener('resize',resize); resize();
+
+function rnd(a,b){return a+Math.random()*(b-a);}
+
+// GREEN PRIMARY
+const FG='rgba(124,255,91,1)';
+const FG_SOFT='rgba(124,255,91,0.68)';
+const FG_DIM='rgba(124,255,91,0.22)';
+const FG_GLOW='rgba(200,255,180,0.85)';
+
+let globalTime=0;
+let cols=[];
+let numCols=30;
+
+let glitchTimer=0;
+let glitchCooldown=0;
+let glitchMode=0;
+let glitchBands=[];
+
+function buildColumns(){
+  cols=[];
+  const margin=Math.max(60,W*0.05);
+  const spacing=(W-margin*2)/(numCols-1);
+
+  for(let i=0;i<numCols;i++){
+    const x=margin+i*spacing;
+    const speed=rnd(0.9,3.1);
+    const phase=rnd(0,Math.PI*2);
+    const density=rnd(0.6,1.4);
+
+    let events=[];
+    let y=-2600;
+    while(y<H+2600){
+      y+=rnd(24,84)/density;
+      events.push({
+        y,
+        type:Math.floor(rnd(0,6)),
+        size:rnd(18.75,78.75) // original +75%
+      });
+    }
+
+    cols.push({x,speed,phase,density,index:i,events});
+  }
+}
+buildColumns();
+
+function spawnGlitch(){
+  glitchTimer = Math.floor(rnd(8,20));
+  glitchCooldown = Math.floor(rnd(40,110));
+  glitchMode = Math.floor(rnd(0,4));
+  glitchBands = [];
+  const count = Math.floor(rnd(3,8));
+  for(let i=0;i<count;i++){
+    glitchBands.push({
+      y:rnd(0,H-20),
+      h:rnd(8,70),
+      dx:rnd(-90,90),
+      dy:rnd(-8,8)
+    });
+  }
+}
+
+function updateGlitch(){
+  if(glitchTimer>0){
+    glitchTimer--;
+    return;
+  }
+  if(glitchCooldown>0){
+    glitchCooldown--;
+    return;
+  }
+  if(Math.random()<0.03){
+    spawnGlitch();
+  }
+}
+
+function drawGuides(){
+  ctx.lineWidth=1;
+  ctx.strokeStyle=FG_DIM;
+  for(const c of cols){
+    ctx.beginPath();
+    ctx.moveTo(c.x,0);
+    ctx.lineTo(c.x,H);
+    ctx.stroke();
+  }
+}
+
+function drawField(){
+  ctx.lineWidth=1;
+  for(let i=0;i<28;i++){
+    const t=globalTime*0.015+i*0.28;
+    const w=180+Math.sin(t*0.8)*150;
+    const h=28+Math.cos(t*1.1)*22;
+    const y=H*0.5+Math.sin(t+i)*(H*0.28);
+
+    ctx.strokeStyle='rgba(124,255,91,0.08)';
+    ctx.beginPath();
+    ctx.ellipse(W*0.5,y,Math.abs(w),Math.abs(h),0,0,Math.PI*2);
+    ctx.stroke();
+  }
+}
+
+function drawFrame(){
+  ctx.strokeStyle='rgba(124,255,91,0.25)';
+  ctx.lineWidth=1;
+  ctx.strokeRect(20,20,W-40,H-40);
+}
+
+function drawConnections(){
+  ctx.lineWidth=1.5;
+  for(let i=0;i<cols.length-1;i++){
+    if(((Math.floor(globalTime/18)+i)%7)===0){
+      const a=cols[i], b=cols[i+1];
+      const y=(globalTime*(1.5+i*0.03)+i*63)%(H+120)-60;
+      const wave=Math.sin(globalTime*0.03+i)*14;
+
+      ctx.strokeStyle='rgba(124,255,91,0.9)';
+      ctx.beginPath();
+      ctx.moveTo(a.x,y);
+      ctx.bezierCurveTo(a.x+18,y+wave,b.x-18,y-wave,b.x,y);
+      ctx.stroke();
+
+      ctx.fillStyle=FG;
+      ctx.beginPath(); ctx.arc(a.x,y,3.5,0,Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(b.x,y,3.5,0,Math.PI*2); ctx.fill();
+    }
+  }
+}
+
+function drawEvent(x,y,ev,phase,index){
+  const pulse=0.5+0.5*Math.sin(globalTime*0.05+phase+y*0.03);
+  ctx.lineWidth=1.8;
+
+  const localGlitch = glitchTimer>0 && Math.random()<0.12;
+  const gx = localGlitch ? rnd(-18,18) : 0;
+  const gy = localGlitch ? rnd(-4,4) : 0;
+
+  switch(ev.type){
+    case 0:
+      ctx.strokeStyle=FG;
+      ctx.beginPath();
+      ctx.moveTo(x+gx,y-ev.size+gy);
+      ctx.lineTo(x+gx,y+ev.size+gy);
+      ctx.stroke();
+      break;
+
+    case 1:
+      ctx.strokeStyle=FG_SOFT;
+      ctx.strokeRect(x-11+gx,y-ev.size*0.5+gy,22,ev.size);
+      if(localGlitch){
+        ctx.strokeStyle='rgba(200,255,180,0.35)';
+        ctx.strokeRect(x-11+gx+rnd(-6,6),y-ev.size*0.5+gy+rnd(-3,3),22,ev.size);
+      }
+      break;
+
+    case 2:
+      ctx.fillStyle=FG;
+      ctx.beginPath();
+      ctx.arc(x+gx,y+gy,4,0,Math.PI*2);
+      ctx.fill();
+
+      ctx.strokeStyle=`rgba(124,255,91,${0.45+pulse*0.4})`;
+      ctx.beginPath();
+      ctx.arc(x+gx,y+gy,12+pulse*18,0,Math.PI*2);
+      ctx.stroke();
+
+      if(localGlitch){
+        ctx.strokeStyle='rgba(200,255,180,0.28)';
+        ctx.beginPath();
+        ctx.arc(x+gx+rnd(-8,8),y+gy+rnd(-4,4),10+pulse*16,0,Math.PI*2);
+        ctx.stroke();
+      }
+      break;
+
+    case 3:
+      ctx.strokeStyle=FG;
+      const w=15+pulse*24;
+      ctx.beginPath();
+      ctx.moveTo(x-w+gx,y+gy);
+      ctx.lineTo(x+w+gx,y+gy);
+      ctx.moveTo(x+gx,y-9+gy);
+      ctx.lineTo(x+gx,y+9+gy);
+      ctx.stroke();
+      break;
+
+    case 4:
+      ctx.strokeStyle=FG_DIM;
+      ctx.beginPath();
+      for(let i=0;i<4;i++){
+        const yy=y+i*7;
+        ctx.moveTo(x-15+gx,yy+gy);
+        ctx.lineTo(x+15+gx,yy+gy);
+      }
+      ctx.stroke();
+      break;
+
+    case 5:
+      ctx.strokeStyle=FG;
+      ctx.beginPath();
+      ctx.moveTo(x+gx,y-ev.size*0.5+gy);
+      ctx.bezierCurveTo(
+        x+18*Math.sin(globalTime*0.03+index)+gx,
+        y+gy,
+        x-18*Math.cos(globalTime*0.02+index)+gx,
+        y+gy,
+        x+gx,
+        y+ev.size*0.5+gy
+      );
+      ctx.stroke();
+
+      if(localGlitch){
+        ctx.strokeStyle='rgba(200,255,180,0.28)';
+        ctx.beginPath();
+        ctx.moveTo(x+gx+rnd(-6,6),y-ev.size*0.5+gy+rnd(-3,3));
+        ctx.bezierCurveTo(
+          x+24*Math.sin(globalTime*0.03+index)+gx,
+          y+gy,
+          x-24*Math.cos(globalTime*0.02+index)+gx,
+          y+gy,
+          x+gx+rnd(-6,6),
+          y+ev.size*0.5+gy+rnd(-3,3)
+        );
+        ctx.stroke();
+      }
+      break;
+  }
+
+  if(pulse>0.93){
+    ctx.fillStyle=FG_GLOW;
+    ctx.beginPath();
+    ctx.arc(x+gx,y+gy,2.5,0,Math.PI*2);
+    ctx.fill();
+  }
+}
+
+function drawColumns(){
+  for(const c of cols){
+    const offset=(globalTime*c.speed)%1800;
+
+    for(const ev of c.events){
+      let y=ev.y+offset;
+      while(y>H+120) y-=3600;
+      while(y<-120) y+=3600;
+      drawEvent(c.x,y,ev,c.phase,c.index);
+    }
+
+    const scannerY=(globalTime*(c.speed*1.85)+c.index*43)%(H+120)-60;
+    ctx.strokeStyle=FG;
+    ctx.beginPath();
+    ctx.moveTo(c.x-18,scannerY);
+    ctx.lineTo(c.x+18,scannerY);
+    ctx.stroke();
+  }
+}
+
+function applyHardVectorGlitch(){
+  if(glitchTimer<=0) return;
+
+  // large horizontal slices
+  for(const b of glitchBands){
+    const sy = Math.max(0, Math.floor(b.y));
+    const sh = Math.max(2, Math.floor(b.h));
+    ctx.drawImage(canvas, 0, sy, W, sh, b.dx, sy + b.dy, W, sh);
+  }
+
+  // full screen mirrored pulse
+  if(glitchMode===1 || glitchMode===3){
+    ctx.save();
+    ctx.globalAlpha = 0.08;
+    ctx.translate(W,0);
+    ctx.scale(-1,1);
+    ctx.drawImage(canvas,0,0);
+    ctx.restore();
+  }
+
+  // vertical digital tears
+  for(let i=0;i<14;i++){
+    const x = rnd(0,W);
+    const w = rnd(1,5);
+    const dx = rnd(-35,35);
+    ctx.drawImage(canvas, x, 0, w, H, x+dx, rnd(-8,8), w, H);
+  }
+
+  // interference bars
+  ctx.fillStyle='rgba(180,255,160,0.08)';
+  for(let i=0;i<30;i++){
+    ctx.fillRect(rnd(0,W), rnd(0,H), rnd(20,260), rnd(1,4));
+  }
+
+  // bright flash lines
+  ctx.fillStyle='rgba(220,255,220,0.10)';
+  for(let i=0;i<8;i++){
+    ctx.fillRect(0, rnd(0,H), W, rnd(1,2));
+  }
+}
+
+function animate(){
+  updateGlitch();
+
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='black';
+  ctx.fillRect(0,0,W,H);
+
+  drawGuides();
+  drawField();
+  drawColumns();
+  drawConnections();
+  applyHardVectorGlitch();
+  drawFrame();
+
+  globalTime+=1;
+  requestAnimationFrame(animate);
+}
+animate();
+
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='f'||e.key==='F'){
+    if(!document.fullscreenElement){
+      document.documentElement.requestFullscreen().catch(()=>{});
+    }else{
+      document.exitFullscreen().catch(()=>{});
+    }
+  }
+});
+</script>
+</body>
+</html>

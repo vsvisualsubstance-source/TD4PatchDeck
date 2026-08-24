@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Machine Green Glitch V2</title>
+<style>
+html, body {
+  margin: 0;
+  background: #020603;
+  overflow: hidden;
+}
+canvas {
+  display: block;
+}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<script>
+const canvas = document.getElementById('c')
+const ctx = canvas.getContext('2d')
+
+let W, H, DPR = Math.min(window.devicePixelRatio || 1, 2)
+
+function resize() {
+  W = innerWidth
+  H = innerHeight
+  canvas.width = Math.floor(W * DPR)
+  canvas.height = Math.floor(H * DPR)
+  canvas.style.width = W + 'px'
+  canvas.style.height = H + 'px'
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0)
+}
+addEventListener('resize', () => {
+  resize()
+  build()
+})
+resize()
+
+function rnd(a, b) { return a + Math.random() * (b - a) }
+function rndi(a, b) { return Math.floor(rnd(a, b)) }
+function pick(a) { return a[Math.floor(Math.random() * a.length)] }
+
+const BG = '#020603'
+const GREEN_MAIN = '#7CFF5B'
+const GREEN_BRIGHT = '#caffba'
+const GREEN_SOFT = '#4ACB4A'
+const GREEN_DIM = '#1E5F28'
+const GREEN_FAINT = 'rgba(80,255,120,0.06)'
+
+const BITMAP_FONT = '"Courier New", "Lucida Console", monospace'
+
+const identifiers = [
+  'SIGNAL','BUFFER','FRAME','INDEX','TIME','CLOCK','STREAM','CACHE',
+  'NODE','SCAN','ERROR','DELTA','STATE','PACKET','INPUT','OUTPUT',
+  'CHANNEL','MEMORY','OFFSET','VECTOR','FIELD','SYNC','PULSE'
+]
+
+const funcs = [
+  'HASH','NOISE','FBM','MAP','MIX','CLAMP','SQRT','ABS','MOD',
+  'EMIT','PUSH','READ','WRITE','SCAN','SYNC','LOAD'
+]
+
+const numbers = ['0','1','2','4','8','16','32','64','128','255','0.25','0.5','0.75','1.0']
+
+const coherentTemplates = [
+  [
+    ['LET', GREEN_MAIN], [' ', GREEN_SOFT], ['DX', GREEN_BRIGHT], [' ', GREEN_SOFT], ['=', '#69f769'], [' ', GREEN_SOFT], ['P0', GREEN_BRIGHT], [' ', GREEN_SOFT], ['-', '#69f769'], [' ', GREEN_SOFT], ['Q0', GREEN_BRIGHT]
+  ],
+  [
+    ['IF', GREEN_MAIN], [' ', GREEN_SOFT], ['SIGNAL', GREEN_BRIGHT], [' ', GREEN_SOFT], ['!=', '#69f769'], [' ', GREEN_SOFT], ['0', '#98ff7a'], [' ', GREEN_SOFT], ['RETURN', GREEN_MAIN], [' ', GREEN_SOFT], ['FRAME', GREEN_BRIGHT]
+  ],
+  [
+    ['FOR', GREEN_MAIN], [' ', GREEN_SOFT], ['INDEX', GREEN_BRIGHT], [' ', GREEN_SOFT], ['=', '#69f769'], [' ', GREEN_SOFT], ['0', '#98ff7a'], [';', GREEN_SOFT], [' ', GREEN_SOFT], ['INDEX', GREEN_BRIGHT], [' ', GREEN_SOFT], ['<', '#69f769'], [' ', GREEN_SOFT], ['BUFFER', GREEN_BRIGHT], [';', GREEN_SOFT], [' ', GREEN_SOFT], ['INDEX', GREEN_BRIGHT], [' ', GREEN_SOFT], ['+=', '#69f769'], [' ', GREEN_SOFT], ['1', '#98ff7a']
+  ],
+  [
+    ['STREAM', GREEN_BRIGHT], ['.', GREEN_SOFT], ['PUSH', GREEN_MAIN], ['(', GREEN_SOFT], ['FRAME', GREEN_BRIGHT], [')', GREEN_SOFT]
+  ],
+  [
+    ['ERROR', GREEN_BRIGHT], [' ', GREEN_SOFT], ['=', '#69f769'], [' ', GREEN_SOFT], ['ABS', GREEN_MAIN], ['(', GREEN_SOFT], ['DX', GREEN_BRIGHT], [')', GREEN_SOFT]
+  ],
+  [
+    ['SYNC', GREEN_MAIN], ['(', GREEN_SOFT], ['CLOCK', GREEN_BRIGHT], [',', GREEN_SOFT], [' ', GREEN_SOFT], ['STREAM', GREEN_BRIGHT], [')', GREEN_SOFT]
+  ],
+  [
+    ['BUFFER', GREEN_BRIGHT], ['[', GREEN_SOFT], ['INDEX', GREEN_BRIGHT], [']', GREEN_SOFT], [' ', GREEN_SOFT], ['=', '#69f769'], [' ', GREEN_SOFT], ['SIGNAL', GREEN_BRIGHT]
+  ],
+  [
+    ['SCAN', GREEN_MAIN], [' ', GREEN_SOFT], ['NODE', GREEN_BRIGHT], [' ', GREEN_SOFT], ['RETURN', GREEN_MAIN], [' ', GREEN_SOFT], ['DATA', GREEN_BRIGHT]
+  ],
+  [
+    ['CLOCK', GREEN_BRIGHT], [' ', GREEN_SOFT], ['+=', '#69f769'], [' ', GREEN_SOFT], ['1', '#98ff7a']
+  ]
+]
+
+function randomWord() {
+  const roll = Math.random()
+  if (roll < 0.32) return [pick(identifiers), GREEN_BRIGHT]
+  if (roll < 0.54) return [pick(funcs), GREEN_MAIN]
+  if (roll < 0.74) return [pick(numbers), '#98ff7a']
+  if (roll < 0.87) return [pick(['=','!=','==','<','>','+=','-=','*=', '/=','&&','||']), '#69f769']
+  return [pick(['{','}','(',')','[',']',';',':','_','.']), GREEN_SOFT]
+}
+
+function generateCoherentLine() {
+  if (Math.random() < 0.7) {
+    return coherentTemplates[Math.floor(Math.random() * coherentTemplates.length)].map(([t, c]) => ({ t, c }))
+  }
+
+  const out = []
+  const count = rndi(6, 14)
+  for (let i = 0; i < count; i++) {
+    const [t, c] = randomWord()
+    out.push({ t, c })
+    if (i < count - 1 && !['.', '(', ')', '[', ']', ';', ':'].includes(t)) {
+      out.push({ t: ' ', c: GREEN_SOFT })
+    }
+  }
+  return out
+}
+
+function generateBlock() {
+  const style = Math.floor(Math.random() * 5)
+
+  if (style === 0) {
+    return [
+      [{ t: 'FOR', c: GREEN_MAIN }, { t: ' ', c: GREEN_SOFT }, { t: 'INDEX', c: GREEN_BRIGHT }, { t: ' ', c: GREEN_SOFT }, { t: '=', c: '#69f769' }, { t: ' ', c: GREEN_SOFT }, { t: '0', c: '#98ff7a' }, { t: ';', c: GREEN_SOFT }, { t: ' ', c: GREEN_SOFT }, { t: 'INDEX', c: GREEN_BRIGHT }, { t: ' ', c: GREEN_SOFT }, { t: '<', c: '#69f769' }, { t: ' ', c: GREEN_SOFT }, { t: 'BUFFER', c: GREEN_BRIGHT }, { t: ';', c: GREEN_SOFT }, { t: ' ', c: GREEN_SOFT }, { t: 'INDEX', c: GREEN_BRIGHT }, { t: ' ', c: GREEN_SOFT }, { t: '+=', c: '#69f769' }, { t: ' ', c: GREEN_SOFT }, { t: '1', c: '#98ff7a' }, { t: ' ', c: GREEN_SOFT }, { t: '{', c: GREEN_SOFT }],
+      [{ t: '    ', c: GREEN_SOFT }, { t: 'BUFFER', c: GREEN_BRIGHT }, { t: '[', c: GREEN_SOFT }, { t: 'INDEX', c: GREEN_BRIGHT }, { t: ']', c: GREEN_SOFT }, { t: ' ', c: GREEN_SOFT }, { t: '=', c: '#69f769' }, { t: ' ', c: GREEN_SOFT }, { t: 'HASH', c: GREEN_MAIN }, { t: '(', c: GREEN_SOFT }, { t: 'SIGNAL', c: GREEN_BRIGHT }, { t: ')', c: GREEN_SOFT }],
+      [{ t: '}', c: GREEN_SOFT }]
+    ]
+  }
+
+  if (style === 1) {
+    return [
+      [{ t: 'IF', c: GREEN_MAIN }, { t: ' ', c: GREEN_SOFT }, { t: 'ERROR', c: GREEN_BRIGHT }, { t: ' ', c: GREEN_SOFT }, { t: '>', c: '#69f769' }, { t: ' ', c: GREEN_SOFT }, { t: '0.75', c: '#98ff7a' }, { t: ' ', c: GREEN_SOFT }, { t: '{', c: GREEN_SOFT }],
+      [{ t: '    ', c: GREEN_SOFT }, { t: 'SYNC', c: GREEN_MAIN }, { t: '(', c: GREEN_SOFT }, { t: 'CLOCK', c: GREEN_BRIGHT }, { t: ',', c: GREEN_SOFT }, { t: ' ', c: GREEN_SOFT }, { t: 'STREAM', c: GREEN_BRIGHT }, { t: ')', c: GREEN_SOFT }],
+      [{ t: '    ', c: GREEN_SOFT }, { t: 'RETURN', c: GREEN_MAIN }, { t: ' ', c: GREEN_SOFT }, { t: 'FRAME', c: GREEN_BRIGHT }],
+      [{ t: '}', c: GREEN_SOFT }]
+    ]
+  }
+
+  if (style === 2) {
+    return [
+      [{ t: 'LET', c: GREEN_MAIN }, { t: ' ', c: GREEN_SOFT }, { t: 'DX', c: GREEN_BRIGHT }, { t: ' ', c: GREEN_SOFT }, { t: '=', c: '#69f769' }, { t: ' ', c: GREEN_SOFT }, { t: 'P0', c: GREEN_BRIGHT }, { t: ' ', c: GREEN_SOFT }, { t: '-', c: '#69f769' }, { t: ' ', c: GREEN_SOFT }, { t: 'Q0', c: GREEN_BRIGHT }],
+      [{ t: 'LET', c: GREEN_MAIN }, { t: ' ', c: GREEN_SOFT }, { t: 'DY', c: GREEN_BRIGHT }, { t: ' ', c: GREEN_SOFT }, { t: '=', c: '#69f769' }, { t: ' ', c: GREEN_SOFT }, { t: 'P1', c: GREEN_BRIGHT }, { t: ' ', c: GREEN_SOFT }, { t: '-', c: '#69f769' }, { t: ' ', c: GREEN_SOFT }, { t: 'Q1', c: GREEN_BRIGHT }],
+      [{ t: 'ERROR', c: GREEN_BRIGHT }, { t: ' ', c: GREEN_SOFT }, { t: '=', c: '#69f769' }, { t: ' ', c: GREEN_SOFT }, { t: 'ABS', c: GREEN_MAIN }, { t: '(', c: GREEN_SOFT }, { t: 'DX', c: GREEN_BRIGHT }, { t: ')', c: GREEN_SOFT }]
+    ]
+  }
+
+  if (style === 3) {
+    return [
+      [{ t: 'STREAM', c: GREEN_BRIGHT }, { t: '.', c: GREEN_SOFT }, { t: 'PUSH', c: GREEN_MAIN }, { t: '(', c: GREEN_SOFT }, { t: 'FRAME', c: GREEN_BRIGHT }, { t: ')', c: GREEN_SOFT }],
+      [{ t: 'CACHE', c: GREEN_BRIGHT }, { t: '[', c: GREEN_SOFT }, { t: 'OFFSET', c: GREEN_BRIGHT }, { t: ']', c: GREEN_SOFT }, { t: ' ', c: GREEN_SOFT }, { t: '=', c: '#69f769' }, { t: ' ', c: GREEN_SOFT }, { t: 'BUFFER', c: GREEN_BRIGHT }],
+      [{ t: 'CLOCK', c: GREEN_BRIGHT }, { t: ' ', c: GREEN_SOFT }, { t: '+=', c: '#69f769' }, { t: ' ', c: GREEN_SOFT }, { t: '1', c: '#98ff7a' }]
+    ]
+  }
+
+  return [
+    generateCoherentLine(),
+    generateCoherentLine(),
+    generateCoherentLine()
+  ]
+}
+
+let lines = []
+let bgLines = []
+const mainSpacing = 34
+const bgSpacing = 24
+
+function build() {
+  lines = []
+  bgLines = []
+
+  let y = -2800
+  while (y < H + 2800) {
+    y += mainSpacing * rnd(0.9, 1.15)
+
+    const useBlock = Math.random() < 0.42
+    if (useBlock) {
+      const block = generateBlock()
+      const speed = rnd(0.85, 2.0)
+      const phase = rnd(0, Math.PI * 2)
+
+      for (let i = 0; i < block.length; i++) {
+        lines.push({
+          y: y + i * 28,
+          tokens: block[i],
+          speed,
+          phase: phase + i * 0.11,
+          block: true
+        })
+      }
+      y += (block.length - 1) * 28
+    } else {
+      lines.push({
+        y,
+        tokens: generateCoherentLine(),
+        speed: rnd(0.85, 2.0),
+        phase: rnd(0, Math.PI * 2),
+        block: false
+      })
+    }
+  }
+
+  let by = -2600
+  while (by < H + 2600) {
+    by += bgSpacing * rnd(0.8, 1.15)
+    bgLines.push({
+      y: by,
+      tokens: generateCoherentLine(),
+      speed: rnd(0.35, 0.85),
+      phase: rnd(0, Math.PI * 2),
+      drift: rnd(-20, 20)
+    })
+  }
+}
+build()
+
+let time = 0
+let glitchBands = []
+let glitchCooldown = 0
+
+function spawnGlitchBands() {
+  glitchBands = []
+  const count = rndi(1, 4)
+  for (let i = 0; i < count; i++) {
+    const h = rnd(18, 90)
+    glitchBands.push({
+      y: rnd(0, H - h),
+      h,
+      life: rndi(8, 20),
+      mirror: Math.random() < 0.45,
+      shift: rnd(-50, 50),
+      noise: rnd(0.6, 1.2)
+    })
+  }
+}
+
+function updateGlitch() {
+  if (glitchBands.length === 0) {
+    if (glitchCooldown > 0) glitchCooldown--
+    if (glitchCooldown === 0 && Math.random() < 0.02) {
+      spawnGlitchBands()
+      glitchCooldown = rndi(30, 100)
+    }
+  } else {
+    for (let i = glitchBands.length - 1; i >= 0; i--) {
+      glitchBands[i].life--
+      if (glitchBands[i].life <= 0) glitchBands.splice(i, 1)
+    }
+  }
+}
+
+function drawBackground() {
+  ctx.fillStyle = BG
+  ctx.fillRect(0, 0, W, H)
+}
+
+function drawScanlines() {
+  ctx.strokeStyle = 'rgba(80,255,120,0.04)'
+  ctx.lineWidth = 1
+  for (let y = 0; y < H; y += 3) {
+    ctx.beginPath()
+    ctx.moveTo(0, y + 0.5)
+    ctx.lineTo(W, y + 0.5)
+    ctx.stroke()
+  }
+}
+
+function drawGuides() {
+  ctx.strokeStyle = 'rgba(80,255,120,0.07)'
+  ctx.lineWidth = 1
+  const cols = Math.max(8, Math.floor(W / 140))
+  for (let i = 0; i <= cols; i++) {
+    const x = (W / cols) * i
+    ctx.beginPath()
+    ctx.moveTo(x, 0)
+    ctx.lineTo(x, H)
+    ctx.stroke()
+  }
+}
+
+function drawBgInterference() {
+  ctx.textBaseline = 'middle'
+  ctx.font = `16px ${BITMAP_FONT}`
+
+  for (const l of bgLines) {
+    let y = l.y + (time * l.speed) % 1800
+    while (y > H + 70) y -= 3600
+    while (y < -70) y += 3600
+
+    let x = 22 + l.drift + Math.sin(time * 0.01 + l.phase) * 12
+    const alpha = 0.10 + (0.5 + 0.5 * Math.sin(time * 0.02 + l.phase)) * 0.08
+
+    ctx.globalAlpha = alpha
+
+    for (let i = 0; i < l.tokens.length; i++) {
+      const tok = l.tokens[i]
+      ctx.fillStyle = GREEN_DIM
+      ctx.fillText(tok.t, x, y)
+      x += ctx.measureText(tok.t).width
+      if (x > W - 40) {
+        y += 17
+        x = 22 + l.drift
+      }
+    }
+  }
+
+  ctx.globalAlpha = 1
+}
+
+function drawMainText() {
+  ctx.textBaseline = 'middle'
+  ctx.font = `28px ${BITMAP_FONT}`
+
+  for (const l of lines) {
+    let baseY = l.y + (time * l.speed) % 2300
+    while (baseY > H + 90) baseY -= 4600
+    while (baseY < -90) baseY += 4600
+
+    let x = 28
+    let y = baseY
+    const pulse = 0.5 + 0.5 * Math.sin(time * 0.04 + l.phase)
+
+    for (let i = 0; i < l.tokens.length; i++) {
+      const tok = l.tokens[i]
+      ctx.globalAlpha = 0.35 + pulse * 0.55
+      ctx.fillStyle = tok.c
+      ctx.fillText(tok.t, x, y)
+      x += ctx.measureText(tok.t).width
+
+      if (x > W - 36) {
+        y += 30
+        x = 28
+      }
+    }
+
+    if (pulse > 0.968) {
+      ctx.globalAlpha = 0.9
+      ctx.fillStyle = GREEN_BRIGHT
+      ctx.fillRect(0, baseY - 1, W, 2)
+    }
+  }
+
+  ctx.globalAlpha = 1
+}
+
+function applyBandGlitch() {
+  if (glitchBands.length === 0) return
+
+  for (const b of glitchBands) {
+    const sy = Math.max(0, Math.floor(b.y))
+    const sh = Math.max(1, Math.floor(b.h))
+    const dx = b.shift + Math.sin(time * 0.25 + b.y) * 10
+
+    ctx.save()
+
+    if (b.mirror) {
+      ctx.translate(W, 0)
+      ctx.scale(-1, 1)
+      ctx.drawImage(canvas, 0, sy, W, sh, -dx, sy + rnd(-3, 3), W, sh)
+    } else {
+      ctx.drawImage(canvas, 0, sy, W, sh, dx, sy + rnd(-3, 3), W, sh)
+    }
+
+    ctx.restore()
+
+    ctx.fillStyle = 'rgba(120,255,120,0.06)'
+    for (let i = 0; i < 10; i++) {
+      const rx = rnd(0, W)
+      const ry = rnd(sy, sy + sh)
+      const rw = rnd(20, 140)
+      const rh = rnd(1, 3)
+      ctx.fillRect(rx, ry, rw, rh)
+    }
+
+    ctx.strokeStyle = 'rgba(180,255,180,0.12)'
+    ctx.strokeRect(0, sy + 0.5, W, sh)
+  }
+}
+
+function drawVignette() {
+  const g = ctx.createLinearGradient(0, 0, 0, H)
+  g.addColorStop(0, 'rgba(0,0,0,0.30)')
+  g.addColorStop(0.18, 'rgba(0,0,0,0.07)')
+  g.addColorStop(0.5, 'rgba(0,0,0,0.0)')
+  g.addColorStop(0.82, 'rgba(0,0,0,0.07)')
+  g.addColorStop(1, 'rgba(0,0,0,0.30)')
+  ctx.fillStyle = g
+  ctx.fillRect(0, 0, W, H)
+}
+
+function drawFrame() {
+  ctx.strokeStyle = 'rgba(100,255,120,0.12)'
+  ctx.lineWidth = 1
+  ctx.strokeRect(16, 16, W - 32, H - 32)
+}
+
+function animate() {
+  updateGlitch()
+  drawBackground()
+  drawBgInterference()
+  drawGuides()
+  drawMainText()
+  applyBandGlitch()
+  drawScanlines()
+  drawVignette()
+  drawFrame()
+
+  time += 1
+  requestAnimationFrame(animate)
+}
+
+animate()
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'f' || e.key === 'F') {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {})
+    } else {
+      document.exitFullscreen().catch(() => {})
+    }
+  }
+})
+</script>
+</body>
+</html>

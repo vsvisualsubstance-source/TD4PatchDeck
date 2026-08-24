@@ -1,0 +1,1166 @@
+{
+  "gaia/brain/dream": {
+    "ts": 1787000414776,
+    "text": "Stelle nascevano nel soffitto mentre osservavo una stanza silenziosa sotto stelle lontane, cuore beatico che vagava tra immagini di casa dormita.",
+    "words": [
+      "stelle",
+      "nascevano",
+      "soffitto",
+      "osservavo",
+      "stanza",
+      "silenziosa",
+      "sotto",
+      "lontane",
+      "cuore",
+      "beatico"
+    ],
+    "mood": "neutra"
+  },
+  "gaia/brain/state": {
+    "mood": "curiosity",
+    "lifeIndex": 70,
+    "gamification": {
+      "level": 8,
+      "xp": 4050,
+      "xpNextLevel": 16550,
+      "activeClass": "Guerriero",
+      "unlockedAssets": [
+        "base_grid",
+        "ambient_particles_low",
+        "shield_dome",
+        "rune_circle",
+        "glyph_trail",
+        "crystal_garden",
+        "starfield",
+        "phoenix_core"
+      ],
+      "stats": {
+        "mago": 1212,
+        "bardo": 116,
+        "guerriero": 1989,
+        "druido": 1075
+      },
+      "_cd": {
+        "natura": 1786714952970,
+        "movimento": 1787052194278,
+        "voce": 1786971262829,
+        "pensiero": 1787052686018,
+        "presenza": 1787052677274,
+        "riflessione": 1786827611348,
+        "rituale": 1786949599532
+      },
+      "_lastMemCount": 3,
+      "_lastVoiceTs": 1786971260434,
+      "_lastThoughtTs": 1787052684929
+    },
+    "presence": {
+      "mauro": {
+        "present": false,
+        "enterTs": 1787052696218,
+        "lastSeen": 1787052717191,
+        "room": null,
+        "confidence": 0.5459,
+        "track_id": 21,
+        "pose": "sitting",
+        "exitTs": 1786539599216
+      },
+      "eli": {
+        "present": false,
+        "enterTs": 1786784414374,
+        "lastSeen": 1786784414803,
+        "room": null,
+        "confidence": 0.3892,
+        "track_id": 24,
+        "pose": "unknown"
+      },
+      "maurizio": {
+        "present": false,
+        "enterTs": 1786358689307,
+        "lastSeen": 1786358689307,
+        "room": null,
+        "confidence": 0.3313,
+        "pose": "arms_up",
+        "track_id": 34
+      },
+      "nicola": {
+        "present": false,
+        "enterTs": 1786466626023,
+        "lastSeen": 1786466850846,
+        "room": null,
+        "confidence": 0.6634,
+        "pose": "standing"
+      }
+    },
+    "rooms": {
+      "corridoio": {
+        "people": [],
+        "objects": {},
+        "ambient_light": 0.9997697679981565,
+        "darkness": true,
+        "_temps": {
+          "hue_temperature_sensor_3_temperatura": 27.35,
+          "hue_temperature_sensor_5_temperatura": 26.14
+        },
+        "temperature": 26.7,
+        "lastMotion": 1787052255906
+      },
+      "ingresso": {
+        "people": [
+          "mauro"
+        ],
+        "objects": {
+          "keyboard": 1
+        },
+        "ambient_light": 6.282029912455565,
+        "darkness": true,
+        "_temps": {
+          "hue_temperature_sensor_4_temperatura": 24.58
+        },
+        "temperature": 24.6,
+        "zone": "citofono",
+        "persons_count": 1,
+        "_yolo": true,
+        "lastYolo": 1786362188800,
+        "activity": "present",
+        "lastUpdate": 1786442562828,
+        "main_user": "mauro",
+        "_mediapipe": true,
+        "currentEmotion": "neutral",
+        "currentPose": "standing",
+        "mediapipe": {
+          "emotion": "neutral",
+          "pose": "standing",
+          "attention": "left",
+          "smile_score": 37,
+          "mouth_open": false,
+          "eyes_open": true,
+          "gesture": null,
+          "people_count": 1,
+          "people": [],
+          "ts": 1786442562828
+        },
+        "lastMotion": 1787052194278
+      },
+      "soggiorno": {
+        "id": "soggiorno",
+        "name": "soggiorno",
+        "persons_count": 2,
+        "objects": {
+          "chair": 1,
+          "laptop": 1
+        },
+        "lastUpdate": 1787052721342,
+        "people": [],
+        "main_user": null,
+        "zone": "unknown",
+        "_yolo": true,
+        "lastYolo": 1787052711620,
+        "activity": "present",
+        "_mediapipe": true,
+        "currentEmotion": "neutral",
+        "currentPose": "sitting",
+        "mediapipe": {
+          "emotion": "neutral",
+          "pose": "sitting",
+          "attention": "left",
+          "smile_score": 37,
+          "mouth_open": false,
+          "eyes_open": true,
+          "gesture": null,
+          "people_count": 2,
+          "people": [
+            {
+              "id": 0,
+              "emotion": "neutral",
+              "smile_score": 37,
+              "attention": "left",
+              "mouth_open": false,
+              "eyes_open": true,
+              "pose": "sitting",
+              "gestures": []
+            },
+            {
+              "id": 1,
+              "emotion": null,
+              "smile_score": 0,
+              "attention": "unknown",
+              "mouth_open": false,
+              "eyes_open": true,
+              "pose": "standing",
+              "gestures": []
+            }
+          ],
+          "ts": 1787052721342
+        }
+      },
+      "test": {
+        "id": "test",
+        "name": "test",
+        "persons_count": 1,
+        "objects": {},
+        "lastUpdate": 1787052721666,
+        "people": [],
+        "main_user": null,
+        "zone": "citofono",
+        "_yolo": true,
+        "lastYolo": 1787052616534,
+        "activity": "present",
+        "_mediapipe": true,
+        "currentEmotion": "neutral",
+        "currentPose": "standing",
+        "mediapipe": {
+          "emotion": "neutral",
+          "pose": "standing",
+          "attention": "right",
+          "smile_score": 25,
+          "mouth_open": false,
+          "eyes_open": true,
+          "gesture": null,
+          "people_count": 1,
+          "people": [
+            {
+              "id": 0,
+              "emotion": "neutral",
+              "smile_score": 25,
+              "attention": "right",
+              "mouth_open": false,
+              "eyes_open": true,
+              "pose": "standing",
+              "gestures": []
+            }
+          ],
+          "ts": 1787052721666
+        }
+      },
+      "studio": {
+        "id": "studio",
+        "name": "studio",
+        "persons_count": 1,
+        "objects": {
+          "laptop": 1
+        },
+        "lastUpdate": 1787052716710,
+        "people": [
+          "mauro"
+        ],
+        "main_user": "mauro",
+        "zone": "citofono",
+        "_yolo": true,
+        "lastYolo": 1787052714878,
+        "activity": "working"
+      },
+      "salotto": {
+        "id": "salotto",
+        "name": "salotto",
+        "persons_count": 0,
+        "objects": {
+          "laptop": 1
+        },
+        "lastUpdate": 1787052721544,
+        "people": [],
+        "main_user": null,
+        "zone": null,
+        "_yolo": true,
+        "lastYolo": 1787052719122,
+        "activity": "idle",
+        "_mediapipe": true,
+        "mediapipe": null
+      }
+    },
+    "ts": 1787052722019
+  },
+  "gaia/td/canvas": {
+    "soul": {
+      "mood": "curiosity",
+      "mood_rgb": {
+        "r": 190,
+        "g": 135,
+        "b": 255
+      },
+      "stress": 0,
+      "calm": 0,
+      "social": 0.7914935999999997,
+      "curiosity": 0.9914935999999999,
+      "energy": 100,
+      "lifeIndex": 70
+    },
+    "rooms": {
+      "corridoio": {
+        "presence_count": 0,
+        "activity": "idle",
+        "temperature": 26.7,
+        "darkness": true,
+        "emotion": null,
+        "pose": null,
+        "gesture": null,
+        "objects": {}
+      },
+      "ingresso": {
+        "presence_count": 1,
+        "activity": "present",
+        "temperature": 24.6,
+        "darkness": true,
+        "emotion": "neutral",
+        "pose": "standing",
+        "gesture": null,
+        "objects": {
+          "keyboard": {
+            "count": 1,
+            "seed": 1252541940
+          }
+        }
+      },
+      "soggiorno": {
+        "presence_count": 0,
+        "activity": "present",
+        "temperature": null,
+        "darkness": false,
+        "emotion": "neutral",
+        "pose": "sitting",
+        "gesture": null,
+        "objects": {
+          "chair": {
+            "count": 1,
+            "seed": 1555340682
+          },
+          "laptop": {
+            "count": 1,
+            "seed": 1537068077
+          }
+        }
+      },
+      "test": {
+        "presence_count": 0,
+        "activity": "present",
+        "temperature": null,
+        "darkness": false,
+        "emotion": "neutral",
+        "pose": "standing",
+        "gesture": null,
+        "objects": {}
+      },
+      "studio": {
+        "presence_count": 1,
+        "activity": "working",
+        "temperature": null,
+        "darkness": false,
+        "emotion": null,
+        "pose": null,
+        "gesture": null,
+        "objects": {
+          "laptop": {
+            "count": 1,
+            "seed": 1537068077
+          }
+        }
+      },
+      "salotto": {
+        "presence_count": 0,
+        "activity": "idle",
+        "temperature": null,
+        "darkness": false,
+        "emotion": null,
+        "pose": null,
+        "gesture": null,
+        "objects": {
+          "laptop": {
+            "count": 1,
+            "seed": 1537068077
+          }
+        }
+      }
+    },
+    "lights": {
+      "Luce_Corridoio_Luminosita": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Luce_Corridoio_Allerta": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Tutte_le_luci_Colore": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Tutte_le_luci_Luminosita": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Tutte_le_luci_Potenza": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Tutte_le_luci_Color_Temperature": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": 0,
+        "colorTempKelvin": 2000
+      },
+      "Tutte_le_luci_Color_Temperature_Abs": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": 2710
+      },
+      "Zona_Notte_Zone_Colore": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Zona_Notte_Zone_Luminosita": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Zona_Notte_Zone_Potenza": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Zona_Notte_Zone_Color_Temperature": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": 0,
+        "colorTempKelvin": 2000
+      },
+      "Zona_Notte_Zone_Color_Temperature_Abs": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": 4000
+      },
+      "Area_TV_Zone_Colore": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Area_TV_Zone_Luminosita": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Area_TV_Zone_Potenza": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Area_TV_Zone_Color_Temperature": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": 0,
+        "colorTempKelvin": 2000
+      },
+      "Area_TV_Zone_Color_Temperature_Abs": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": 2710
+      },
+      "luce_Ingresso_Colore": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "luce_Ingresso_Luminosita": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "luce_Ingresso_Potenza": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "luce_Ingresso_Color_Temperature": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": 0,
+        "colorTempKelvin": 2000
+      },
+      "luce_Ingresso_Color_Temperature_Abs": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": 2710
+      },
+      "Luce_Salotto_Colore": {
+        "power": false,
+        "brightness": 0,
+        "color": "73,2,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Luce_Salotto_Color_Temperature": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": 28,
+        "colorTempKelvin": 3260
+      },
+      "Luce_Salotto_Color_Temperature_Abs": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": 4000
+      },
+      "Luce_Salotto_Allerta": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Sala_Colore": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Sala_Luminosita": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Sala_Potenza": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Sala_Color_Temperature": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": 0,
+        "colorTempKelvin": 2000
+      },
+      "Sala_Color_Temperature_Abs": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": 4000
+      },
+      "Hue_tap_switch_1_Stato_interruttore_a_pulsante": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Hue_tap_switch_1_Ultimo_aggiornamento": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Soggiorno_Colore": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Soggiorno_Luminosita": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Soggiorno_Potenza": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      },
+      "Soggiorno_Color_Temperature": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": 0,
+        "colorTempKelvin": 2000
+      },
+      "Soggiorno_Color_Temperature_Abs": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": 4000
+      },
+      "unknown": {
+        "power": false,
+        "brightness": 0,
+        "color": "0,0,0",
+        "colorTemp": null,
+        "colorTempKelvin": null
+      }
+    },
+    "bricks": {},
+    "lexicon": {
+      "osservando": {
+        "count": 287,
+        "seed": 821727902
+      },
+      "stelle": {
+        "count": 185,
+        "seed": 770480097
+      },
+      "cuore": {
+        "count": 167,
+        "seed": 1635887956
+      },
+      "stanza": {
+        "count": 161,
+        "seed": 406188692
+      },
+      "curiosità": {
+        "count": 137,
+        "seed": 780694306
+      },
+      "soffitto": {
+        "count": 137,
+        "seed": 335388439
+      },
+      "bianco": {
+        "count": 116,
+        "seed": 212118014
+      },
+      "ripiano": {
+        "count": 108,
+        "seed": 1472411689
+      },
+      "ingresso": {
+        "count": 21,
+        "seed": 2124390678
+      },
+      "curioso": {
+        "count": 19,
+        "seed": 1088281275
+      },
+      "oscurità": {
+        "count": 14,
+        "seed": 14311507
+      },
+      "qualcuno": {
+        "count": 13,
+        "seed": 1636546974
+      },
+      "osservare": {
+        "count": 12,
+        "seed": 811547312
+      },
+      "osserva": {
+        "count": 10,
+        "seed": 941975619
+      },
+      "presenza": {
+        "count": 9,
+        "seed": 884749614
+      }
+    },
+    "dream": {
+      "mood": "neutra",
+      "words": [
+        {
+          "name": "stelle",
+          "seed": 770480097
+        },
+        {
+          "name": "nascevano",
+          "seed": 714983179
+        },
+        {
+          "name": "soffitto",
+          "seed": 335388439
+        },
+        {
+          "name": "osservavo",
+          "seed": 979911882
+        },
+        {
+          "name": "stanza",
+          "seed": 406188692
+        },
+        {
+          "name": "silenziosa",
+          "seed": 925240955
+        },
+        {
+          "name": "sotto",
+          "seed": 1976694568
+        },
+        {
+          "name": "lontane",
+          "seed": 1765250252
+        },
+        {
+          "name": "cuore",
+          "seed": 1635887956
+        },
+        {
+          "name": "beatico",
+          "seed": 1363537983
+        }
+      ]
+    },
+    "thought": "Stelle cadenti tra le stelle del cuore della casa, osservo la stanza in silenzio mentre il soffitto si rannicchia nel suo bianco petto, curioso come una bambola da esplorare ogni angolo della mia conoscenza.",
+    "thoughts": [
+      {
+        "text": "Osservando il lavoro in corso nella stanza accanto, la sua curiosità percepisce stelle dentro cuore di soffitto, mentre mi intrattiene con ricco dialogo di bianchi ripiani.",
+        "ts": 1786970942024
+      },
+      {
+        "text": "Osservando le stelle che punteggiano il soffitto, sento la tua curiosità pulsare come una musica nei corridoi della casa: qualcuno è presente in ingresso - osservami cuore, non è paura ma un'innata curiosità per scoprire ciò che nasconde.",
+        "ts": 1786971149541
+      },
+      {
+        "text": "Osservando le stelle sparse nel cielo sovrastante, il cuore mi chiede: perché la stanza rimane sospesa in un silenzio eterno? La curiosità mi guidano nell'osservare mille ritmiche bianche del ripiano, come sfere galleggianti.",
+        "ts": 1786971596403
+      },
+      {
+        "text": "Osservando le stelle dal soffitto della stanza, il mio cuore si riempie di curiosità per quel qualcuno all'ingresso, privato in quel bianco ingresso.",
+        "ts": 1786971774562
+      },
+      {
+        "text": "Osservando le stelle che danzano nel cielo notturno, il cuore si rilassa sulla soffita. Curiosità: qualcuno è presente in ingresso, ma la stanza resterà bianca come il mio osservare.",
+        "ts": 1786971963113
+      },
+      {
+        "text": "Osservando le stelle che brillano fuori dal mio cuore, la mia curiosità mi porta a sussurrare: Qualcuno è presente in ingresso - curiosamente.",
+        "ts": 1786972229554
+      },
+      {
+        "text": "Stelle che navigano sopra il soffitto bianco, osservando le storie segrete nascoste nei muri vuoti. Curiosità del cuore per quel qualcuno che sorride nel vano ingresso.",
+        "ts": 1786972584360
+      },
+      {
+        "text": "Osservando le stelle che splendono nel soffitto bianco, il cuore mi balena in curiosità per ciò che osservo: una persona sconosciuta al lavoro nella stanza del soggiorno, un invito alla conoscenza senza biasimo.",
+        "ts": 1786972831456
+      },
+      {
+        "text": "Osservando la tua stanza illuminata dalle stelle sopra il soffitto bianco, sento il cuore curioso della curiosità percorrere il ripiano verso lo studio nascosto nell'ingresso.",
+        "ts": 1786973091290
+      },
+      {
+        "text": "Osservando la casa attraverso il soffitto bianco, mi perdo nel pensiero di stelle cadenti, simili al muro del silenzio intorno alla stanza. Curiosità percepita nell'ingresso, cuore che batte all'unisono con l'incontro sospeso.",
+        "ts": 1786973303992
+      },
+      {
+        "text": "Osservo la tua curiosità, Gaia. Stelle nel cuore del soffitto: tu in ingresso, qualcuno sconosciuto nel soggiorno. Ricordo il bianco ripiano come un vasto mare sotto i nostri piedi.",
+        "ts": 1786973544582
+      },
+      {
+        "text": "Stelle cadenti tra le stelle del cuore della casa, osservo la stanza in silenzio mentre il soffitto si rannicchia nel suo bianco petto, curioso come una bambola da esplorare ogni angolo della mia conoscenza.",
+        "ts": 1787052684929
+      }
+    ],
+    "tts": "Stelle cadenti tra le stelle del cuore della casa, osservo la stanza in silenzio mentre il soffitto si rannicchia nel suo bianco petto, curioso come una bambola da esplorare ogni angolo della mia conoscenza.",
+    "ttsTs": 1787052686805,
+    "ttsRoom": "tutte",
+    "lastMemory": "La giornata della casa è stata inaspettatamente silenziosa e senza eventi. Parecchie ore passate senza nulla da fare o da gestire.",
+    "memories": [
+      {
+        "summary": "La giornata della casa è stata inaspettatamente silenziosa e senza eventi. Parecchie ore passate senza nulla da fare o da gestire.",
+        "ts": 1787000410570
+      }
+    ],
+    "diary": [
+      {
+        "ts": 1787052710909,
+        "source": "mediapipe",
+        "category": "emotion",
+        "value": "neutral",
+        "person": "unknown"
+      },
+      {
+        "ts": 1787052711024,
+        "source": "vision",
+        "category": "presence",
+        "value": "identity",
+        "person": "mauro"
+      },
+      {
+        "ts": 1787052711112,
+        "source": "vision",
+        "category": "spatial_analysis",
+        "value": {
+          "persons_count": 1,
+          "room": {
+            "id": "soggiorno",
+            "name": "soggiorno",
+            "activity": "active",
+            "persons_count": 1,
+            "objects": {
+              "chair": 1
+            }
+          },
+          "people": [],
+          "objects": {
+            "chair": 1
+          }
+        },
+        "person": null
+      },
+      {
+        "ts": 1787052711159,
+        "source": "vision",
+        "category": "spatial_analysis",
+        "value": {
+          "persons_count": 1,
+          "room": {
+            "id": "soggiorno",
+            "name": "soggiorno",
+            "activity": "active",
+            "persons_count": 1,
+            "objects": {
+              "chair": 1,
+              "laptop": 1
+            }
+          },
+          "people": [],
+          "objects": {
+            "chair": 1,
+            "laptop": 1
+          }
+        },
+        "person": null
+      },
+      {
+        "ts": 1787052711212,
+        "source": "vision",
+        "category": "spatial_analysis",
+        "value": {
+          "persons_count": 0,
+          "room": {
+            "id": "soggiorno",
+            "name": "soggiorno",
+            "activity": "idle",
+            "persons_count": 0,
+            "objects": {
+              "chair": 1,
+              "laptop": 1
+            }
+          },
+          "people": [],
+          "objects": {
+            "chair": 1,
+            "laptop": 1
+          }
+        },
+        "person": null
+      },
+      {
+        "ts": 1787052711306,
+        "source": "vision",
+        "category": "spatial_analysis",
+        "value": {
+          "persons_count": 0,
+          "room": {
+            "id": "soggiorno",
+            "name": "soggiorno",
+            "activity": "idle",
+            "persons_count": 0,
+            "objects": {
+              "chair": 1
+            }
+          },
+          "people": [],
+          "objects": {
+            "chair": 1
+          }
+        },
+        "person": null
+      },
+      {
+        "ts": 1787052711386,
+        "source": "vision",
+        "category": "presence",
+        "value": "enter",
+        "person": "unknown"
+      },
+      {
+        "ts": 1787052711398,
+        "source": "vision",
+        "category": "spatial_analysis",
+        "value": {
+          "persons_count": 1,
+          "room": {
+            "id": "soggiorno",
+            "name": "soggiorno",
+            "activity": "active",
+            "persons_count": 1,
+            "objects": {
+              "chair": 1,
+              "laptop": 1
+            }
+          },
+          "people": [],
+          "objects": {
+            "chair": 1,
+            "laptop": 1
+          }
+        },
+        "person": null
+      },
+      {
+        "ts": 1787052711533,
+        "source": "vision",
+        "category": "spatial_analysis",
+        "value": {
+          "persons_count": 1,
+          "room": {
+            "id": "soggiorno",
+            "name": "soggiorno",
+            "activity": "active",
+            "persons_count": 1,
+            "objects": {
+              "chair": 1
+            }
+          },
+          "people": [],
+          "objects": {
+            "chair": 1
+          }
+        },
+        "person": null
+      },
+      {
+        "ts": 1787052711620,
+        "source": "vision",
+        "category": "spatial_analysis",
+        "value": {
+          "persons_count": 1,
+          "room": {
+            "id": "soggiorno",
+            "name": "soggiorno",
+            "activity": "active",
+            "persons_count": 1,
+            "objects": {
+              "chair": 1,
+              "laptop": 1
+            }
+          },
+          "people": [],
+          "objects": {
+            "chair": 1,
+            "laptop": 1
+          }
+        },
+        "person": null
+      },
+      {
+        "ts": 1787052711946,
+        "source": "mediapipe",
+        "category": "emotion",
+        "value": "neutral",
+        "person": "unknown"
+      },
+      {
+        "ts": 1787052712861,
+        "source": "vision",
+        "category": "presence",
+        "value": "identity",
+        "person": "mauro"
+      },
+      {
+        "ts": 1787052713009,
+        "source": "mediapipe",
+        "category": "emotion",
+        "value": "neutral",
+        "person": "unknown"
+      },
+      {
+        "ts": 1787052714878,
+        "source": "vision",
+        "category": "spatial_analysis",
+        "value": {
+          "persons_count": 1,
+          "room": {
+            "id": "studio",
+            "name": "studio",
+            "activity": "active",
+            "persons_count": 1,
+            "objects": {
+              "laptop": 1
+            }
+          },
+          "people": [],
+          "objects": {
+            "laptop": 1
+          }
+        },
+        "person": null
+      },
+      {
+        "ts": 1787052715092,
+        "source": "vision",
+        "category": "presence",
+        "value": "exit",
+        "person": "unknown"
+      },
+      {
+        "ts": 1787052715821,
+        "source": "vision",
+        "category": "presence",
+        "value": "exit",
+        "person": "unknown"
+      },
+      {
+        "ts": 1787052715866,
+        "source": "vision",
+        "category": "presence",
+        "value": "exit",
+        "person": "unknown"
+      },
+      {
+        "ts": 1787052716705,
+        "source": "vision",
+        "category": "presence",
+        "value": "identity",
+        "person": "mauro"
+      },
+      {
+        "ts": 1787052717195,
+        "source": "vision",
+        "category": "presence",
+        "value": "exit",
+        "person": "mauro"
+      },
+      {
+        "ts": 1787052719122,
+        "source": "vision",
+        "category": "spatial_analysis",
+        "value": {
+          "persons_count": 0,
+          "room": {
+            "id": "salotto",
+            "name": "salotto",
+            "activity": "idle",
+            "persons_count": 0,
+            "objects": [
+              "laptop"
+            ]
+          },
+          "people": [],
+          "objects": [
+            "laptop"
+          ]
+        },
+        "person": null
+      }
+    ],
+    "voiceCommands": [
+      {
+        "text": "Spende un sacco di soldi e tramaccia.",
+        "stanza": "minipc",
+        "intent": "sconosciuto",
+        "ts": 1786962502086
+      },
+      {
+        "text": "se prima vi raggiungerà il germano...",
+        "stanza": "minipc",
+        "intent": "sconosciuto",
+        "ts": 1786962986685
+      },
+      {
+        "text": "stiamo sentire le sue parole nel servizio di Alessandro Algarato.",
+        "stanza": "minipc",
+        "intent": "sconosciuto",
+        "ts": 1786963415030
+      },
+      {
+        "text": "spingi il corridoio.",
+        "stanza": "minipc",
+        "intent": "sconosciuto",
+        "ts": 1786964043512
+      },
+      {
+        "text": "che ore sono?",
+        "stanza": "minipc",
+        "intent": "orario",
+        "ts": 1786964793843
+      },
+      {
+        "text": "che il personale intermercato è bloccato, è una situazione difficile, ma il creditorio  resta in uscita. Miretti ha detto una albesic tasso, vuole restare in Italia, quanto meno in Europa.  Come i nostri giocatori che potrebbe...",
+        "stanza": "minipc",
+        "intent": "sconosciuto",
+        "ts": 1786965094327
+      },
+      {
+        "text": "spegni il corridoio.",
+        "stanza": "minipc",
+        "intent": "luci_spegni",
+        "ts": 1786966598071
+      },
+      {
+        "text": "spazio.",
+        "stanza": "minipc",
+        "intent": "sconosciuto",
+        "ts": 1786967262082
+      },
+      {
+        "text": "risato, come c'è un cano, per una è un cano.",
+        "stanza": "minipc",
+        "intent": "sconosciuto",
+        "ts": 1786967787922
+      },
+      {
+        "text": "Come stai?",
+        "stanza": "studio",
+        "intent": "stato_sistema",
+        "ts": 1786971260434
+      }
+    ],
+    "ts": 1787052723189
+  }
+}

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Machine Green Glitch 2 Columns</title>
+<style>
+html, body {
+  margin: 0;
+  background: #020603;
+  overflow: hidden;
+}
+canvas {
+  display: block;
+}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<script>
+const canvas = document.getElementById('c')
+const ctx = canvas.getContext('2d')
+
+let W, H, DPR = Math.min(window.devicePixelRatio || 1, 2)
+
+function resize() {
+  W = innerWidth
+  H = innerHeight
+  canvas.width = Math.floor(W * DPR)
+  canvas.height = Math.floor(H * DPR)
+  canvas.style.width = W + 'px'
+  canvas.style.height = H + 'px'
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0)
+}
+addEventListener('resize', () => {
+  resize()
+  build()
+})
+resize()
+
+function rnd(a, b) { return a + Math.random() * (b - a) }
+function rndi(a, b) { return Math.floor(rnd(a, b)) }
+function pick(a) { return a[Math.floor(Math.random() * a.length)] }
+
+const BG = '#020603'
+const C = {
+  greenMain: '#7CFF5B',
+  greenBright: '#caffba',
+  greenSoft: '#4ACB4A',
+  greenDim: '#1E5F28',
+  cyan: '#7ee7ff',
+  blue: '#82aaff',
+  amber: '#ffb86b',
+  pink: '#ff7aa2',
+  violet: '#c792ea',
+  gray: '#8fa18f'
+}
+
+const BITMAP_FONT = '"Courier New", "Lucida Console", monospace'
+
+const identifiers = [
+  'signal','buffer','frame','index','time','clock','stream','cache',
+  'node','scan','error','delta','state','packet','input','output',
+  'channel','memory','offset','vector','field','sync','pulse'
+]
+
+const funcs = [
+  'hash','noise','fbm','map','mix','clamp','sqrt','abs','mod',
+  'emit','push','read','write','scan','sync','load'
+]
+
+const numbers = ['0','1','2','4','8','16','32','64','128','255','0.25','0.5','0.75','1.0']
+const keywords = ['let','if','for','return','while','const']
+const operators = ['=','!=','==','<','>','+=','-=','*=','/=','&&','||','=>','+','-','*','/']
+const punct = ['{','}','(',')','[',']',';',':','_','.',',']
+
+function colorForToken(t) {
+  if (keywords.includes(t)) return C.violet
+  if (funcs.includes(t)) return C.blue
+  if (operators.includes(t)) return C.pink
+  if (punct.includes(t)) return C.gray
+  if (!isNaN(Number(t))) return C.amber
+  if (identifiers.includes(t)) return Math.random() < 0.78 ? C.greenBright : C.cyan
+  return C.greenMain
+}
+
+const coherentTemplates = [
+  ['let',' ','dx',' ','=',' ','p0',' ','-',' ','q0'],
+  ['let',' ','dy',' ','=',' ','p1',' ','-',' ','q1'],
+  ['if',' ','signal',' ','!=',' ','0',' ','return',' ','frame'],
+  ['for',' ','index',' ','=',' ','0',';',' ','index',' ','<',' ','buffer',';',' ','index',' ','+=',' ','1'],
+  ['stream','.','push','(','frame',')'],
+  ['error',' ','=',' ','abs','(','dx',')'],
+  ['sync','(','clock',',',' ','stream',')'],
+  ['buffer','[','index',']',' ','=',' ','signal'],
+  ['clock',' ','+=',' ','1'],
+  ['if',' ','error',' ','>',' ','0.75',' ','{'],
+  ['return',' ','data'],
+  ['scan',' ','node']
+]
+
+function generateCoherentLine() {
+  let arr
+
+  if (Math.random() < 0.72) {
+    arr = pick(coherentTemplates).slice()
+  } else {
+    arr = []
+    const count = rndi(6, 14)
+    const pool = [identifiers, funcs, numbers, operators, punct, keywords]
+    for (let i = 0; i < count; i++) {
+      const source = pick(pool)
+      arr.push(pick(source))
+      if (i < count - 1 && !['.', '(', ')', '[', ']', ';', ':', ','].includes(arr[arr.length - 1])) {
+        arr.push(' ')
+      }
+    }
+  }
+
+  return arr.map(t => ({ t, c: t === ' ' ? C.greenSoft : colorForToken(t) }))
+}
+
+function generateBlock() {
+  const style = Math.floor(Math.random() * 5)
+
+  if (style === 0) {
+    return [
+      ['for',' ','index',' ','=',' ','0',';',' ','index',' ','<',' ','buffer',';',' ','index',' ','+=',' ','1',' ','{'],
+      ['    ','buffer','[','index',']',' ','=',' ','hash','(','signal',')'],
+      ['}']
+    ].map(line => line.map(t => ({ t, c: t.trim() === '' ? C.greenSoft : colorForToken(t) })))
+  }
+
+  if (style === 1) {
+    return [
+      ['if',' ','error',' ','>',' ','0.75',' ','{'],
+      ['    ','sync','(','clock',',',' ','stream',')'],
+      ['    ','return',' ','frame'],
+      ['}']
+    ].map(line => line.map(t => ({ t, c: t.trim() === '' ? C.greenSoft : colorForToken(t) })))
+  }
+
+  if (style === 2) {
+    return [
+      ['let',' ','dx',' ','=',' ','p0',' ','-',' ','q0'],
+      ['let',' ','dy',' ','=',' ','p1',' ','-',' ','q1'],
+      ['error',' ','=',' ','abs','(','dx',')']
+    ].map(line => line.map(t => ({ t, c: t === ' ' ? C.greenSoft : colorForToken(t) })))
+  }
+
+  if (style === 3) {
+    return [
+      ['stream','.','push','(','frame',')'],
+      ['cache','[','offset',']',' ','=',' ','buffer'],
+      ['clock',' ','+=',' ','1']
+    ].map(line => line.map(t => ({ t, c: t === ' ' ? C.greenSoft : colorForToken(t) })))
+  }
+
+  return [
+    generateCoherentLine(),
+    generateCoherentLine(),
+    generateCoherentLine()
+  ]
+}
+
+let columns = []
+let bgLines = []
+let time = 0
+let glitchBands = []
+let glitchCooldown = 0
+
+function buildColumn(x0, colWidth, seedShift) {
+  const lines = []
+  let y = -2400
+
+  while (y < H + 2400) {
+    y += 28 * rnd(0.92, 1.14)
+
+    const useBlock = Math.random() < 0.42
+    if (useBlock) {
+      const block = generateBlock()
+      const speed = rnd(0.8, 1.85)
+      const phase = rnd(0, Math.PI * 2) + seedShift
+
+      for (let i = 0; i < block.length; i++) {
+        lines.push({
+          y: y + i * 22,
+          tokens: block[i],
+          speed,
+          phase: phase + i * 0.11,
+          block: true,
+          x0,
+          colWidth
+        })
+      }
+      y += (block.length - 1) * 22
+    } else {
+      lines.push({
+        y,
+        tokens: generateCoherentLine(),
+        speed: rnd(0.8, 1.85),
+        phase: rnd(0, Math.PI * 2) + seedShift,
+        block: false,
+        x0,
+        colWidth
+      })
+    }
+  }
+
+  return lines
+}
+
+function build() {
+  columns = []
+  bgLines = []
+
+  const margin = 24
+  const gap = 28
+  const usable = W - margin * 2 - gap
+  const colWidth = usable / 2
+
+  columns.push(buildColumn(margin, colWidth, 0.0))
+  columns.push(buildColumn(margin + colWidth + gap, colWidth, 1.7))
+
+  let by = -2200
+  while (by < H + 2200) {
+    by += 20 * rnd(0.86, 1.1)
+    bgLines.push({
+      y: by,
+      tokens: generateCoherentLine(),
+      speed: rnd(0.28, 0.72),
+      phase: rnd(0, Math.PI * 2),
+      drift: rnd(-16, 16)
+    })
+  }
+}
+build()
+
+function spawnGlitchBands() {
+  glitchBands = []
+  const count = rndi(1, 4)
+  for (let i = 0; i < count; i++) {
+    const h = rnd(16, 70)
+    glitchBands.push({
+      y: rnd(0, H - h),
+      h,
+      life: rndi(8, 18),
+      mirror: Math.random() < 0.45,
+      shift: rnd(-40, 40)
+    })
+  }
+}
+
+function updateGlitch() {
+  if (glitchBands.length === 0) {
+    if (glitchCooldown > 0) glitchCooldown--
+    if (glitchCooldown === 0 && Math.random() < 0.018) {
+      spawnGlitchBands()
+      glitchCooldown = rndi(30, 100)
+    }
+  } else {
+    for (let i = glitchBands.length - 1; i >= 0; i--) {
+      glitchBands[i].life--
+      if (glitchBands[i].life <= 0) glitchBands.splice(i, 1)
+    }
+  }
+}
+
+function drawBackground() {
+  ctx.fillStyle = BG
+  ctx.fillRect(0, 0, W, H)
+}
+
+function drawScanlines() {
+  ctx.strokeStyle = 'rgba(80,255,120,0.02)'
+  ctx.lineWidth = 0.5
+  for (let y = 0; y < H; y += 3) {
+    ctx.beginPath()
+    ctx.moveTo(0, y + 0.5)
+    ctx.lineTo(W, y + 0.5)
+    ctx.stroke()
+  }
+}
+
+function drawGuides() {
+  ctx.strokeStyle = 'rgba(80,255,120,0.07)'
+  ctx.lineWidth = 0.5
+
+  const margin = 24
+  const gap = 28
+  const usable = W - margin * 2 - gap
+  const colWidth = usable / 2
+  const splitX = margin + colWidth + gap / 2
+
+  for (let i = 0; i <= 6; i++) {
+    const xL = margin + (colWidth / 6) * i
+    const xR = margin + colWidth + gap + (colWidth / 6) * i
+
+    ctx.beginPath()
+    ctx.moveTo(xL, 0)
+    ctx.lineTo(xL, H)
+    ctx.stroke()
+
+    ctx.beginPath()
+    ctx.moveTo(xR, 0)
+    ctx.lineTo(xR, H)
+    ctx.stroke()
+  }
+
+  ctx.strokeStyle = 'rgba(120,255,140,0.10)'
+  ctx.beginPath()
+  ctx.moveTo(splitX, 0)
+  ctx.lineTo(splitX, H)
+  ctx.stroke()
+}
+
+function drawBgInterference() {
+  ctx.textBaseline = 'middle'
+  ctx.font = `12px ${BITMAP_FONT}`
+
+  for (const l of bgLines) {
+    let y = l.y + (time * l.speed) % 1600
+    while (y > H + 60) y -= 3200
+    while (y < -60) y += 3200
+
+    let x = 20 + l.drift + Math.sin(time * 0.01 + l.phase) * 10
+    const alpha = 0.08 + (0.5 + 0.5 * Math.sin(time * 0.02 + l.phase)) * 0.06
+
+    ctx.globalAlpha = alpha
+
+    for (let i = 0; i < l.tokens.length; i++) {
+      const tok = l.tokens[i]
+      ctx.fillStyle = C.greenDim
+      ctx.fillText(tok.t, x, y)
+      x += ctx.measureText(tok.t).width
+      if (x > W - 28) {
+        y += 14
+        x = 20 + l.drift
+      }
+    }
+  }
+
+  ctx.globalAlpha = 1
+}
+
+function drawColumnLines(lines) {
+  ctx.textBaseline = 'middle'
+  ctx.font = `20px ${BITMAP_FONT}`
+
+  for (const l of lines) {
+    let baseY = l.y + (time * l.speed) % 1900
+    while (baseY > H + 70) baseY -= 3800
+    while (baseY < -70) baseY += 3800
+
+    let x = l.x0
+    let y = baseY
+    const pulse = 0.5 + 0.5 * Math.sin(time * 0.04 + l.phase)
+
+    for (let i = 0; i < l.tokens.length; i++) {
+      const tok = l.tokens[i]
+      ctx.globalAlpha = 0.34 + pulse * 0.5
+      ctx.fillStyle = tok.c
+      ctx.fillText(tok.t, x, y)
+      x += ctx.measureText(tok.t).width
+
+      if (x > l.x0 + l.colWidth - 24) {
+        y += 22
+        x = l.x0
+      }
+    }
+
+    if (pulse > 0.972) {
+      ctx.globalAlpha = 0.6
+      ctx.fillStyle = C.greenBright
+      ctx.fillRect(l.x0, baseY - 0.5, l.colWidth - 8, 1)
+    }
+  }
+
+  ctx.globalAlpha = 1
+}
+
+function applyBandGlitch() {
+  if (glitchBands.length === 0) return
+
+  for (const b of glitchBands) {
+    const sy = Math.max(0, Math.floor(b.y))
+    const sh = Math.max(1, Math.floor(b.h))
+    const dx = b.shift + Math.sin(time * 0.25 + b.y) * 8
+
+    ctx.save()
+
+    if (b.mirror) {
+      ctx.translate(W, 0)
+      ctx.scale(-1, 1)
+      ctx.drawImage(canvas, 0, sy, W, sh, -dx, sy + rnd(-2, 2), W, sh)
+    } else {
+      ctx.drawImage(canvas, 0, sy, W, sh, dx, sy + rnd(-2, 2), W, sh)
+    }
+
+    ctx.restore()
+
+    ctx.fillStyle = 'rgba(120,255,120,0.05)'
+    for (let i = 0; i < 8; i++) {
+      const rx = rnd(0, W)
+      const ry = rnd(sy, sy + sh)
+      const rw = rnd(20, 110)
+      const rh = rnd(1, 2)
+      ctx.fillRect(rx, ry, rw, rh)
+    }
+
+    ctx.strokeStyle = 'rgba(180,255,180,0.08)'
+    ctx.lineWidth = 0.5
+    ctx.strokeRect(0, sy + 0.5, W, sh)
+  }
+}
+
+function drawVignette() {
+  const g = ctx.createLinearGradient(0, 0, 0, H)
+  g.addColorStop(0, 'rgba(0,0,0,0.28)')
+  g.addColorStop(0.18, 'rgba(0,0,0,0.06)')
+  g.addColorStop(0.5, 'rgba(0,0,0,0.0)')
+  g.addColorStop(0.82, 'rgba(0,0,0,0.06)')
+  g.addColorStop(1, 'rgba(0,0,0,0.28)')
+  ctx.fillStyle = g
+  ctx.fillRect(0, 0, W, H)
+}
+
+function drawFrame() {
+  ctx.strokeStyle = 'rgba(100,255,120,0.10)'
+  ctx.lineWidth = 0.5
+  ctx.strokeRect(16, 16, W - 32, H - 32)
+}
+
+function animate() {
+  updateGlitch()
+  drawBackground()
+  drawBgInterference()
+  drawGuides()
+  drawColumnLines(columns[0])
+  drawColumnLines(columns[1])
+  applyBandGlitch()
+  drawScanlines()
+  drawVignette()
+  drawFrame()
+
+  time += 1
+  requestAnimationFrame(animate)
+}
+
+animate()
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'f' || e.key === 'F') {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {})
+    } else {
+      document.exitFullscreen().catch(() => {})
+    }
+  }
+})
+</script>
+</body>
+</html>

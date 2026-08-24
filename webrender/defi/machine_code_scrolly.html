@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Machine Code Scroll</title>
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      background: #0a0a0a;
+    }
+    #hint {
+      position: fixed;
+      left: 14px;
+      bottom: 10px;
+      color: rgba(255,255,255,0.35);
+      font: 12px/1.2 Menlo, Monaco, monospace;
+      letter-spacing: 0.08em;
+      user-select: none;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hint">F fullscreen</div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+let W = 1920;
+let H = 1080;
+let DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+function resize() {
+  const ww = window.innerWidth;
+  const hh = window.innerHeight;
+  canvas.width = Math.floor(ww * DPR);
+  canvas.height = Math.floor(hh * DPR);
+  canvas.style.width = ww + 'px';
+  canvas.style.height = hh + 'px';
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  W = ww;
+  H = hh;
+}
+window.addEventListener('resize', resize);
+resize();
+
+function rnd(a, b) { return a + Math.random() * (b - a); }
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+const palette = {
+  bg: '#0a0a0a',
+  fg: 'rgba(245,245,245,0.95)',
+  soft: 'rgba(210,210,210,0.60)',
+  dim: 'rgba(150,150,150,0.22)',
+  faint: 'rgba(255,255,255,0.08)',
+  pulse: 'rgba(255,255,255,0.98)'
+};
+
+const tokens = [
+  'let', 'const', 'var', 'if', 'for', 'while', 'return', 'function',
+  'Math.sin', 'Math.cos', 'noise', 'push', 'pop', 'line', 'vertex',
+  'pts[i]', 'q[0]', 'q[1]', 'dx', 'dy', 'mx', 'my', 'speed', 'phase',
+  'index', 'time', 'frame', 'buffer', 'stream', 'data', 'node', 'signal',
+  'hash2(', 'fbm(', 'sort(', 'sqrt(', 'min(', 'max(', 'map(', 'mix(',
+  '0.12', '0.35', '0.75', '1.0', '2.0', '3.14', '16', '32', '64', '256',
+  '{', '}', '[', ']', '(', ')', ';', '=>', '&&', '||', '!=', '==', '<', '>',
+  '+', '-', '*', '/', '=', '+=', '-=', '*=', '/='
+];
+
+const lineTemplates = [
+  'let dx = p[0] - q[0]',
+  'let dy = p[1] - q[1]',
+  'if (d < r * 0.5) neigh.push([d, q])',
+  'neigh.sort((a, b) => a[0] - b[0])',
+  'for (let k = 0; k < Math.min(4, neigh.length); k++) {',
+  'line(p[0], p[1], q[0], q[1])',
+  'if (pulse > 0.93) pointMark(x, y, 0.12)',
+  'let offset = (time * speed) % 1800',
+  'signal[i].y += velocity',
+  'buffer[index] = value',
+  'stream.push(frame)',
+  'hash2(mx, my) < 0.6',
+  'erosionAmount(mx, my) > 0.75',
+  'ctx.fillText(token, x, y)',
+  'if (state !== 0) emit()',
+  'packet.loss = 0.02',
+  'for (let i = 0; i < pts.length; i++)',
+  'return data.filter(v => v > 0.5)',
+  'matrix[y][x] = sample',
+  'clock += 1'
+];
+
+let globalTime = 0;
+let streams = [];
+let connectors = [];
+
+function buildSystem() {
+  streams = [];
+  connectors = [];
+
+  const count = Math.max(18, Math.floor(W / 72));
+  const margin = Math.max(60, W * 0.05);
+  const spacing = (W - margin * 2) / (count - 1);
+
+  for (let i = 0; i < count; i++) {
+    const x = margin + i * spacing;
+    const fontSize = rnd(18, 30);
+    const speed = rnd(0.7, 2.8);
+    const phase = rnd(0, Math.PI * 2);
+    const density = rnd(0.7, 1.45);
+    const textAlpha = rnd(0.45, 0.95);
+
+    const events = [];
+    let y = -2800;
+
+    while (y < H + 2800) {
+      y += rnd(26, 82) / density;
+
+      const kindRoll = Math.random();
+      let kind = 'token';
+      if (kindRoll < 0.18) kind = 'snippet';
+      else if (kindRoll < 0.28) kind = 'number';
+      else if (kindRoll < 0.36) kind = 'symbol';
+
+      events.push({
+        y,
+        kind,
+        text: generateText(kind),
+        blink: rnd(0, Math.PI * 2),
+        w: rnd(18, 120)
+      });
+    }
+
+    streams.push({
+      x,
+      index: i,
+      fontSize,
+      speed,
+      phase,
+      density,
+      textAlpha,
+      events
+    });
+  }
+
+  for (let i = 0; i < streams.length - 1; i++) {
+    connectors.push({
+      a: i,
+      b: i + 1,
+      phase: rnd(0, Math.PI * 2),
+      speed: rnd(0.8, 1.8)
+    });
+  }
+}
+
+function generateText(kind) {
+  if (kind === 'token') return pick(tokens);
+  if (kind === 'number') return String((Math.random() * 999).toFixed(Math.random() < 0.5 ? 0 : 2));
+  if (kind === 'symbol') return pick(['{', '}', '[', ']', '(', ')', ';', '=>', '&&', '||', '+=', '-=', '*=', '/=']);
+  return pick(lineTemplates);
+}
+
+buildSystem();
+window.addEventListener('resize', buildSystem);
+
+function drawBackground() {
+  ctx.fillStyle = palette.bg;
+  ctx.fillRect(0, 0, W, H);
+}
+
+function drawGuides() {
+  ctx.lineWidth = 1;
+  for (const s of streams) {
+    ctx.strokeStyle = palette.dim;
+    ctx.beginPath();
+    ctx.moveTo(s.x, 0);
+    ctx.lineTo(s.x, H);
+    ctx.stroke();
+  }
+}
+
+function drawCentralField() {
+  ctx.lineWidth = 1;
+  for (let i = 0; i < 18; i++) {
+    const t = globalTime * 0.012 + i * 0.4;
+    const w = 180 + Math.sin(t * 0.8) * 140;
+    const h = 18 + Math.cos(t * 1.05) * 12;
+    const y = H * 0.5 + Math.sin(t + i) * H * 0.24;
+    ctx.strokeStyle = 'rgba(255,255,255,0.035)';
+    ctx.beginPath();
+    ctx.ellipse(W * 0.5, y, Math.abs(w), Math.abs(h), 0, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+}
+
+function drawConnectors() {
+  ctx.lineWidth = 1;
+
+  for (let i = 0; i < connectors.length; i++) {
+    const c = connectors[i];
+    const a = streams[c.a];
+    const b = streams[c.b];
+
+    if (((Math.floor(globalTime / 22) + i) % 8) !== 0) continue;
+
+    const y = (globalTime * (1.2 + c.speed * 0.35) + i * 71) % (H + 140) - 70;
+    const wave = Math.sin(globalTime * 0.03 + c.phase) * 16;
+
+    ctx.strokeStyle = 'rgba(255,255,255,0.24)';
+    ctx.beginPath();
+    ctx.moveTo(a.x, y);
+    ctx.bezierCurveTo(a.x + 18, y + wave, b.x - 18, y - wave, b.x, y);
+    ctx.stroke();
+
+    ctx.fillStyle = 'rgba(255,255,255,0.8)';
+    ctx.beginPath();
+    ctx.arc(a.x, y, 1.6, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(b.x, y, 1.6, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function drawStream(stream) {
+  const offset = (globalTime * stream.speed * 1.6) % 2200;
+
+  ctx.font = `${stream.fontSize}px Menlo, Monaco, Consolas, monospace`;
+  ctx.textBaseline = 'middle';
+
+  for (const ev of stream.events) {
+    let y = ev.y + offset;
+    while (y > H + 100) y -= 4400;
+    while (y < -100) y += 4400;
+
+    const pulse = 0.5 + 0.5 * Math.sin(globalTime * 0.045 + stream.phase + ev.blink + y * 0.01);
+    const alpha = Math.min(1, stream.textAlpha * (0.45 + pulse * 0.55));
+
+    if (ev.kind === 'snippet') {
+      ctx.fillStyle = `rgba(255,255,255,${0.10 + alpha * 0.30})`;
+      ctx.fillText(ev.text, stream.x - ev.w * 0.18, y);
+    } else if (ev.kind === 'number') {
+      ctx.fillStyle = `rgba(255,255,255,${0.18 + alpha * 0.45})`;
+      ctx.fillText(ev.text, stream.x - 10, y);
+    } else if (ev.kind === 'symbol') {
+      ctx.fillStyle = `rgba(255,255,255,${0.16 + alpha * 0.38})`;
+      ctx.fillText(ev.text, stream.x - 6, y);
+    } else {
+      ctx.fillStyle = `rgba(255,255,255,${0.14 + alpha * 0.50})`;
+      ctx.fillText(ev.text, stream.x - 14, y);
+    }
+
+    if (pulse > 0.93 && ev.kind !== 'snippet') {
+      ctx.fillStyle = palette.pulse;
+      ctx.fillRect(stream.x - 22, y - 1, 4, 2);
+    }
+  }
+
+  const scannerY = (globalTime * (stream.speed * 2.0) + stream.index * 37) % (H + 120) - 60;
+  ctx.strokeStyle = 'rgba(255,255,255,0.9)';
+  ctx.beginPath();
+  ctx.moveTo(stream.x - 12, scannerY);
+  ctx.lineTo(stream.x + 12, scannerY);
+  ctx.stroke();
+}
+
+function drawFrame() {
+  ctx.strokeStyle = 'rgba(255,255,255,0.14)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(18, 18, W - 36, H - 36);
+}
+
+function animate() {
+  drawBackground();
+  drawGuides();
+  drawCentralField();
+
+  for (const s of streams) {
+    drawStream(s);
+  }
+
+  drawConnectors();
+  drawFrame();
+
+  globalTime += 1;
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'f' || e.key === 'F') {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+});
+</script>
+</body>
+</html>

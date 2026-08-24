@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Machine Scroll — Sistema operativo alieno</title>
+<style>
+html, body { margin:0; width:100%; height:100%; overflow:hidden; background:#000; }
+canvas { display:block; width:100vw; height:100vh; background:#000; }
+#hint { position:fixed; left:12px; bottom:10px; color:rgba(255,255,255,0.45); font:12px Arial; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hint">F fullscreen</div>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+let W,H,t=0,DPR=Math.min(devicePixelRatio||1,2);
+
+function resize(){
+  W=innerWidth; H=innerHeight;
+  canvas.width=Math.floor(W*DPR); canvas.height=Math.floor(H*DPR);
+  canvas.style.width=W+'px'; canvas.style.height=H+'px';
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+addEventListener('resize',resize); resize();
+
+function rnd(a,b){ return a+Math.random()*(b-a); }
+
+const FG='rgba(124,255,91,1)';
+const SOFT='rgba(124,255,91,0.55)';
+const DIM='rgba(124,255,91,0.15)';
+const GLOW='rgba(220,255,200,0.9)';
+
+let cols=[];
+function build(){
+  cols=[];
+  const count=44;
+  const margin=Math.max(30,W*0.03);
+  const spacing=(W-margin*2)/(count-1);
+  for(let i=0;i<count;i++){
+    const x=margin+i*spacing;
+    const speed=rnd(1.2,4.0);
+    const phase=rnd(0,Math.PI*2);
+    const events=[];
+    let y=-2600;
+    while(y<H+2600){
+      y+=rnd(18,55);
+      events.push({y,type:Math.floor(rnd(0,6)),size:rnd(18,85)});
+    }
+    cols.push({x,speed,phase,index:i,events});
+  }
+}
+build();
+
+function drawEvent(x,y,e,p,i){
+  const pulse=0.5+0.5*Math.sin(t*0.05+p+y*0.018);
+  ctx.lineWidth=1.4;
+  switch(e.type){
+    case 0:
+      ctx.strokeStyle=FG;
+      ctx.beginPath(); ctx.moveTo(x,y-e.size); ctx.lineTo(x,y+e.size); ctx.stroke(); break;
+    case 1:
+      ctx.strokeStyle=SOFT;
+      ctx.strokeRect(x-10,y-e.size*0.45,20,e.size*0.9); break;
+    case 2:
+      ctx.fillStyle=FG;
+      ctx.beginPath(); ctx.arc(x,y,3.5,0,Math.PI*2); ctx.fill();
+      ctx.strokeStyle='rgba(124,255,91,'+(0.25+pulse*0.5)+')';
+      ctx.beginPath(); ctx.arc(x,y,8+pulse*18,0,Math.PI*2); ctx.stroke(); break;
+    case 3:
+      ctx.strokeStyle=FG;
+      let w=9+pulse*18;
+      ctx.beginPath(); ctx.moveTo(x-w,y); ctx.lineTo(x+w,y); ctx.moveTo(x,y-7); ctx.lineTo(x,y+7); ctx.stroke(); break;
+    case 4:
+      ctx.strokeStyle=DIM;
+      ctx.beginPath();
+      for(let k=0;k<5;k++){ let yy=y+k*6; ctx.moveTo(x-14,yy); ctx.lineTo(x+14,yy); }
+      ctx.stroke(); break;
+    case 5:
+      ctx.strokeStyle=FG;
+      ctx.beginPath();
+      ctx.moveTo(x,y-e.size*0.5);
+      ctx.bezierCurveTo(x+16*Math.sin(t*0.03+i),y,x-16*Math.cos(t*0.024+i),y,x,y+e.size*0.5);
+      ctx.stroke(); break;
+  }
+  if(pulse>0.95){
+    ctx.fillStyle=GLOW;
+    ctx.beginPath(); ctx.arc(x,y,2,0,Math.PI*2); ctx.fill();
+  }
+}
+
+function draw(){
+  ctx.fillStyle='black';
+  ctx.fillRect(0,0,W,H);
+
+  // atmospheric background
+  ctx.lineWidth=1;
+  for(let i=0;i<22;i++){
+    const tt=t*0.012+i*0.31;
+    const w=160+Math.sin(tt*0.8)*130;
+    const h=20+Math.cos(tt*1.1)*16;
+    const y=H*0.5+Math.sin(tt+i)*H*0.32;
+    ctx.strokeStyle='rgba(124,255,91,0.05)';
+    ctx.beginPath(); ctx.ellipse(W*0.5,y,Math.abs(w),Math.abs(h),0,0,Math.PI*2); ctx.stroke();
+  }
+
+  ctx.strokeStyle=DIM;
+  ctx.lineWidth=1;
+  for(const c of cols){
+    ctx.beginPath(); ctx.moveTo(c.x,0); ctx.lineTo(c.x,H); ctx.stroke();
+  }
+
+  for(const c of cols){
+    const off=(t*c.speed)%1800;
+    for(const e of c.events){
+      let y=e.y+off;
+      while(y>H+90) y-=3600;
+      while(y<-90) y+=3600;
+      drawEvent(c.x,y,e,c.phase,c.index);
+    }
+    const sy=(t*(c.speed*1.9)+c.index*37)%(H+140)-70;
+    ctx.strokeStyle=FG;
+    ctx.beginPath(); ctx.moveTo(c.x-14,sy); ctx.lineTo(c.x+14,sy); ctx.stroke();
+  }
+
+  // many connectors
+  ctx.lineWidth=1;
+  for(let i=0;i<cols.length-1;i++){
+    if(((Math.floor(t/9)+i)%3)===0){
+      const a=cols[i], b=cols[i+1];
+      const y=(t*(1.8+i*0.02)+i*41)%(H+100)-50;
+      const wave=Math.sin(t*0.05+i)*12;
+      ctx.strokeStyle='rgba(124,255,91,0.45)';
+      ctx.beginPath();
+      ctx.moveTo(a.x,y);
+      ctx.bezierCurveTo(a.x+14,y+wave,b.x-14,y-wave,b.x,y);
+      ctx.stroke();
+    }
+  }
+
+  // scanlines
+  ctx.strokeStyle='rgba(124,255,91,0.02)';
+  for(let y=0;y<H;y+=3){
+    ctx.beginPath(); ctx.moveTo(0,y+.5); ctx.lineTo(W,y+.5); ctx.stroke();
+  }
+
+  ctx.strokeStyle='rgba(124,255,91,0.14)';
+  ctx.strokeRect(18,18,W-36,H-36);
+
+  t+=1;
+  requestAnimationFrame(draw);
+}
+draw();
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='f'||e.key==='F'){
+    if(!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+    else document.exitFullscreen().catch(()=>{});
+  }
+});
+</script>
+</body>
+</html>

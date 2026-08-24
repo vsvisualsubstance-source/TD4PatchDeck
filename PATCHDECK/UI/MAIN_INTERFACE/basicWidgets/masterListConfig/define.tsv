@@ -1,0 +1,6 @@
+Name	Data	Description
+rowDragColor	0.395 0.549 0.605 1.0	Color of line indicating row drop location
+dividingLineColor	0.1 0.1 0.1 1	Dividing line for parameter: Row Striping
+dragDropLineColor	0.395 0.549 0.605 1.0	Color of line indicating drag/drop location in line mode
+dragDropOverlayColor	0.395 0.549 0.605 0.1	Color of highlight indicating drag/drop location in row mode
+rowStripeOverlayColor	1 1 1 0.154	Used when Row Striping is set to "Striping"

@@ -1,0 +1,16 @@
+name	index	path	parameter	enable
+Resolutionw	0	render1	resolutionw	0
+Resolutionh	1	render1	resolutionh	0
+Horzsource	2	reorder1	outputredchan	0
+Vertsource	3	reorder1	outputgreenchan	0
+Resolutionw	0	phong1GLSL	value1x	0
+Resolutionh	1	phong1GLSL	value1y	0
+Resolutionw	0	cam1	orthowidth	1
+Weightx	4	level1	highr	0
+Weighty	5	level1	highg	0
+Midpointx	6	math_midPointHorz	preoff	1
+Midpointy	7	math_midPointVert	preoff	1
+Horzsource	2	phong1GLSL	value2x	0
+Vertsource	3	phong1GLSL	value2y	0
+Midpointx	6	phong1GLSL	value3x	0
+Midpointy	7	phong1GLSL	value3y	0

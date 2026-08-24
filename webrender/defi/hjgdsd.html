@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Machine Green Glitch</title>
+<style>
+html, body {
+  margin: 0;
+  background: #020603;
+  overflow: hidden;
+}
+canvas {
+  display: block;
+}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<script>
+const canvas = document.getElementById('c')
+const ctx = canvas.getContext('2d')
+
+let W, H, DPR = Math.min(window.devicePixelRatio || 1, 2)
+
+function resize() {
+  W = innerWidth
+  H = innerHeight
+  canvas.width = W * DPR
+  canvas.height = H * DPR
+  canvas.style.width = W + 'px'
+  canvas.style.height = H + 'px'
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0)
+}
+addEventListener('resize', resize)
+resize()
+
+function rnd(a, b) { return a + Math.random() * (b - a) }
+function pick(a) { return a[Math.floor(Math.random() * a.length)] }
+
+const GREEN_MAIN = '#7CFF5B'
+const GREEN_SOFT = '#4ACB4A'
+const GREEN_DIM = '#1E5F28'
+const GREEN_FAINT = 'rgba(80,255,120,0.06)'
+const BG = '#020603'
+
+const keywords = ['LOAD','PUSH','SYNC','SCAN','IF','FOR','LOOP','RETURN','DATA','NODE','SIGNAL','CLOCK']
+const funcs = ['SIN','COS','HASH','NOISE','FBM','MAP','MIX','SQRT','MOD','BUF']
+const vars = ['X','Y','DX','DY','PTS','TIME','SPEED','INDEX','FRAME','CACHE','STREAM','PACKET']
+const operators = ['+','-','*','/','=','=>','&&','||','!=','==','<','>','+=','-=']
+const symbols = ['{','}','(',')','[',']',';',':','_']
+const phrases = [
+  'IF SIGNAL != 0 RETURN FRAME',
+  'FOR INDEX = 0; INDEX < BUFFER; INDEX += 1',
+  'LET DX = P0 - Q0',
+  'STREAM PUSH FRAME',
+  'HASH MX MY < 0.6',
+  'CLOCK += 1',
+  'SCAN NODE RETURN DATA',
+  'IF ERROR > 0.75 PUSH CACHE',
+  'MAP SIGNAL TO BUFFER',
+  'SYNC LOOP SPEED FRAME'
+]
+
+function generateLine() {
+  let parts = []
+  const longLine = Math.random() < 0.3
+
+  if (longLine) {
+    const txt = pick(phrases).split(' ')
+    for (let i = 0; i < txt.length; i++) {
+      const t = txt[i]
+      parts.push({ t, c: pickTokenColor(t) })
+    }
+    return parts
+  }
+
+  let count = Math.floor(rnd(7, 18))
+  for (let i = 0; i < count; i++) {
+    let r = Math.random()
+    if (r < 0.15) parts.push({ t: pick(keywords), c: GREEN_MAIN })
+    else if (r < 0.30) parts.push({ t: pick(funcs), c: GREEN_SOFT })
+    else if (r < 0.58) parts.push({ t: pick(vars), c: '#b7ff9e' })
+    else if (r < 0.72) parts.push({ t: String((Math.random() * 255).toFixed(Math.random() < 0.5 ? 0 : 2)), c: '#98ff7a' })
+    else if (r < 0.88) parts.push({ t: pick(operators), c: '#69f769' })
+    else parts.push({ t: pick(symbols), c: '#53b853' })
+  }
+  return parts
+}
+
+function pickTokenColor(t) {
+  if (keywords.includes(t)) return GREEN_MAIN
+  if (funcs.includes(t)) return GREEN_SOFT
+  if (operators.includes(t)) return '#69f769'
+  if (symbols.includes(t)) return '#53b853'
+  if (!isNaN(Number(t))) return '#98ff7a'
+  return '#b7ff9e'
+}
+
+let lines = []
+let bgLines = []
+const spacing = 34
+const bgSpacing = 24
+
+function build() {
+  lines = []
+  bgLines = []
+
+  let y = -2600
+  while (y < H + 2600) {
+    y += spacing * rnd(0.85, 1.25)
+    lines.push({
+      y,
+      tokens: generateLine(),
+      speed: rnd(0.8, 2.2),
+      phase: rnd(0, Math.PI * 2)
+    })
+  }
+
+  let by = -2600
+  while (by < H + 2600) {
+    by += bgSpacing * rnd(0.75, 1.2)
+    bgLines.push({
+      y: by,
+      tokens: generateLine(),
+      speed: rnd(0.35, 1.0),
+      phase: rnd(0, Math.PI * 2),
+      drift: rnd(-30, 30)
+    })
+  }
+}
+build()
+addEventListener('resize', build)
+
+let time = 0
+
+let glitchTimer = 0
+let glitchCooldown = 0
+let glitchMode = 0
+
+function updateGlitch() {
+  if (glitchTimer > 0) {
+    glitchTimer--
+    return
+  }
+
+  if (glitchCooldown > 0) {
+    glitchCooldown--
+    return
+  }
+
+  if (Math.random() < 0.018) {
+    glitchTimer = Math.floor(rnd(8, 24))
+    glitchCooldown = Math.floor(rnd(20, 90))
+    glitchMode = Math.floor(rnd(0, 4))
+  }
+}
+
+function drawBackground() {
+  ctx.fillStyle = BG
+  ctx.fillRect(0, 0, W, H)
+}
+
+function drawScanlines() {
+  ctx.lineWidth = 1
+  ctx.strokeStyle = 'rgba(80,255,120,0.04)'
+  for (let y = 0; y < H; y += 3) {
+    ctx.beginPath()
+    ctx.moveTo(0, y + 0.5)
+    ctx.lineTo(W, y + 0.5)
+    ctx.stroke()
+  }
+}
+
+function drawGuides() {
+  ctx.strokeStyle = 'rgba(80,255,120,0.08)'
+  ctx.lineWidth = 1
+  const cols = Math.max(8, Math.floor(W / 140))
+  for (let i = 0; i <= cols; i++) {
+    const x = (W / cols) * i
+    ctx.beginPath()
+    ctx.moveTo(x, 0)
+    ctx.lineTo(x, H)
+    ctx.stroke()
+  }
+}
+
+function drawBgInterference() {
+  ctx.textBaseline = 'middle'
+  ctx.font = '16px monospace'
+
+  for (const l of bgLines) {
+    let y = l.y + (time * l.speed) % 1800
+    while (y > H + 80) y -= 3600
+    while (y < -80) y += 3600
+
+    let pulse = 0.5 + 0.5 * Math.sin(time * 0.02 + l.phase)
+    let x = 24 + l.drift + Math.sin(time * 0.01 + l.phase) * 18
+
+    ctx.globalAlpha = 0.12 + pulse * 0.10
+
+    for (let i = 0; i < l.tokens.length; i++) {
+      const tok = l.tokens[i]
+      ctx.fillStyle = GREEN_DIM
+      ctx.fillText(tok.t, x, y)
+      x += ctx.measureText(tok.t).width + 12
+
+      if (x > W - 40) {
+        y += 18
+        x = 24 + l.drift
+      }
+    }
+  }
+
+  ctx.globalAlpha = 1
+}
+
+function drawMainText() {
+  ctx.textBaseline = 'middle'
+  ctx.font = '28px monospace'
+
+  for (const l of lines) {
+    let baseY = l.y + (time * l.speed) % 2200
+    while (baseY > H + 120) baseY -= 4400
+    while (baseY < -120) baseY += 4400
+
+    let pulse = 0.5 + 0.5 * Math.sin(time * 0.04 + l.phase)
+    let x = 32
+    let y = baseY
+
+    const lineGlitch = glitchTimer > 0 && Math.random() < 0.08
+    const localMirror = lineGlitch && (glitchMode === 1 || glitchMode === 3)
+    const localShift = lineGlitch ? rnd(-18, 18) : 0
+    const localSlice = lineGlitch ? rnd(-8, 8) : 0
+
+    ctx.save()
+
+    if (localMirror) {
+      ctx.translate(W, 0)
+      ctx.scale(-1, 1)
+      x = 32
+    }
+
+    for (let i = 0; i < l.tokens.length; i++) {
+      const tok = l.tokens[i]
+      const alpha = 0.35 + pulse * 0.55
+
+      ctx.globalAlpha = alpha
+      ctx.fillStyle = tok.c
+      ctx.fillText(tok.t, x + localShift, y + localSlice)
+
+      if (glitchTimer > 0 && Math.random() < 0.05) {
+        ctx.globalAlpha = 0.16
+        ctx.fillStyle = '#d8ffd0'
+        ctx.fillText(tok.t, x + localShift + rnd(-6, 6), y + rnd(-3, 3))
+      }
+
+      x += ctx.measureText(tok.t).width + 18
+
+      if (x > W - 50) {
+        y += 30
+        x = 32
+      }
+    }
+
+    if (pulse > 0.965) {
+      ctx.globalAlpha = 0.95
+      ctx.fillStyle = '#caffba'
+      ctx.fillRect(0, baseY - 1, W, 2)
+    }
+
+    ctx.restore()
+  }
+
+  ctx.globalAlpha = 1
+}
+
+function drawGlitchOverlay() {
+  if (glitchTimer <= 0) return
+
+  ctx.save()
+
+  if (glitchMode === 0 || glitchMode === 2) {
+    for (let i = 0; i < 5; i++) {
+      const y = rnd(0, H)
+      const h = rnd(6, 26)
+      const dx = rnd(-40, 40)
+      ctx.drawImage(canvas, 0, y, W, h, dx, y + rnd(-4, 4), W, h)
+    }
+  }
+
+  if (glitchMode === 1 || glitchMode === 3) {
+    ctx.globalAlpha = 0.09
+    ctx.translate(W, 0)
+    ctx.scale(-1, 1)
+    ctx.drawImage(canvas, 0, 0)
+  }
+
+  ctx.restore()
+
+  ctx.fillStyle = 'rgba(120,255,120,0.05)'
+  for (let i = 0; i < 18; i++) {
+    const x = rnd(0, W)
+    const y = rnd(0, H)
+    const w = rnd(20, 160)
+    const h = rnd(1, 4)
+    ctx.fillRect(x, y, w, h)
+  }
+}
+
+function drawVignette() {
+  const g = ctx.createLinearGradient(0, 0, 0, H)
+  g.addColorStop(0, 'rgba(0,0,0,0.32)')
+  g.addColorStop(0.18, 'rgba(0,0,0,0.08)')
+  g.addColorStop(0.5, 'rgba(0,0,0,0.0)')
+  g.addColorStop(0.82, 'rgba(0,0,0,0.08)')
+  g.addColorStop(1, 'rgba(0,0,0,0.32)')
+  ctx.fillStyle = g
+  ctx.fillRect(0, 0, W, H)
+}
+
+function drawFrame() {
+  ctx.strokeStyle = 'rgba(100,255,120,0.12)'
+  ctx.lineWidth = 1
+  ctx.strokeRect(16, 16, W - 32, H - 32)
+}
+
+function animate() {
+  updateGlitch()
+  drawBackground()
+  drawBgInterference()
+  drawGuides()
+  drawMainText()
+  drawGlitchOverlay()
+  drawScanlines()
+  drawVignette()
+  drawFrame()
+
+  time += 1
+  requestAnimationFrame(animate)
+}
+
+animate()
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'f' || e.key === 'F') {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {})
+    } else {
+      document.exitFullscreen().catch(() => {})
+    }
+  }
+})
+</script>
+</body>
+</html>

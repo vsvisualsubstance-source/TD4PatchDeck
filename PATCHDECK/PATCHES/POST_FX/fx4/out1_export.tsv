@@ -1,0 +1,3 @@
+name	index	path	parameter	enable
+FB_BLUR	0	../level1	opacity	0
+FB_BLUR	0	../blur1	size	1

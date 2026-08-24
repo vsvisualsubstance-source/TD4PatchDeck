@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Machine Scroll — Iper-densa con zoom dinamico</title>
+<style>
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+}
+#hint {
+  position: fixed;
+  left: 12px;
+  bottom: 10px;
+  color: rgba(255,255,255,0.45);
+  font: 12px Arial, sans-serif;
+  letter-spacing: .08em;
+  user-select: none;
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hint">F fullscreen</div>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+let W = 1920, H = 1080;
+let DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+function resize() {
+  const ww = window.innerWidth;
+  const hh = window.innerHeight;
+  canvas.width = Math.floor(ww * DPR);
+  canvas.height = Math.floor(hh * DPR);
+  canvas.style.width = ww + 'px';
+  canvas.style.height = hh + 'px';
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  W = ww;
+  H = hh;
+}
+window.addEventListener('resize', resize);
+resize();
+
+function rnd(a,b){ return a + Math.random() * (b-a); }
+function clamp(x,a,b){ return Math.max(a, Math.min(b, x)); }
+
+const FG = 'rgba(124,255,91,1)';
+const FG_SOFT = 'rgba(124,255,91,0.62)';
+const FG_DIM = 'rgba(124,255,91,0.15)';
+const FG_GHOST = 'rgba(124,255,91,0.08)';
+const FG_GLOW = 'rgba(210,255,185,0.95)';
+
+let t = 0;
+let cols = [];
+let numCols = 54;
+let ambientPoints = [];
+let zoomEvents = [];
+
+function build() {
+  cols = [];
+  ambientPoints = [];
+  zoomEvents = [];
+
+  const margin = Math.max(22, W * 0.02);
+  const spacing = (W - margin * 2) / (numCols - 1);
+
+  for (let i = 0; i < numCols; i++) {
+    const x = margin + i * spacing;
+    const speed = rnd(0.9, 4.6);
+    const phase = rnd(0, Math.PI * 2);
+    const density = rnd(0.9, 2.4);
+    const events = [];
+
+    let y = -3600;
+    while (y < H + 3600) {
+      y += rnd(14, 42) / density;
+      events.push({
+        y,
+        type: Math.floor(rnd(0, 8)),
+        size: rnd(10, 68),
+        bias: rnd(0, 1)
+      });
+    }
+
+    cols.push({ x, speed, phase, density, index: i, events });
+  }
+
+  for (let i = 0; i < 1800; i++) {
+    ambientPoints.push({
+      x: rnd(0, W),
+      y: rnd(0, H),
+      r: rnd(0.4, 1.8),
+      a: rnd(0.02, 0.12),
+      phase: rnd(0, Math.PI * 2)
+    });
+  }
+
+  let zt = 0;
+  while (zt < 100000) {
+    zt += rnd(180, 520);
+    zoomEvents.push({
+      start: zt,
+      dur: rnd(100, 260),
+      scale: rnd(1.08, 1.28),
+      panX: rnd(-0.06, 0.06),
+      panY: rnd(-0.08, 0.08)
+    });
+  }
+}
+build();
+
+function getZoomState(time) {
+  let scale = 1.0;
+  let panX = 0;
+  let panY = 0;
+
+  for (let i = 0; i < zoomEvents.length; i++) {
+    const z = zoomEvents[i];
+    if (time >= z.start && time <= z.start + z.dur) {
+      const u = (time - z.start) / z.dur;
+      const env = Math.sin(u * Math.PI);
+      scale = 1 + (z.scale - 1) * env;
+      panX = z.panX * env * W;
+      panY = z.panY * env * H;
+      break;
+    }
+  }
+  return { scale, panX, panY };
+}
+
+function drawGuides() {
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = FG_DIM;
+  for (const c of cols) {
+    ctx.beginPath();
+    ctx.moveTo(c.x, -H);
+    ctx.lineTo(c.x, H * 2);
+    ctx.stroke();
+  }
+}
+
+function drawAtmosphere() {
+  for (const p of ambientPoints) {
+    const pulse = 0.5 + 0.5 * Math.sin(t * 0.02 + p.phase);
+    ctx.fillStyle = `rgba(124,255,91,${p.a * (0.65 + pulse * 0.7)})`;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r + pulse * 0.4, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.lineWidth = 1;
+  for (let i = 0; i < 36; i++) {
+    const tt = t * 0.012 + i * 0.23;
+    const w = 140 + Math.sin(tt * 0.8) * 120;
+    const h = 14 + Math.cos(tt * 1.1) * 18;
+    const y = H * 0.5 + Math.sin(tt + i) * (H * 0.34);
+    ctx.strokeStyle = 'rgba(124,255,91,0.05)';
+    ctx.beginPath();
+    ctx.ellipse(W * 0.5, y, Math.abs(w), Math.abs(h), 0, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+}
+
+function drawMicroGrid() {
+  ctx.strokeStyle = 'rgba(124,255,91,0.035)';
+  ctx.lineWidth = 1;
+  const step = 36;
+  for (let x = 0; x <= W; x += step) {
+    ctx.beginPath();
+    ctx.moveTo(x + 0.5, 0);
+    ctx.lineTo(x + 0.5, H);
+    ctx.stroke();
+  }
+  for (let y = 0; y <= H; y += step) {
+    ctx.beginPath();
+    ctx.moveTo(0, y + 0.5);
+    ctx.lineTo(W, y + 0.5);
+    ctx.stroke();
+  }
+}
+
+function drawConnections() {
+  ctx.lineWidth = 1;
+  for (let i = 0; i < cols.length - 1; i++) {
+    if (((Math.floor(t / 7) + i) % 2) === 0) {
+      const a = cols[i], b = cols[i+1];
+      const y = (t * (1.7 + i * 0.018) + i * 29) % (H + 140) - 70;
+      const wave = Math.sin(t * 0.05 + i) * 12;
+
+      ctx.strokeStyle = 'rgba(124,255,91,0.32)';
+      ctx.beginPath();
+      ctx.moveTo(a.x, y);
+      ctx.bezierCurveTo(a.x + 12, y + wave, b.x - 12, y - wave, b.x, y);
+      ctx.stroke();
+
+      if (i % 3 === 0) {
+        ctx.fillStyle = FG_SOFT;
+        ctx.beginPath(); ctx.arc(a.x, y, 1.6, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(b.x, y, 1.6, 0, Math.PI*2); ctx.fill();
+      }
+    }
+  }
+}
+
+function drawEvent(x, y, ev, phase, index) {
+  const pulse = 0.5 + 0.5 * Math.sin(t * 0.05 + phase + y * 0.03);
+  ctx.lineWidth = 1.4;
+
+  switch (ev.type) {
+    case 0: // vertical
+      ctx.strokeStyle = FG;
+      ctx.beginPath();
+      ctx.moveTo(x, y - ev.size);
+      ctx.lineTo(x, y + ev.size);
+      ctx.stroke();
+      break;
+
+    case 1: // rect
+      ctx.strokeStyle = FG_SOFT;
+      ctx.strokeRect(x - 7, y - ev.size * 0.5, 14, ev.size);
+      break;
+
+    case 2: // node + ring
+      ctx.fillStyle = FG;
+      ctx.beginPath();
+      ctx.arc(x, y, 2.8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = `rgba(124,255,91,${0.25 + pulse * 0.45})`;
+      ctx.beginPath();
+      ctx.arc(x, y, 7 + pulse * 14, 0, Math.PI * 2);
+      ctx.stroke();
+      break;
+
+    case 3: // cross
+      ctx.strokeStyle = FG;
+      const w = 8 + pulse * 15;
+      ctx.beginPath();
+      ctx.moveTo(x - w, y);
+      ctx.lineTo(x + w, y);
+      ctx.moveTo(x, y - 6);
+      ctx.lineTo(x, y + 6);
+      ctx.stroke();
+      break;
+
+    case 4: // stack
+      ctx.strokeStyle = FG_DIM;
+      ctx.beginPath();
+      for (let i = 0; i < 5; i++) {
+        const yy = y + i * 5;
+        ctx.moveTo(x - 10, yy);
+        ctx.lineTo(x + 10, yy);
+      }
+      ctx.stroke();
+      break;
+
+    case 5: // curve
+      ctx.strokeStyle = FG;
+      ctx.beginPath();
+      ctx.moveTo(x, y - ev.size * 0.5);
+      ctx.bezierCurveTo(
+        x + 12 * Math.sin(t * 0.03 + index),
+        y,
+        x - 12 * Math.cos(t * 0.02 + index),
+        y,
+        x,
+        y + ev.size * 0.5
+      );
+      ctx.stroke();
+      break;
+
+    case 6: // double bar
+      ctx.strokeStyle = FG_SOFT;
+      ctx.beginPath();
+      ctx.moveTo(x - 6, y - ev.size * 0.6);
+      ctx.lineTo(x - 6, y + ev.size * 0.6);
+      ctx.moveTo(x + 6, y - ev.size * 0.6);
+      ctx.lineTo(x + 6, y + ev.size * 0.6);
+      ctx.stroke();
+      break;
+
+    case 7: // capsule
+      ctx.strokeStyle = `rgba(124,255,91,${0.4 + pulse * 0.4})`;
+      ctx.beginPath();
+      ctx.roundRect(x - 10, y - ev.size * 0.32, 20, ev.size * 0.64, 8);
+      ctx.stroke();
+      break;
+  }
+
+  if (pulse > 0.95 && ev.type !== 4) {
+    ctx.fillStyle = FG_GLOW;
+    ctx.beginPath();
+    ctx.arc(x, y, 1.8, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function drawColumns() {
+  for (const c of cols) {
+    const offset = (t * c.speed) % 2200;
+
+    for (const ev of c.events) {
+      let y = ev.y + offset;
+      while (y > H + 120) y -= 4400;
+      while (y < -120) y += 4400;
+      drawEvent(c.x, y, ev, c.phase, c.index);
+    }
+
+    const scannerY = (t * (c.speed * 1.95) + c.index * 37) % (H + 160) - 80;
+    ctx.strokeStyle = FG;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(c.x - 11, scannerY);
+    ctx.lineTo(c.x + 11, scannerY);
+    ctx.stroke();
+  }
+}
+
+function drawForegroundSweep() {
+  for (let i = 0; i < 8; i++) {
+    const y = (t * (0.9 + i * 0.08) + i * 130) % (H + 180) - 90;
+    ctx.fillStyle = 'rgba(124,255,91,0.018)';
+    ctx.fillRect(0, y, W, 2 + (i % 2));
+  }
+}
+
+function drawFrame() {
+  ctx.strokeStyle = 'rgba(124,255,91,0.18)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(18, 18, W - 36, H - 36);
+}
+
+function drawScanlines() {
+  ctx.strokeStyle = 'rgba(124,255,91,0.02)';
+  ctx.lineWidth = 1;
+  for (let y = 0; y < H; y += 3) {
+    ctx.beginPath();
+    ctx.moveTo(0, y + 0.5);
+    ctx.lineTo(W, y + 0.5);
+    ctx.stroke();
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = 'black';
+  ctx.fillRect(0, 0, W, H);
+
+  const z = getZoomState(t);
+
+  ctx.save();
+  ctx.translate(W * 0.5 + z.panX, H * 0.5 + z.panY);
+  ctx.scale(z.scale, z.scale);
+  ctx.translate(-W * 0.5, -H * 0.5);
+
+  drawMicroGrid();
+  drawAtmosphere();
+  drawGuides();
+  drawColumns();
+  drawConnections();
+  drawForegroundSweep();
+
+  ctx.restore();
+
+  drawScanlines();
+  drawFrame();
+
+  t += 1;
+  requestAnimationFrame(animate);
+}
+animate();
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'f' || e.key === 'F') {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+column	A1	B1	C1	Delete
+columnLabel	*	*	*	
+sourceData				x
+sourceDataMode	string	string	string	constant
+cellLook				button
+topPath				
+textFormat				
+help				
+width	38.0	47.0	47.0	30
+stretch	1	1	1	0
+editable	0	0	0	0
+selectRow	0	0	0	1
+justify	CENTERLEFT	CENTERLEFT	CENTERLEFT	CENTER
+draggable	0	0	0	0
+clickOnDrag	0	0	0	0
+fontBold	0	0	0	0
+fontItalic	0	0	0	0

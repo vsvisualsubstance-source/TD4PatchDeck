@@ -1,0 +1,99 @@
+Widget	Folder	ParStyle	Size
+			
+masterHeader	Core		
+masterFooter	Core		
+masterLabel	Core		
+mastersection	Core		
+masterValueLabel	Core		
+			
+masterButton	Core	Toggle	
+masterButtonPush	Core	Pulse	
+masterRadioButton	Core	Int	1
+masterCheckbox	Core	Toggle	
+masterRocker	Core	Toggle	
+			
+masterNumericField	Core	Float	1
+masterStringField	Core	Str	1
+			
+masterSlider	Core	Float	1
+masterSlider2D	Core	Float	2
+masterRange	Core	Float	2
+masterKnob	Core	Float	1
+			
+masterReferenceOP	Core	OP	
+			
+masterFolderTabs	Core	Menu	
+masterFolderTabsLegacy	Core	Menu	
+masterDropMenu	Core	Menu	
+masterStringMenu	Core	StrMenu	
+masterIconMenu	Core	Menu	
+masterList	Core		
+masterTextEditor	Core		
+masterFolderTabsWIcons	Core	Int	1
+			
+gadget	.		
+layout	.		
+			
+spacer	.		
+windowHeader	.		
+topMenu	.		
+contextPath	.		
+			
+header	.		
+folderTabs	.	Menu	
+footer	.		
+label	.		
+section	.		
+spacer	.		
+			
+buttonMomentary	.	Toggle	
+buttonToggle	.	Toggle	
+buttonScript	.	Toggle	
+buttonState	.	Toggle	
+buttonRadio	.	Int	1
+buttonRocker	.	Toggle	
+buttonCheckbox	.	Toggle	
+			
+int1	.	Int	1
+int2	.	Int	2
+int3	.	Int	3
+int4	.	Int	4
+float1	.	Float	1
+float2	.	Float	2
+float3	.	Float	3
+float4	.	Float	4
+			
+sliderHorz	.	Float	1
+sliderHorzXFade	.	Float	1
+sliderVert	.	Float	1
+range	.	Float	2
+slider2D	.	Float	2
+knobFixed	.	Float	1
+knobEndless	.	Float	1
+			
+slider3Hsv	.	Float	3
+slider3Rgb	.	Float	3
+slider4Hsva	.	Float	4
+slider4Rgba	.	Float	4
+			
+fieldString	.	String	
+fieldStringExec	.		
+fieldTextArea	.		
+			
+fieldFileBrowser	.	File	
+fieldFolderBrowser	.	Folder	
+			
+dropDownButton	.	StrMenu	
+dropDownMenu	.	Menu	
+list	.		
+			
+referenceOP	.	OP	
+referenceCHOP	.	CHOP	
+referenceCOMP	.	COMP	
+referenceDAT	.	DAT	
+referenceMAT	.	MAT	
+referenceOBJ	.	OBJ	
+referenceSOP	.	SOP	
+referenceTOP	.	TOP	
+			
+opViewer	.		

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Machine Code Scroll Color</title>
+
+<style>
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0b0b0f;
+}
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+</style>
+</head>
+
+<body>
+<canvas id="c"></canvas>
+
+<script>
+const canvas = document.getElementById('c')
+const ctx = canvas.getContext('2d')
+
+let W, H, DPR = Math.min(devicePixelRatio || 1, 2)
+
+function resize(){
+  W = innerWidth
+  H = innerHeight
+  canvas.width = W * DPR
+  canvas.height = H * DPR
+  canvas.style.width = W + 'px'
+  canvas.style.height = H + 'px'
+  ctx.setTransform(DPR,0,0,DPR,0,0)
+}
+addEventListener('resize', resize)
+resize()
+
+function rnd(a,b){ return a + Math.random()*(b-a) }
+function pick(a){ return a[Math.floor(Math.random()*a.length)] }
+
+// 🎨 palette codice
+const colors = {
+  keyword: '#c586c0',
+  number: '#f78c6c',
+  func: '#82aaff',
+  var: '#d4d4d4',
+  symbol: '#aaaaaa',
+  operator: '#f07178',
+  comment: '#6a9955',
+  faint: 'rgba(255,255,255,0.08)'
+}
+
+const keywords = ['let','const','if','for','return','while']
+const funcs = ['Math.sin','Math.cos','sqrt','noise','hash2','fbm']
+const vars = ['x','y','dx','dy','pts','time','speed','index','buffer']
+const operators = ['+','-','*','/','=','=>','&&','||']
+const symbols = ['{','}','(',')','[',']',';']
+
+function generateToken(){
+  let r = Math.random()
+  if (r < 0.15) return {t: pick(keywords), c: colors.keyword}
+  if (r < 0.30) return {t: pick(funcs), c: colors.func}
+  if (r < 0.55) return {t: pick(vars), c: colors.var}
+  if (r < 0.70) return {t: (Math.random()*100).toFixed(1), c: colors.number}
+  if (r < 0.85) return {t: pick(operators), c: colors.operator}
+  return {t: pick(symbols), c: colors.symbol}
+}
+
+let streams = []
+let time = 0
+
+function build(){
+  streams = []
+  let cols = Math.floor(W / 60)
+
+  for(let i=0;i<cols;i++){
+    let x = 40 + i * (W-80)/cols
+
+    let events = []
+    let y = -2000
+
+    while(y < H + 2000){
+      y += rnd(20,60)
+      events.push({
+        y,
+        tokens: Array.from({length: Math.floor(rnd(2,6))}, generateToken),
+        speed: rnd(0.8,2.5),
+        phase: rnd(0,Math.PI*2)
+      })
+    }
+
+    streams.push({x, events})
+  }
+}
+build()
+addEventListener('resize', build)
+
+function draw(){
+  ctx.fillStyle = '#0b0b0f'
+  ctx.fillRect(0,0,W,H)
+
+  ctx.font = '16px Menlo, monospace'
+
+  for(let s of streams){
+
+    for(let ev of s.events){
+
+      let y = ev.y + time * ev.speed % 2000
+
+      while(y > H+50) y -= 4000
+      while(y < -50) y += 4000
+
+      let pulse = 0.5 + 0.5*Math.sin(time*0.05 + ev.phase)
+
+      let x = s.x
+
+      for(let tok of ev.tokens){
+        ctx.fillStyle = tok.c
+        ctx.globalAlpha = 0.5 + pulse * 0.5
+        ctx.fillText(tok.t, x, y)
+        x += ctx.measureText(tok.t).width + 6
+      }
+
+      ctx.globalAlpha = 1
+
+      // scanner
+      if (pulse > 0.95){
+        ctx.fillStyle = '#ffffff'
+        ctx.fillRect(s.x-10, y-1, 20, 2)
+      }
+    }
+  }
+
+  time += 1
+  requestAnimationFrame(draw)
+}
+
+draw()
+
+document.addEventListener('keydown', e=>{
+  if(e.key === 'f'){
+    if(!document.fullscreenElement){
+      document.documentElement.requestFullscreen()
+    } else {
+      document.exitFullscreen()
+    }
+  }
+})
+</script>
+</body>
+</html>

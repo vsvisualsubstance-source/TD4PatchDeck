@@ -1,0 +1,4 @@
+name	index	path	parameter	enable
+r	0	../1_2_fps	Labelfontcolorr	1
+g	1	../1_2_fps	Labelfontcolorg	1
+b	2	../1_2_fps	Labelfontcolorb	1
