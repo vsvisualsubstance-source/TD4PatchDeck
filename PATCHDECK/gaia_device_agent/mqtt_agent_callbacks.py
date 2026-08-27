@@ -12,6 +12,7 @@ def onConnect(dat: mqttclientDAT):
 		dat: The MQTT Client DAT
 	"""
 	op('gaia_device_agent').module.on_connect(dat)
+	op('patchdeck_services').module.publish_matrix()
 	return
 
 def onConnectFailure(dat: mqttclientDAT, msg: str):
