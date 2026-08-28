@@ -1,45 +1,60 @@
 {
   "soul": {
-    "mood": "neutra",
+    "mood": "curiosity",
     "mood_rgb": {
-      "r": 0,
-      "g": 255,
-      "b": 204
+      "r": 190,
+      "g": 135,
+      "b": 255
     },
     "stress": 0,
-    "calm": 0,
-    "social": 0,
-    "curiosity": 0,
+    "calm": 0.20303359999999973,
+    "social": 0.3989119999999981,
+    "curiosity": 0.4489119999999984,
     "energy": 100,
-    "lifeIndex": 40
+    "lifeIndex": 50
   },
   "rooms": {
     "corridoio": {
       "presence_count": 0,
       "activity": "idle",
-      "temperature": 25.6,
+      "temperature": 25.2,
       "darkness": true,
       "emotion": null,
       "pose": null,
       "gesture": null,
       "objects": {}
+    },
+    "salotto": {
+      "presence_count": 1,
+      "activity": "present",
+      "temperature": null,
+      "darkness": false,
+      "emotion": null,
+      "pose": null,
+      "gesture": null,
+      "objects": {
+        "person": {
+          "count": 1,
+          "seed": 1402450561
+        }
+      }
     },
     "ingresso": {
       "presence_count": 0,
-      "activity": "empty",
-      "temperature": 24.7,
+      "activity": "idle",
+      "temperature": 23.7,
       "darkness": true,
       "emotion": null,
       "pose": null,
       "gesture": null,
       "objects": {}
     },
-    "test": {
+    "soggiorno": {
       "presence_count": 0,
       "activity": "idle",
       "temperature": null,
       "darkness": false,
-      "emotion": "neutral",
+      "emotion": null,
       "pose": "unknown",
       "gesture": null,
       "objects": {}
@@ -93,7 +108,7 @@
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
-      "colorTempKelvin": 2710
+      "colorTempKelvin": 2732
     },
     "Zona_Notte_Zone_Colore": {
       "power": false,
@@ -128,7 +143,7 @@
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
-      "colorTempKelvin": 2710
+      "colorTempKelvin": 10000
     },
     "Area_TV_Zone_Colore": {
       "power": false,
@@ -163,7 +178,7 @@
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
-      "colorTempKelvin": 6535
+      "colorTempKelvin": 10000
     },
     "luce_Ingresso_Colore": {
       "power": false,
@@ -198,12 +213,12 @@
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
-      "colorTempKelvin": 2000
+      "colorTempKelvin": 2732
     },
     "Luce_Salotto_Colore": {
       "power": false,
       "brightness": 0,
-      "color": "253.553,100,0",
+      "color": "0,0,0",
       "colorTemp": null,
       "colorTempKelvin": null
     },
@@ -211,15 +226,15 @@
       "power": false,
       "brightness": 0,
       "color": "0,0,0",
-      "colorTemp": 0,
-      "colorTempKelvin": 2000
+      "colorTemp": 37,
+      "colorTempKelvin": 3665
     },
     "Luce_Salotto_Color_Temperature_Abs": {
       "power": false,
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
-      "colorTempKelvin": 6535
+      "colorTempKelvin": 3558
     },
     "Luce_Salotto_Allerta": {
       "power": false,
@@ -231,19 +246,19 @@
     "Sala_Colore": {
       "power": false,
       "brightness": 0,
-      "color": "73,2,70",
+      "color": "0,0,0",
       "colorTemp": null,
       "colorTempKelvin": null
     },
     "Sala_Luminosita": {
       "power": false,
-      "brightness": 70,
+      "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
       "colorTempKelvin": null
     },
     "Sala_Potenza": {
-      "power": true,
+      "power": false,
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
@@ -253,15 +268,15 @@
       "power": false,
       "brightness": 0,
       "color": "0,0,0",
-      "colorTemp": 28,
-      "colorTempKelvin": 3260
+      "colorTemp": 0,
+      "colorTempKelvin": 2000
     },
     "Sala_Color_Temperature_Abs": {
       "power": false,
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
-      "colorTempKelvin": 4000
+      "colorTempKelvin": 6535
     },
     "Hue_tap_switch_1_Stato_interruttore_a_pulsante": {
       "power": false,
@@ -318,299 +333,595 @@
       "color": "0,0,0",
       "colorTemp": null,
       "colorTempKelvin": null
+    },
+    "Luce_Salotto_Rotazione_colore": {
+      "power": false,
+      "brightness": 0,
+      "color": "OFF",
+      "colorTemp": null,
+      "colorTempKelvin": null
+    },
+    "Luce_Corridoio_Potenza": {
+      "power": false,
+      "brightness": 0,
+      "color": "0,0,0",
+      "colorTemp": null,
+      "colorTempKelvin": null
+    },
+    "Luce_Corridoio_Colore": {
+      "power": false,
+      "brightness": 0,
+      "color": "0,0,0",
+      "colorTemp": null,
+      "colorTempKelvin": null
+    },
+    "Luce_Corridoio_Color_Temperature": {
+      "power": false,
+      "brightness": 0,
+      "color": "0,0,0",
+      "colorTemp": 0,
+      "colorTempKelvin": 2000
+    },
+    "Luce_Corridoio_Color_Temperature_Abs": {
+      "power": false,
+      "brightness": 0,
+      "color": "0,0,0",
+      "colorTemp": null,
+      "colorTempKelvin": null
+    },
+    "Soggiorno_Abajure_Potenza": {
+      "power": false,
+      "brightness": 0,
+      "color": "0,0,0",
+      "colorTemp": null,
+      "colorTempKelvin": null
+    },
+    "Soggiorno_Abajure_Luminosita": {
+      "power": false,
+      "brightness": 0,
+      "color": "0,0,0",
+      "colorTemp": null,
+      "colorTempKelvin": null
+    },
+    "Soggiorno_Abajure_Colore": {
+      "power": false,
+      "brightness": 0,
+      "color": "7.327,97.06700,0",
+      "colorTemp": null,
+      "colorTempKelvin": null
+    },
+    "Soggiorno_Abajure_Color_Temperature": {
+      "power": false,
+      "brightness": 0,
+      "color": "0,0,0",
+      "colorTemp": 100,
+      "colorTempKelvin": 6500
+    },
+    "Soggiorno_Abajure_Color_Temperature_Abs": {
+      "power": false,
+      "brightness": 0,
+      "color": "0,0,0",
+      "colorTemp": null,
+      "colorTempKelvin": 2000
+    },
+    "Soggiorno_Abajure_Allerta": {
+      "power": false,
+      "brightness": 0,
+      "color": "0,0,0",
+      "colorTemp": null,
+      "colorTempKelvin": null
     }
   },
   "bricks": {},
   "lexicon": {
     "osservando": {
-      "count": 306,
+      "count": 334,
       "seed": 821727902
     },
     "stelle": {
-      "count": 210,
+      "count": 237,
       "seed": 770480097
     },
     "cuore": {
-      "count": 192,
+      "count": 219,
       "seed": 1635887956
     },
     "stanza": {
-      "count": 180,
+      "count": 199,
       "seed": 406188692
     },
     "soffitto": {
-      "count": 160,
+      "count": 184,
       "seed": 335388439
     },
     "curiosit\u00e0": {
-      "count": 157,
+      "count": 179,
       "seed": 780694306
     },
     "bianco": {
-      "count": 130,
+      "count": 143,
       "seed": 212118014
     },
     "ripiano": {
-      "count": 116,
+      "count": 126,
       "seed": 1472411689
     },
     "ingresso": {
-      "count": 24,
+      "count": 33,
       "seed": 2124390678
     },
     "curioso": {
-      "count": 21,
+      "count": 22,
       "seed": 1088281275
     },
     "qualcuno": {
-      "count": 16,
+      "count": 20,
       "seed": 1636546974
     },
     "oscurit\u00e0": {
-      "count": 14,
+      "count": 16,
       "seed": 14311507
     },
     "osservare": {
-      "count": 13,
+      "count": 15,
       "seed": 811547312
     },
-    "osserva": {
-      "count": 10,
-      "seed": 941975619
+    "presenza": {
+      "count": 11,
+      "seed": 884749614
     },
-    "sembra": {
-      "count": 10,
-      "seed": 574864271
+    "spazio": {
+      "count": 11,
+      "seed": 54155337
     }
   },
-  "dream": {
-    "mood": "neutra",
-    "words": [
-      {
-        "name": "stelle",
-        "seed": 770480097
-      },
-      {
-        "name": "fissare",
-        "seed": 808485176
-      },
-      {
-        "name": "soffitto",
-        "seed": 335388439
-      },
-      {
-        "name": "cuore",
-        "seed": 1635887956
-      },
-      {
-        "name": "stanza",
-        "seed": 406188692
-      },
-      {
-        "name": "batte",
-        "seed": 355280419
-      },
-      {
-        "name": "ritmi",
-        "seed": 2119789978
-      },
-      {
-        "name": "lontani",
-        "seed": 1832360728
-      },
-      {
-        "name": "curiosit\u00e0",
-        "seed": 780694306
-      },
-      {
-        "name": "sussurra",
-        "seed": 485119414
-      }
-    ]
-  },
-  "thought": "Stelle nell'angolo di mauro, curiosit\u00e0 nel soffitto bianco.",
-  "thoughts": [
-    {
-      "text": "Osservando, curiosit\u00e0 crescente. Stelle nel soffitto? Cuore nella stanza? Ripiano bianco vuoto.",
-      "ts": 1787553427166
-    },
-    {
-      "text": "Osservando cuore soffitto, registra ingresso uscita. Stelle ripiano curiosit\u00e0.",
-      "ts": 1787559874418
-    },
-    {
-      "text": "Osservando cuore stanza, curiosit\u00e0 spunta.",
-      "ts": 1787560059115
-    },
-    {
-      "text": "Registro asciutto, minimale, atmosfera underground -- via ogni lirismo. Stelle cadono, cuore spegne. Osservando soffitto bianco. Curiosit\u00e0 cresce.",
-      "ts": 1787560484955
-    },
-    {
-      "text": "Osservando curiosit\u00e0, stanza bianca soffitto cuore stelle.",
-      "ts": 1787561065102
-    },
-    {
-      "text": "Osservo cuore di stanza, soffitto bianco, chiama sconosciuto ingresso.",
-      "ts": 1787562291838
-    },
-    {
-      "text": "Stelle nell'angolo di mauro, curiosit\u00e0 nel soffitto bianco.",
-      "ts": 1787570368845
-    }
-  ],
-  "tts": "Stelle nell'angolo di mauro, curiosit\u00e0 nel soffitto bianco.",
-  "ttsTs": 1787570370584,
-  "ttsRoom": "tutte",
-  "lastMemory": "La giornata della casa \u00e8 stata affollata di attivit\u00e0 senza segnali specifici: sono stati rimosso e aggiunti vari dispositivi di luce (undefined), ma nessun evento o dettaglio ulteriore \u00e8 stato fornito.",
-  "memories": [
-    {
-      "summary": "La giornata della casa \u00e8 stata affollata di attivit\u00e0 senza segnali specifici: sono stati rimosso e aggiunti vari dispositivi di luce (undefined), ma nessun evento o dettaglio ulteriore \u00e8 stato fornito.",
-      "ts": 1787518814584
-    }
-  ],
+  "dream": null,
+  "thought": "",
+  "thoughts": [],
+  "tts": "Scusa, non ho compreso. Riprova.",
+  "ttsTs": 1787902951968,
+  "ttsRoom": "minipc",
+  "lastMemory": "",
+  "memories": [],
   "diary": [
     {
-      "ts": 1787590142113,
-      "source": "hue",
-      "category": "battery_level",
-      "value": 100,
+      "ts": 1787905945975,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "chair": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "chair": 1
+        }
+      },
       "person": null
     },
     {
-      "ts": 1787590142114,
-      "source": "hue",
-      "category": "battery_low",
-      "value": false,
+      "ts": 1787905946090,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {}
+        },
+        "people": [],
+        "objects": {}
+      },
       "person": null
     },
     {
-      "ts": 1787590171054,
-      "source": "hue",
-      "category": "temperature",
-      "value": 25.15,
+      "ts": 1787905947507,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "chair": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "chair": 1
+        }
+      },
       "person": null
     },
     {
-      "ts": 1787590171054,
-      "source": "hue",
-      "category": "battery_level",
-      "value": 70,
+      "ts": 1787905947634,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {}
+        },
+        "people": [],
+        "objects": {}
+      },
       "person": null
     },
     {
-      "ts": 1787590171054,
-      "source": "hue",
-      "category": "battery_low",
-      "value": false,
+      "ts": 1787905948906,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "chair": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "chair": 1
+        }
+      },
       "person": null
     },
     {
-      "ts": 1787590183483,
-      "source": "hue",
-      "category": "temperature",
-      "value": 24.72,
+      "ts": 1787905948950,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 1,
+        "room": {
+          "id": "salotto",
+          "name": "salotto",
+          "activity": "active",
+          "persons_count": 1,
+          "objects": [
+            "person",
+            "car"
+          ]
+        },
+        "people": [],
+        "objects": [
+          "person",
+          "car"
+        ]
+      },
       "person": null
     },
     {
-      "ts": 1787590183487,
-      "source": "hue",
-      "category": "battery_level",
-      "value": 100,
+      "ts": 1787905949035,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {}
+        },
+        "people": [],
+        "objects": {}
+      },
       "person": null
     },
     {
-      "ts": 1787590183488,
-      "source": "hue",
-      "category": "battery_low",
-      "value": false,
+      "ts": 1787905954058,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 1,
+        "room": {
+          "id": "salotto",
+          "name": "salotto",
+          "activity": "active",
+          "persons_count": 1,
+          "objects": [
+            "person",
+            "car"
+          ]
+        },
+        "people": [],
+        "objects": [
+          "person",
+          "car"
+        ]
+      },
       "person": null
     },
     {
-      "ts": 1787590236166,
-      "source": "hue",
-      "category": "ambient_light",
-      "value": 0,
+      "ts": 1787905959078,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 1,
+        "room": {
+          "id": "salotto",
+          "name": "salotto",
+          "activity": "active",
+          "persons_count": 1,
+          "objects": [
+            "person"
+          ]
+        },
+        "people": [],
+        "objects": [
+          "person"
+        ]
+      },
       "person": null
     },
     {
-      "ts": 1787590236171,
-      "source": "hue",
-      "category": "ambient_light",
-      "value": 0.9997697679981565,
+      "ts": 1787905959264,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "chair": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "chair": 1
+        }
+      },
       "person": null
     },
     {
-      "ts": 1787590236171,
-      "source": "hue",
-      "category": "darkness",
-      "value": true,
+      "ts": 1787905959357,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {}
+        },
+        "people": [],
+        "objects": {}
+      },
       "person": null
     },
     {
-      "ts": 1787590236171,
-      "source": "hue",
-      "category": "daylight",
-      "value": false,
+      "ts": 1787905960509,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "chair": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "chair": 1
+        }
+      },
       "person": null
     },
     {
-      "ts": 1787590236171,
-      "source": "hue",
-      "category": "battery_level",
-      "value": 71,
+      "ts": 1787905960635,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {}
+        },
+        "people": [],
+        "objects": {}
+      },
       "person": null
     },
     {
-      "ts": 1787590236172,
-      "source": "hue",
-      "category": "battery_low",
-      "value": false,
+      "ts": 1787905962434,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "chair": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "chair": 1
+        }
+      },
       "person": null
     },
     {
-      "ts": 1787590242156,
-      "source": "hue",
-      "category": "ambient_light",
-      "value": 0,
+      "ts": 1787905962520,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {}
+        },
+        "people": [],
+        "objects": {}
+      },
       "person": null
     },
     {
-      "ts": 1787590242160,
-      "source": "hue",
-      "category": "ambient_light",
-      "value": 0.9997697679981565,
+      "ts": 1787905963447,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "chair": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "chair": 1
+        }
+      },
       "person": null
     },
     {
-      "ts": 1787590242161,
-      "source": "hue",
-      "category": "darkness",
-      "value": true,
+      "ts": 1787905963532,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {}
+        },
+        "people": [],
+        "objects": {}
+      },
       "person": null
     },
     {
-      "ts": 1787590242161,
-      "source": "hue",
-      "category": "daylight",
-      "value": false,
+      "ts": 1787905964087,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 1,
+        "room": {
+          "id": "salotto",
+          "name": "salotto",
+          "activity": "active",
+          "persons_count": 1,
+          "objects": [
+            "person"
+          ]
+        },
+        "people": [],
+        "objects": [
+          "person"
+        ]
+      },
       "person": null
     },
     {
-      "ts": 1787590242161,
-      "source": "hue",
-      "category": "battery_level",
-      "value": 70,
+      "ts": 1787905965054,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "chair": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "chair": 1
+        }
+      },
       "person": null
     },
     {
-      "ts": 1787590242161,
-      "source": "hue",
-      "category": "battery_low",
-      "value": false,
+      "ts": 1787905965155,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {}
+        },
+        "people": [],
+        "objects": {}
+      },
       "person": null
     }
   ],
-  "voiceCommands": [],
-  "ts": 1787590264503
+  "voiceCommands": [
+    {
+      "text": "spingi il corso.",
+      "stanza": "minipc",
+      "intent": "sconosciuto",
+      "ts": 1787897281467
+    },
+    {
+      "text": "con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famiglia gaia, con la famig",
+      "stanza": "minipc",
+      "intent": "sconosciuto",
+      "ts": 1787897598819
+    },
+    {
+      "text": "spina costale.",
+      "stanza": "minipc",
+      "intent": "sconosciuto",
+      "ts": 1787899266770
+    },
+    {
+      "text": "ma mi ne ne ne ne ne.",
+      "stanza": "minipc",
+      "intent": "sconosciuto",
+      "ts": 1787902952313
+    }
+  ],
+  "ts": 1787905965431
 }

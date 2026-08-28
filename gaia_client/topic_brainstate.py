@@ -1,6 +1,6 @@
 {
   "mood": "calm",
-  "lifeIndex": 40,
+  "lifeIndex": 50,
   "gamification": {
     "level": 8,
     "xp": 14882,
@@ -37,11 +37,11 @@
   },
   "presence": {
     "mauro": {
-      "present": false,
-      "enterTs": 1787906336886,
-      "lastSeen": 1787906338417,
-      "room": null,
-      "confidence": 0.6489,
+      "present": true,
+      "enterTs": 1787906790552,
+      "lastSeen": 1787906855472,
+      "room": "salotto",
+      "confidence": 0.6912,
       "track_id": 2,
       "pose": "standing",
       "exitTs": 1786539599216
@@ -74,7 +74,7 @@
     "corridoio": {
       "people": [],
       "objects": {},
-      "ambient_light": 1.1020467039630304,
+      "ambient_light": 2.975774377372812,
       "darkness": true,
       "_temps": {
         "hue_temperature_sensor_3_temperatura": 25.51,
@@ -86,27 +86,31 @@
     "salotto": {
       "id": "salotto",
       "name": "salotto",
-      "persons_count": 0,
-      "objects": {},
-      "lastUpdate": 1787906414576,
-      "people": [],
+      "persons_count": 1,
+      "objects": {
+        "person": 1
+      },
+      "lastUpdate": 1787906855472,
+      "people": [
+        "mauro"
+      ],
       "main_user": "mauro",
       "zone": null,
       "_yolo": true,
-      "lastYolo": 1787906414576,
-      "activity": "empty",
-      "_activityCandidate": "empty",
-      "_activityCandidateSince": 1787906414576,
+      "lastYolo": 1787906855472,
+      "activity": "present",
+      "_activityCandidate": "present",
+      "_activityCandidateSince": 1787906763955,
       "_activityCommitted": "present"
     },
     "ingresso": {
       "people": [],
       "objects": {},
       "_temps": {
-        "hue_temperature_sensor_4_temperatura": 23.87
+        "hue_temperature_sensor_4_temperatura": 24.01
       },
-      "temperature": 23.9,
-      "ambient_light": 9.366988779521161,
+      "temperature": 24,
+      "ambient_light": 12.122717925364965,
       "darkness": true,
       "lastMotion": 1787905225309
     },
@@ -117,15 +121,15 @@
       "objects": {
         "chair": 1
       },
-      "lastUpdate": 1787906414388,
+      "lastUpdate": 1787906858307,
       "people": [],
       "main_user": null,
       "zone": "unknown",
       "_yolo": true,
-      "lastYolo": 1787906411790,
-      "activity": "idle",
+      "lastYolo": 1787906858307,
+      "activity": "sitting",
       "_activityCandidate": "sitting",
-      "_activityCandidateSince": 1787906411790,
+      "_activityCandidateSince": 1787906858307,
       "_mediapipe": true,
       "mediapipe": null,
       "currentPose": "unknown",
@@ -133,5 +137,5 @@
       "_activityCommitted": "sitting"
     }
   },
-  "ts": 1787906414576
+  "ts": 1787906858307
 }
