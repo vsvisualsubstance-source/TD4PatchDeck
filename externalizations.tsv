@@ -4,7 +4,7 @@ path	type	strategy	rel_file_path	timestamp	dirty	build	touch_build	node_x	node_y
 /PATCHDECK/local/modules/monitors1_callbacks	text	py	/Users/maurospagnoli/Library/CloudStorage/GoogleDrive-vs.visualsubstance@gmail.com/Il mio Drive/VS/TD Repository/PROGETTI/2026/marzo/PATCHDECK/local/modules/monitors1_callbacks.py	2026-08-24 10:42:16 UTC				-225	-25	0.9000,0.3000,0.4000
 /PATCHDECK/local/modules	base	tox	/Users/maurospagnoli/Library/CloudStorage/GoogleDrive-vs.visualsubstance@gmail.com/Il mio Drive/VS/TD Repository/PROGETTI/2026/marzo/PATCHDECK/local/modules.tox	2026-08-24 10:42:16 UTC		1	2025.33070	-2250	1925	0.3250,0.8000,0.3000
 /PATCHDECK/local	base	tox	PATCHDECK/local.tox	2026-08-24 10:42:16 UTC		1	2025.33070	250	300	0.3250,0.8000,0.3000
-/PATCHDECK/audio	base	tox	PATCHDECK/audio.tox	2026-08-27 17:45:07 UTC		2	2025.33070	475	300	0.3250,0.8000,0.3000
+/PATCHDECK/audio	base	tox	PATCHDECK/audio.tox	2026-08-28 14:09:01 UTC		3	2025.33070	475	300	0.3250,0.8000,0.3000
 /PATCHDECK/UI/MAIN_INTERFACE/ui_par_exec	parexec	py	PATCHDECK/UI/MAIN_INTERFACE/ui_par_exec.py	2026-08-24 10:42:16 UTC				-1400	6700	0.9000,0.3000,0.4000
 /PATCHDECK/UI/MAIN_INTERFACE/strobo_color_panel	container	tox	PATCHDECK/UI/MAIN_INTERFACE/strobo_color_panel.tox	2026-08-27 17:45:05 UTC		3	2025.33070	4100	13425	0.3250,0.8000,0.3000
 /PATCHDECK/UI/MAIN_INTERFACE/sliders_b	container	tox	PATCHDECK/UI/MAIN_INTERFACE/sliders_b.tox	2026-08-27 15:55:56 UTC		4	2025.33070	5275	6375	0.3250,0.8000,0.3000
@@ -21,7 +21,7 @@ path	type	strategy	rel_file_path	timestamp	dirty	build	touch_build	node_x	node_y
 /PATCHDECK/UI/MAIN_INTERFACE/dmx_control_panel/dmx_palette_options	table	tsv	PATCHDECK/UI/MAIN_INTERFACE/dmx_control_panel/dmx_palette_options.tsv	2026-08-24 10:42:16 UTC				7295	7860	0.9000,0.3000,0.4000
 /PATCHDECK/UI/MAIN_INTERFACE/dmx_control_panel	container	tox	PATCHDECK/UI/MAIN_INTERFACE/dmx_control_panel.tox	2026-08-27 15:54:42 UTC		3	2025.33070	6450	10225	0.3250,0.8000,0.3000
 /PATCHDECK/UI/MAIN_INTERFACE/datexec1	datexec	py	PATCHDECK/UI/MAIN_INTERFACE/datexec1.py	2026-08-24 10:42:16 UTC				725	3300	0.9000,0.3000,0.4000
-/PATCHDECK/UI/MAIN_INTERFACE/control_ui	container	tox	PATCHDECK/UI/MAIN_INTERFACE/control_ui.tox	2026-08-28 09:20:11 UTC		10	2025.33070	3400	9525	0.3250,0.8000,0.3000
+/PATCHDECK/UI/MAIN_INTERFACE/control_ui	container	tox	PATCHDECK/UI/MAIN_INTERFACE/control_ui.tox	2026-08-28 14:08:59 UTC		11	2025.33070	3400	9525	0.3250,0.8000,0.3000
 /PATCHDECK/UI/MAIN_INTERFACE/buttons_panel_b	container	tox	PATCHDECK/UI/MAIN_INTERFACE/buttons_panel_b.tox	2026-08-27 16:20:56 UTC		4	2025.33070	5000	7300	0.3250,0.8000,0.3000
 /PATCHDECK/UI/MAIN_INTERFACE/buttons_panel_a	container	tox	PATCHDECK/UI/MAIN_INTERFACE/buttons_panel_a.tox	2026-08-24 10:42:16 UTC		1	2025.33070	4822	4987	0.3250,0.8000,0.3000
 /PATCHDECK/UI/MAIN_INTERFACE/basicWidgets/topMenuCallbacks	text	py	PATCHDECK/UI/MAIN_INTERFACE/basicWidgets/topMenuCallbacks.py	2026-08-24 10:42:16 UTC				200	-5800	0.9000,0.3000,0.4000
@@ -64,8 +64,8 @@ path	type	strategy	rel_file_path	timestamp	dirty	build	touch_build	node_x	node_y
 /PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1/B	button	tox	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1/B.tox	2026-08-24 10:42:18 UTC		1	2025.33070	-375	-175	0.3250,0.8000,0.3000
 /PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1/A/color	table	tsv	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1/A/color.tsv	2026-08-24 10:42:18 UTC				275	425	0.9000,0.3000,0.4000
 /PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1/A	button	tox	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1/A.tox	2026-08-24 10:42:18 UTC		1	2025.33070	-350	100	0.3250,0.8000,0.3000
-/PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1	container	tox	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1.tox	2026-08-28 11:02:26 UTC		35	2025.33070	25	350	0.3250,0.8000,0.3000
-/PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0	container	tox	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0.tox	2026-08-28 11:02:26 UTC		42	2025.33070	-175	-325	0.3250,0.8000,0.3000
+/PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1	container	tox	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1.tox	2026-08-28 14:09:01 UTC		36	2025.33070	25	350	0.3250,0.8000,0.3000
+/PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0	container	tox	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0.tox	2026-08-28 14:09:01 UTC		43	2025.33070	-175	-325	0.3250,0.8000,0.3000
 /PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/selectexec	chopexec	py	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/selectexec.py	2026-08-24 10:42:18 UTC				-475	25	0.9000,0.3000,0.4000
 /PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/select1	select	tox	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/select1.tox	2026-08-24 10:42:18 UTC		1	2025.33070	50	-50	0.3250,0.8000,0.3000
 /PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/replicator1_callbacks	text	py	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/replicator1_callbacks.py	2026-08-24 10:42:18 UTC				-180	-485	0.9000,0.3000,0.4000
@@ -924,11 +924,11 @@ path	type	strategy	rel_file_path	timestamp	dirty	build	touch_build	node_x	node_y
 /Embody1/Collection/CollectionExt	text	py	Embody1/Collection/CollectionExt.py	2026-08-24 10:42:39 UTC				200	0	0.9000,0.3000,0.4000
 /Embody1/Collection	base	tox	Embody1/Collection.tox	2026-08-24 10:42:39 UTC		2	2025.33070	200	-550	0.3250,0.8000,0.3000
 /Embody1/CatalogManagerExt	text	py	Embody1/CatalogManagerExt.py	2026-08-24 10:42:39 UTC				-700	500	0.9000,0.3000,0.4000
-/Embody1	container	tox	Embody1.tox	2026-08-28 09:36:46 UTC		1213	2025.33070	350	500	0.3250,0.8000,0.3000
+/Embody1	container	tox	Embody1.tox	2026-08-28 14:09:00 UTC		1214	2025.33070	350	500	0.3250,0.8000,0.3000
 /	base	tdn	PATCHDECK_V8.tdn	2026-08-24 12:35:25 UTC			099.2025.33070			
 /PATCHDECK/PATCHES/master_directndi_exec	parexec	py	PATCHDECK/PATCHES/master_directndi_exec.py	2026-08-27 16:20:57 UTC				926	-1095	0.9000,0.3000,0.4000
 /PATCHDECK/CTRL/master_toggle_exec	chopexec	py	PATCHDECK/CTRL/master_toggle_exec.py	2026-08-27 16:26:27 UTC				-3845	7733	0.9000,0.3000,0.4000
-/gaia_client	base	tox	gaia_client.tox	2026-08-28 10:16:25 UTC		17	2025.33070	775	175	0.3250,0.8000,0.3000
+/gaia_client	base	tox	gaia_client.tox	2026-08-28 14:09:00 UTC		18	2025.33070	775	175	0.3250,0.8000,0.3000
 /gaia_client/mqtt_ingest_callbacks	text	py	gaia_client/mqtt_ingest_callbacks.py	2026-08-28 07:13:07 UTC				0	580	0.9000,0.3000,0.4000
 /gaia_client/topic_canvas	text	py	gaia_client/topic_canvas.py	2026-08-28 07:13:08 UTC				400	700	0.9000,0.3000,0.4000
 /gaia_client/topic_brainstate	text	py	gaia_client/topic_brainstate.py	2026-08-28 07:13:08 UTC				400	300	0.9000,0.3000,0.4000
