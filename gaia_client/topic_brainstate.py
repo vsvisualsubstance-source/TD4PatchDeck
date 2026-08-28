@@ -1,9 +1,9 @@
 {
   "mood": "curiosity",
-  "lifeIndex": 50,
+  "lifeIndex": 40,
   "gamification": {
     "level": 8,
-    "xp": 14892,
+    "xp": 14937,
     "xpNextLevel": 16550,
     "activeClass": "Guerriero",
     "unlockedAssets": [
@@ -17,31 +17,31 @@
       "phoenix_core"
     ],
     "stats": {
-      "mago": 1378,
+      "mago": 1379,
       "bardo": 127,
-      "guerriero": 2356,
+      "guerriero": 2360,
       "druido": 1586
     },
     "_cd": {
       "natura": 1787755032180,
-      "movimento": 1787909594786,
-      "voce": 1787902952008,
+      "movimento": 1787914586508,
+      "voce": 1787913169603,
       "pensiero": 1787754603697,
       "presenza": 1787744119921,
       "riflessione": 1786827611348,
       "rituale": 1787896390160
     },
     "_lastMemCount": 3,
-    "_lastVoiceTs": 1787902952313,
+    "_lastVoiceTs": 1787913169926,
     "_lastThoughtTs": 1787754603184
   },
   "presence": {
     "mauro": {
       "present": false,
-      "enterTs": 1787909745586,
-      "lastSeen": 1787909798051,
+      "enterTs": 1787915161486,
+      "lastSeen": 1787915178922,
       "room": null,
-      "confidence": 0.6951,
+      "confidence": 0.6438,
       "track_id": 2,
       "pose": "standing",
       "exitTs": 1786539599216
@@ -68,75 +68,64 @@
       "lastSeen": 1787755653213,
       "room": null,
       "confidence": 0.4606
-    },
-    "unknown_1787909833364_0": {
-      "present": true,
-      "room": "salotto",
-      "lastSeen": 1787909833364,
-      "confidence": 0.3,
-      "enterTs": 1787909833364
     }
   },
   "rooms": {
     "corridoio": {
       "people": [],
       "objects": {},
-      "ambient_light": 1.3225131530409457,
+      "ambient_light": 2.5345449627583774,
       "darkness": true,
       "_temps": {
-        "hue_temperature_sensor_3_temperatura": 25.65,
-        "hue_temperature_sensor_5_temperatura": 25.01
+        "hue_temperature_sensor_3_temperatura": 26.22,
+        "hue_temperature_sensor_5_temperatura": 25.29
       },
-      "temperature": 25.3,
-      "lastMotion": 1787909774190
+      "temperature": 25.8,
+      "lastMotion": 1787914615885
     },
     "salotto": {
       "id": "salotto",
       "name": "salotto",
-      "persons_count": 1,
-      "objects": {
-        "person": 1
-      },
-      "lastUpdate": 1787909833364,
-      "people": [
-        "unknown_1787909833364_0"
-      ],
+      "persons_count": 0,
+      "objects": {},
+      "lastUpdate": 1787915295376,
+      "people": [],
       "main_user": "mauro",
       "zone": null,
       "_yolo": true,
-      "lastYolo": 1787909833364,
-      "activity": "present",
-      "_activityCandidate": "present",
-      "_activityCandidateSince": 1787909813228,
+      "lastYolo": 1787915295376,
+      "activity": "empty",
+      "_activityCandidate": "empty",
+      "_activityCandidateSince": 1787915283771,
       "_activityCommitted": "present"
     },
     "ingresso": {
       "people": [],
       "objects": {},
       "_temps": {
-        "hue_temperature_sensor_4_temperatura": 24.44
+        "hue_temperature_sensor_4_temperatura": 24.58
       },
-      "temperature": 24.4,
-      "ambient_light": 3.6366373933084746,
+      "temperature": 24.6,
+      "ambient_light": 4.518559443749224,
       "darkness": true,
-      "lastMotion": 1787905225309
+      "lastMotion": 1787914883210
     },
     "soggiorno": {
       "id": "soggiorno",
       "name": "soggiorno",
       "persons_count": 0,
       "objects": {
-        "chair": 1
+        "bottle": 1
       },
-      "lastUpdate": 1787909833819,
+      "lastUpdate": 1787915298408,
       "people": [],
       "main_user": null,
       "zone": "unknown",
       "_yolo": true,
-      "lastYolo": 1787909833819,
-      "activity": "sitting",
-      "_activityCandidate": "sitting",
-      "_activityCandidateSince": 1787909833819,
+      "lastYolo": 1787915298408,
+      "activity": "empty",
+      "_activityCandidate": "empty",
+      "_activityCandidateSince": 1787915295553,
       "_mediapipe": true,
       "mediapipe": null,
       "currentPose": "standing",
@@ -144,5 +133,5 @@
       "_activityCommitted": "sitting"
     }
   },
-  "ts": 1787909833819
+  "ts": 1787915298408
 }

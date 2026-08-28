@@ -91,13 +91,18 @@ def publish_matrix():
 
 
 def register_all():
+	"""Idempotent for the REGISTRATION step only -- publish_matrix() always
+	runs regardless, because the first call (from onCreate, early in the
+	load sequence) usually lands before mqtt_device has connected and
+	fails silently; onCreate/onStart/the 5s self-heal all call this, so
+	gating the publish behind the same 'already registered' check meant
+	it could permanently skip publishing after that one failed attempt."""
 	agent = op('/gaia_client/gaia_device_agent').module
-	if 'deck_a' in agent._services:
-		return
-	for deck in ('A', 'B'):
-		_register_deck_services(agent, deck)
-	for patch_num in range(1, 39):
+	if 'deck_a' not in agent._services:
 		for deck in ('A', 'B'):
-			_register_patch_service(agent, patch_num, deck)
-	print('[PatchDeck Services] %d servizi registrati' % len(agent._services))
+			_register_deck_services(agent, deck)
+		for patch_num in range(1, 39):
+			for deck in ('A', 'B'):
+				_register_patch_service(agent, patch_num, deck)
+		print('[PatchDeck Services] %d servizi registrati' % len(agent._services))
 	publish_matrix()

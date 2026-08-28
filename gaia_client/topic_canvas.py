@@ -7,17 +7,17 @@
       "b": 255
     },
     "stress": 0,
-    "calm": 0.34506720000000035,
-    "social": 0.6963912000000013,
-    "curiosity": 0.9679872000000006,
+    "calm": 0,
+    "social": 0.823713600000001,
+    "curiosity": 0.9237136000000011,
     "energy": 100,
-    "lifeIndex": 50
+    "lifeIndex": 40
   },
   "rooms": {
     "corridoio": {
       "presence_count": 0,
       "activity": "idle",
-      "temperature": 25.3,
+      "temperature": 25.8,
       "darkness": true,
       "emotion": null,
       "pose": null,
@@ -25,24 +25,19 @@
       "objects": {}
     },
     "salotto": {
-      "presence_count": 1,
-      "activity": "present",
+      "presence_count": 0,
+      "activity": "empty",
       "temperature": null,
       "darkness": false,
       "emotion": null,
       "pose": null,
       "gesture": null,
-      "objects": {
-        "person": {
-          "count": 1,
-          "seed": 1402450561
-        }
-      }
+      "objects": {}
     },
     "ingresso": {
       "presence_count": 0,
       "activity": "idle",
-      "temperature": 24.4,
+      "temperature": 24.6,
       "darkness": true,
       "emotion": null,
       "pose": null,
@@ -51,16 +46,16 @@
     },
     "soggiorno": {
       "presence_count": 0,
-      "activity": "sitting",
+      "activity": "idle",
       "temperature": null,
       "darkness": false,
       "emotion": null,
       "pose": "standing",
       "gesture": null,
       "objects": {
-        "chair": {
+        "bottle": {
           "count": 1,
-          "seed": 1555340682
+          "seed": 1722404745
         }
       }
     }
@@ -68,7 +63,7 @@
   "lights": {
     "Luce_Corridoio_Luminosita": {
       "power": false,
-      "brightness": 50,
+      "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
       "colorTempKelvin": null
@@ -83,19 +78,19 @@
     "Tutte_le_luci_Colore": {
       "power": false,
       "brightness": 0,
-      "color": "0,0,50",
+      "color": "0,0,0",
       "colorTemp": null,
       "colorTempKelvin": null
     },
     "Tutte_le_luci_Luminosita": {
       "power": false,
-      "brightness": 50,
+      "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
       "colorTempKelvin": null
     },
     "Tutte_le_luci_Potenza": {
-      "power": true,
+      "power": false,
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
@@ -113,7 +108,7 @@
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
-      "colorTempKelvin": 2732
+      "colorTempKelvin": 2710
     },
     "Zona_Notte_Zone_Colore": {
       "power": false,
@@ -218,7 +213,7 @@
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
-      "colorTempKelvin": 2732
+      "colorTempKelvin": 2710
     },
     "Luce_Salotto_Colore": {
       "power": false,
@@ -347,7 +342,7 @@
       "colorTempKelvin": null
     },
     "Luce_Corridoio_Potenza": {
-      "power": true,
+      "power": false,
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
@@ -356,7 +351,7 @@
     "Luce_Corridoio_Colore": {
       "power": false,
       "brightness": 0,
-      "color": "0,0,50",
+      "color": "0,0,0",
       "colorTemp": null,
       "colorTempKelvin": null
     },
@@ -483,14 +478,106 @@
   "dream": null,
   "thought": "",
   "thoughts": [],
-  "tts": "Scusa, non ho compreso. Riprova.",
-  "ttsTs": 1787902951968,
+  "tts": "Dimmi",
+  "ttsTs": 1787915081883,
   "ttsRoom": "minipc",
   "lastMemory": "",
   "memories": [],
   "diary": [
     {
-      "ts": 1787909827194,
+      "ts": 1787915290891,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "bottle": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "bottle": 1
+        }
+      },
+      "person": null
+    },
+    {
+      "ts": 1787915290939,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "bottle": 1,
+            "chair": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "bottle": 1,
+          "chair": 1
+        }
+      },
+      "person": null
+    },
+    {
+      "ts": 1787915291553,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "bottle": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "bottle": 1
+        }
+      },
+      "person": null
+    },
+    {
+      "ts": 1787915291716,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "bottle": 1,
+            "chair": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "bottle": 1,
+          "chair": 1
+        }
+      },
+      "person": null
+    },
+    {
+      "ts": 1787915291879,
       "source": "vision",
       "category": "spatial_analysis",
       "value": {
@@ -512,7 +599,7 @@
       "person": null
     },
     {
-      "ts": 1787909827719,
+      "ts": 1787915291984,
       "source": "vision",
       "category": "spatial_analysis",
       "value": {
@@ -522,15 +609,21 @@
           "name": "soggiorno",
           "activity": "idle",
           "persons_count": 0,
-          "objects": {}
+          "objects": {
+            "chair": 1,
+            "bottle": 1
+          }
         },
         "people": [],
-        "objects": {}
+        "objects": {
+          "chair": 1,
+          "bottle": 1
+        }
       },
       "person": null
     },
     {
-      "ts": 1787909827795,
+      "ts": 1787915294180,
       "source": "vision",
       "category": "spatial_analysis",
       "value": {
@@ -552,47 +645,255 @@
       "person": null
     },
     {
-      "ts": 1787909828323,
+      "ts": 1787915294238,
       "source": "vision",
       "category": "spatial_analysis",
       "value": {
-        "persons_count": 1,
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "chair": 1,
+            "bottle": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "chair": 1,
+          "bottle": 1
+        }
+      },
+      "person": null
+    },
+    {
+      "ts": 1787915294508,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "chair": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "chair": 1
+        }
+      },
+      "person": null
+    },
+    {
+      "ts": 1787915294563,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "chair": 1,
+            "bottle": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "chair": 1,
+          "bottle": 1
+        }
+      },
+      "person": null
+    },
+    {
+      "ts": 1787915294674,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "chair": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "chair": 1
+        }
+      },
+      "person": null
+    },
+    {
+      "ts": 1787915294729,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "chair": 1,
+            "bottle": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "chair": 1,
+          "bottle": 1
+        }
+      },
+      "person": null
+    },
+    {
+      "ts": 1787915295005,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "chair": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "chair": 1
+        }
+      },
+      "person": null
+    },
+    {
+      "ts": 1787915295064,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "chair": 1,
+            "bottle": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "chair": 1,
+          "bottle": 1
+        }
+      },
+      "person": null
+    },
+    {
+      "ts": 1787915295121,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "bottle": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "bottle": 1
+        }
+      },
+      "person": null
+    },
+    {
+      "ts": 1787915295175,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "bottle": 1,
+            "chair": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "bottle": 1,
+          "chair": 1
+        }
+      },
+      "person": null
+    },
+    {
+      "ts": 1787915295376,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "idle",
+          "persons_count": 0,
+          "objects": {
+            "bottle": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "bottle": 1
+        }
+      },
+      "person": null
+    },
+    {
+      "ts": 1787915295376,
+      "source": "vision",
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 0,
         "room": {
           "id": "salotto",
           "name": "salotto",
-          "activity": "active",
-          "persons_count": 1,
-          "objects": [
-            "person"
-          ]
-        },
-        "people": [],
-        "objects": [
-          "person"
-        ]
-      },
-      "person": null
-    },
-    {
-      "ts": 1787909828459,
-      "source": "vision",
-      "category": "spatial_analysis",
-      "value": {
-        "persons_count": 0,
-        "room": {
-          "id": "soggiorno",
-          "name": "soggiorno",
           "activity": "idle",
           "persons_count": 0,
-          "objects": {}
+          "objects": []
         },
         "people": [],
-        "objects": {}
+        "objects": []
       },
       "person": null
     },
     {
-      "ts": 1787909828510,
+      "ts": 1787915295450,
       "source": "vision",
       "category": "spatial_analysis",
       "value": {
@@ -603,36 +904,20 @@
           "activity": "idle",
           "persons_count": 0,
           "objects": {
+            "bottle": 1,
             "chair": 1
           }
         },
         "people": [],
         "objects": {
+          "bottle": 1,
           "chair": 1
         }
       },
       "person": null
     },
     {
-      "ts": 1787909828885,
-      "source": "vision",
-      "category": "spatial_analysis",
-      "value": {
-        "persons_count": 0,
-        "room": {
-          "id": "soggiorno",
-          "name": "soggiorno",
-          "activity": "idle",
-          "persons_count": 0,
-          "objects": {}
-        },
-        "people": [],
-        "objects": {}
-      },
-      "person": null
-    },
-    {
-      "ts": 1787909828989,
+      "ts": 1787915295553,
       "source": "vision",
       "category": "spatial_analysis",
       "value": {
@@ -643,252 +928,12 @@
           "activity": "idle",
           "persons_count": 0,
           "objects": {
-            "chair": 1
+            "bottle": 1
           }
         },
         "people": [],
         "objects": {
-          "chair": 1
-        }
-      },
-      "person": null
-    },
-    {
-      "ts": 1787909829476,
-      "source": "vision",
-      "category": "spatial_analysis",
-      "value": {
-        "persons_count": 0,
-        "room": {
-          "id": "soggiorno",
-          "name": "soggiorno",
-          "activity": "idle",
-          "persons_count": 0,
-          "objects": {}
-        },
-        "people": [],
-        "objects": {}
-      },
-      "person": null
-    },
-    {
-      "ts": 1787909829531,
-      "source": "vision",
-      "category": "spatial_analysis",
-      "value": {
-        "persons_count": 0,
-        "room": {
-          "id": "soggiorno",
-          "name": "soggiorno",
-          "activity": "idle",
-          "persons_count": 0,
-          "objects": {
-            "chair": 1
-          }
-        },
-        "people": [],
-        "objects": {
-          "chair": 1
-        }
-      },
-      "person": null
-    },
-    {
-      "ts": 1787909829641,
-      "source": "vision",
-      "category": "spatial_analysis",
-      "value": {
-        "persons_count": 0,
-        "room": {
-          "id": "soggiorno",
-          "name": "soggiorno",
-          "activity": "idle",
-          "persons_count": 0,
-          "objects": {}
-        },
-        "people": [],
-        "objects": {}
-      },
-      "person": null
-    },
-    {
-      "ts": 1787909829863,
-      "source": "vision",
-      "category": "spatial_analysis",
-      "value": {
-        "persons_count": 0,
-        "room": {
-          "id": "soggiorno",
-          "name": "soggiorno",
-          "activity": "idle",
-          "persons_count": 0,
-          "objects": {
-            "chair": 1
-          }
-        },
-        "people": [],
-        "objects": {
-          "chair": 1
-        }
-      },
-      "person": null
-    },
-    {
-      "ts": 1787909830326,
-      "source": "vision",
-      "category": "spatial_analysis",
-      "value": {
-        "persons_count": 0,
-        "room": {
-          "id": "soggiorno",
-          "name": "soggiorno",
-          "activity": "idle",
-          "persons_count": 0,
-          "objects": {}
-        },
-        "people": [],
-        "objects": {}
-      },
-      "person": null
-    },
-    {
-      "ts": 1787909830475,
-      "source": "vision",
-      "category": "spatial_analysis",
-      "value": {
-        "persons_count": 0,
-        "room": {
-          "id": "soggiorno",
-          "name": "soggiorno",
-          "activity": "idle",
-          "persons_count": 0,
-          "objects": {
-            "chair": 1
-          }
-        },
-        "people": [],
-        "objects": {
-          "chair": 1
-        }
-      },
-      "person": null
-    },
-    {
-      "ts": 1787909830703,
-      "source": "vision",
-      "category": "spatial_analysis",
-      "value": {
-        "persons_count": 0,
-        "room": {
-          "id": "soggiorno",
-          "name": "soggiorno",
-          "activity": "idle",
-          "persons_count": 0,
-          "objects": {}
-        },
-        "people": [],
-        "objects": {}
-      },
-      "person": null
-    },
-    {
-      "ts": 1787909830790,
-      "source": "vision",
-      "category": "spatial_analysis",
-      "value": {
-        "persons_count": 0,
-        "room": {
-          "id": "soggiorno",
-          "name": "soggiorno",
-          "activity": "idle",
-          "persons_count": 0,
-          "objects": {
-            "chair": 1
-          }
-        },
-        "people": [],
-        "objects": {
-          "chair": 1
-        }
-      },
-      "person": null
-    },
-    {
-      "ts": 1787909830863,
-      "source": "vision",
-      "category": "spatial_analysis",
-      "value": {
-        "persons_count": 0,
-        "room": {
-          "id": "soggiorno",
-          "name": "soggiorno",
-          "activity": "idle",
-          "persons_count": 0,
-          "objects": {}
-        },
-        "people": [],
-        "objects": {}
-      },
-      "person": null
-    },
-    {
-      "ts": 1787909831040,
-      "source": "vision",
-      "category": "spatial_analysis",
-      "value": {
-        "persons_count": 0,
-        "room": {
-          "id": "soggiorno",
-          "name": "soggiorno",
-          "activity": "idle",
-          "persons_count": 0,
-          "objects": {
-            "chair": 1
-          }
-        },
-        "people": [],
-        "objects": {
-          "chair": 1
-        }
-      },
-      "person": null
-    },
-    {
-      "ts": 1787909831676,
-      "source": "vision",
-      "category": "spatial_analysis",
-      "value": {
-        "persons_count": 0,
-        "room": {
-          "id": "soggiorno",
-          "name": "soggiorno",
-          "activity": "idle",
-          "persons_count": 0,
-          "objects": {}
-        },
-        "people": [],
-        "objects": {}
-      },
-      "person": null
-    },
-    {
-      "ts": 1787909831838,
-      "source": "vision",
-      "category": "spatial_analysis",
-      "value": {
-        "persons_count": 0,
-        "room": {
-          "id": "soggiorno",
-          "name": "soggiorno",
-          "activity": "idle",
-          "persons_count": 0,
-          "objects": {
-            "chair": 1
-          }
-        },
-        "people": [],
-        "objects": {
-          "chair": 1
+          "bottle": 1
         }
       },
       "person": null
@@ -918,7 +963,13 @@
       "stanza": "minipc",
       "intent": "sconosciuto",
       "ts": 1787902952313
+    },
+    {
+      "text": "che ore sono state davvero pedanti per il nostro cittadine e anche per la comunicazione?",
+      "stanza": "minipc",
+      "intent": "orario",
+      "ts": 1787913169926
     }
   ],
-  "ts": 1787909831994
+  "ts": 1787915297002
 }
