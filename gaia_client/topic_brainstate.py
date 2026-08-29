@@ -1,9 +1,9 @@
 {
-  "mood": "neutra",
-  "lifeIndex": 40,
+  "mood": "curiosity",
+  "lifeIndex": 50,
   "gamification": {
     "level": 8,
-    "xp": 15703,
+    "xp": 15773,
     "xpNextLevel": 16550,
     "activeClass": "Guerriero",
     "unlockedAssets": [
@@ -17,31 +17,31 @@
       "phoenix_core"
     ],
     "stats": {
-      "mago": 1405,
+      "mago": 1407,
       "bardo": 128,
-      "guerriero": 2394,
+      "guerriero": 2399,
       "druido": 1586
     },
     "_cd": {
       "natura": 1787755032180,
-      "movimento": 1787999627522,
-      "voce": 1787999398115,
-      "pensiero": 1787988453834,
+      "movimento": 1788001807464,
+      "voce": 1788001207202,
+      "pensiero": 1788001708223,
       "presenza": 1787934930821,
       "riflessione": 1786827611348,
       "rituale": 1787991038207
     },
     "_lastMemCount": 3,
-    "_lastVoiceTs": 1787999398881,
-    "_lastThoughtTs": 1787988453778
+    "_lastVoiceTs": 1788001208662,
+    "_lastThoughtTs": 1788001706686
   },
   "presence": {
     "mauro": {
-      "present": false,
-      "enterTs": 1787989161244,
-      "lastSeen": 1787999835912,
-      "room": null,
-      "confidence": 0.6629,
+      "present": true,
+      "enterTs": 1788001830687,
+      "lastSeen": 1788002251071,
+      "room": "soggiorno",
+      "confidence": 0.4573,
       "track_id": 1,
       "pose": "standing",
       "exitTs": 1786539599216
@@ -78,10 +78,10 @@
       "darkness": true,
       "_temps": {
         "hue_temperature_sensor_3_temperatura": 25.51,
-        "hue_temperature_sensor_5_temperatura": 24.16
+        "hue_temperature_sensor_5_temperatura": 24.02
       },
       "temperature": 24.8,
-      "lastMotion": 1787999627522
+      "lastMotion": 1788001996945
     },
     "salotto": {
       "id": "salotto",
@@ -101,9 +101,9 @@
     "soggiorno": {
       "id": "soggiorno",
       "name": "soggiorno",
-      "persons_count": 2,
+      "persons_count": 1,
       "objects": {},
-      "lastUpdate": 1787999883752,
+      "lastUpdate": 1788002256408,
       "people": [
         "mauro"
       ],
@@ -111,13 +111,35 @@
       "_mediapipe": true,
       "activity": "present",
       "currentPose": "standing",
-      "mediapipe": null,
+      "mediapipe": {
+        "emotion": null,
+        "pose": "standing",
+        "attention": "unknown",
+        "smile_score": 0,
+        "mouth_open": false,
+        "eyes_open": true,
+        "gesture": null,
+        "people_count": 1,
+        "people": [
+          {
+            "id": 0,
+            "emotion": null,
+            "smile_score": 0,
+            "attention": "unknown",
+            "mouth_open": false,
+            "eyes_open": true,
+            "pose": "standing",
+            "gestures": []
+          }
+        ],
+        "ts": 1788002256408
+      },
       "currentEmotion": null,
       "zone": "unknown",
       "_yolo": true,
-      "lastYolo": 1787989196238,
+      "lastYolo": 1788001819181,
       "_activityCandidate": "present",
-      "_activityCandidateSince": 1787989196110,
+      "_activityCandidateSince": 1788001689419,
       "_activityCommitted": "present"
     },
     "ingresso": {
@@ -132,5 +154,5 @@
       "lastMotion": 1787997520354
     }
   },
-  "ts": 1787999884139
+  "ts": 1788002257252
 }

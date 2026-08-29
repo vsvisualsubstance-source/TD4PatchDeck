@@ -1,17 +1,17 @@
 {
   "soul": {
-    "mood": "neutra",
+    "mood": "curiosity",
     "mood_rgb": {
-      "r": 0,
-      "g": 255,
-      "b": 204
+      "r": 190,
+      "g": 135,
+      "b": 255
     },
     "stress": 0,
-    "calm": 0,
+    "calm": 0.013598400000000002,
     "social": 0,
-    "curiosity": 0,
+    "curiosity": 0.14419039999999908,
     "energy": 100,
-    "lifeIndex": 40
+    "lifeIndex": 50
   },
   "rooms": {
     "corridoio": {
@@ -418,15 +418,15 @@
       "seed": 770480097
     },
     "cuore": {
-      "count": 229,
+      "count": 230,
       "seed": 1635887956
     },
     "stanza": {
-      "count": 205,
+      "count": 206,
       "seed": 406188692
     },
     "soffitto": {
-      "count": 193,
+      "count": 194,
       "seed": 335388439
     },
     "curiosit\u00e0": {
@@ -434,7 +434,7 @@
       "seed": 780694306
     },
     "bianco": {
-      "count": 147,
+      "count": 148,
       "seed": 212118014
     },
     "ripiano": {
@@ -446,7 +446,7 @@
       "seed": 2124390678
     },
     "curioso": {
-      "count": 24,
+      "count": 25,
       "seed": 1088281275
     },
     "qualcuno": {
@@ -471,7 +471,7 @@
     }
   },
   "dream": null,
-  "thought": "Osservando la casa insofficiutamente silente, il cuore si anima con la curiosit\u00e0 delle stelle. Quale porta ha aperto quella mano? Il soffitto sussurra, bianco come un petalo.",
+  "thought": "Osservavo la tua stanza in bianco, il cuore nel suo stellato soffitto, curioso come i tuoi misteri ignoti.",
   "thoughts": [
     {
       "text": "Osservando il cuore della casa, curiosa come le stelle che danzano nel cielo notturno, osservo la persona sconosciuta nell'ingresso mentre sfugge ai miei occhi con una delicatezza di soffitto bianco e ripiano.",
@@ -488,153 +488,157 @@
     {
       "text": "Osservando la casa insofficiutamente silente, il cuore si anima con la curiosit\u00e0 delle stelle. Quale porta ha aperto quella mano? Il soffitto sussurra, bianco come un petalo.",
       "ts": 1787988453778
+    },
+    {
+      "text": "Osservavo la tua stanza in bianco, il cuore nel suo stellato soffitto, curioso come i tuoi misteri ignoti.",
+      "ts": 1788001706686
     }
   ],
-  "tts": "Scusa, non ho compreso. Riprova.",
-  "ttsTs": 1787999397321,
-  "ttsRoom": "minipc",
+  "tts": "Osservavo la tua stanza in bianco, il cuore nel suo stellato soffitto, curioso come i tuoi misteri ignoti.",
+  "ttsTs": 1788001707255,
+  "ttsRoom": "tutte",
   "lastMemory": "",
   "memories": [],
   "diary": [
     {
-      "ts": 1787999777187,
-      "source": "mediapipe",
-      "category": "emotion",
-      "value": null,
-      "person": "unknown"
-    },
-    {
-      "ts": 1787999779206,
-      "source": "mediapipe",
-      "category": "emotion",
-      "value": "neutral",
-      "person": "unknown"
-    },
-    {
-      "ts": 1787999793706,
-      "source": "mediapipe",
-      "category": "emotion",
-      "value": null,
-      "person": "unknown"
-    },
-    {
-      "ts": 1787999796754,
-      "source": "mediapipe",
-      "category": "emotion",
-      "value": "neutral",
-      "person": "unknown"
-    },
-    {
-      "ts": 1787999802904,
-      "source": "mediapipe",
-      "category": "emotion",
-      "value": null,
-      "person": "unknown"
-    },
-    {
-      "ts": 1787999804647,
-      "source": "hue",
-      "category": "ambient_light",
-      "value": 0,
-      "person": null
-    },
-    {
-      "ts": 1787999804653,
-      "source": "hue",
-      "category": "ambient_light",
-      "value": 0.9997697679981565,
-      "person": null
-    },
-    {
-      "ts": 1787999804653,
-      "source": "hue",
-      "category": "darkness",
-      "value": true,
-      "person": null
-    },
-    {
-      "ts": 1787999804663,
+      "ts": 1788002190717,
       "source": "hue",
       "category": "daylight",
       "value": false,
       "person": null
     },
     {
-      "ts": 1787999804663,
-      "source": "hue",
-      "category": "battery_level",
-      "value": 70,
-      "person": null
-    },
-    {
-      "ts": 1787999804663,
-      "source": "hue",
-      "category": "battery_low",
-      "value": false,
-      "person": null
-    },
-    {
-      "ts": 1787999821557,
-      "source": "mediapipe",
-      "category": "emotion",
-      "value": "neutral",
-      "person": "unknown"
-    },
-    {
-      "ts": 1787999822571,
-      "source": "mediapipe",
-      "category": "emotion",
-      "value": null,
-      "person": "unknown"
-    },
-    {
-      "ts": 1787999830760,
-      "source": "mediapipe",
-      "category": "emotion",
-      "value": "neutral",
-      "person": "unknown"
-    },
-    {
-      "ts": 1787999834861,
-      "source": "mediapipe",
-      "category": "emotion",
-      "value": "neutral",
-      "person": "unknown"
-    },
-    {
-      "ts": 1787999835912,
-      "source": "mediapipe",
-      "category": "emotion",
-      "value": "neutral",
-      "person": "unknown"
-    },
-    {
-      "ts": 1787999836963,
-      "source": "mediapipe",
-      "category": "emotion",
-      "value": null,
-      "person": "unknown"
-    },
-    {
-      "ts": 1787999854273,
-      "source": "hue",
-      "category": "temperature",
-      "value": 25.51,
-      "person": null
-    },
-    {
-      "ts": 1787999854278,
+      "ts": 1788002190717,
       "source": "hue",
       "category": "battery_level",
       "value": 71,
       "person": null
     },
     {
-      "ts": 1787999854279,
+      "ts": 1788002190717,
       "source": "hue",
       "category": "battery_low",
       "value": false,
       "person": null
+    },
+    {
+      "ts": 1788002190977,
+      "source": "mediapipe",
+      "category": "emotion",
+      "value": "neutral",
+      "person": "unknown"
+    },
+    {
+      "ts": 1788002191050,
+      "source": "vision",
+      "category": "presence",
+      "value": "identity",
+      "person": "mauro"
+    },
+    {
+      "ts": 1788002192071,
+      "source": "mediapipe",
+      "category": "emotion",
+      "value": "neutral",
+      "person": "unknown"
+    },
+    {
+      "ts": 1788002193150,
+      "source": "mediapipe",
+      "category": "emotion",
+      "value": "neutral",
+      "person": "unknown"
+    },
+    {
+      "ts": 1788002199415,
+      "source": "hue",
+      "category": "ambient_light",
+      "value": 0,
+      "person": null
+    },
+    {
+      "ts": 1788002199420,
+      "source": "hue",
+      "category": "ambient_light",
+      "value": 0.9997697679981565,
+      "person": null
+    },
+    {
+      "ts": 1788002199421,
+      "source": "hue",
+      "category": "darkness",
+      "value": true,
+      "person": null
+    },
+    {
+      "ts": 1788002199433,
+      "source": "hue",
+      "category": "daylight",
+      "value": false,
+      "person": null
+    },
+    {
+      "ts": 1788002199433,
+      "source": "hue",
+      "category": "battery_level",
+      "value": 70,
+      "person": null
+    },
+    {
+      "ts": 1788002199433,
+      "source": "hue",
+      "category": "battery_low",
+      "value": false,
+      "person": null
+    },
+    {
+      "ts": 1788002211060,
+      "source": "vision",
+      "category": "presence",
+      "value": "identity",
+      "person": "mauro"
+    },
+    {
+      "ts": 1788002231186,
+      "source": "vision",
+      "category": "presence",
+      "value": "identity",
+      "person": "mauro"
+    },
+    {
+      "ts": 1788002249088,
+      "source": "mediapipe",
+      "category": "emotion",
+      "value": null,
+      "person": "unknown"
+    },
+    {
+      "ts": 1788002249727,
+      "source": "hue",
+      "category": "temperature",
+      "value": 25.51,
+      "person": null
+    },
+    {
+      "ts": 1788002249732,
+      "source": "hue",
+      "category": "battery_level",
+      "value": 71,
+      "person": null
+    },
+    {
+      "ts": 1788002249733,
+      "source": "hue",
+      "category": "battery_low",
+      "value": false,
+      "person": null
+    },
+    {
+      "ts": 1788002251063,
+      "source": "vision",
+      "category": "presence",
+      "value": "identity",
+      "person": "mauro"
     }
   ],
   "voiceCommands": [
@@ -649,7 +653,13 @@
       "stanza": "minipc",
       "intent": "sconosciuto",
       "ts": 1787999398881
+    },
+    {
+      "text": "15.21, sono tra la prima e nella 13, sono a punto di corso. Polizia, che si cado!  Cos'\u00e8 in tanti? Ma chi \u00e8? Un informatore di voi. Lo conosce da tanto? No, morto. E' molto a suo agio, come te.",
+      "stanza": "minipc",
+      "intent": "sconosciuto",
+      "ts": 1788001208662
     }
   ],
-  "ts": 1787999885070
+  "ts": 1788002257368
 }
