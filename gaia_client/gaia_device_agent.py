@@ -79,6 +79,15 @@ _last_heartbeat = 0.0
 
 _last_error = None   # {"context","message","ts"} -- last error, visible in Admin
 
+_registrar = None                 # project-specific idempotent registration retry hook
+_REGISTRAR_CHECK_S = 10.0
+_REGISTRAR_GRACE_S = 10.0         # startup grace before the empty-registry warning fires
+_last_registrar_check = 0.0
+
+_last_identity_state = None       # cache so _check_identity only writes on a real transition
+_IDENTITY_OK_COLOR = (0.6700000166893005, 0.6700000166893005, 0.6700000166893005)
+_IDENTITY_WARN_COLOR = (0.85, 0.22, 0.18)
+
 
 def _record_error(context, exc):
 	global _last_error
@@ -104,6 +113,8 @@ def perf_tick():
 	"""Call EVERY frame from onFrameStart (agent_lifecycle.py), unthrottled
 	unlike tick()."""
 	global _perf_last_time, _perf_dropped_window
+	_check_identity()
+	_self_check()
 	now = time.time()
 	if _perf_last_time is not None:
 		dt = now - _perf_last_time
@@ -157,6 +168,82 @@ def register_param(name, get=None, set=None):
 	_params[name] = {"get": get, "set": set}
 
 
+def register_project_registrar(fn):
+	"""Opt into the empty-registry self-check/Re-register safety net (see
+	_self_check()/reregister(), GAIA_INTERFACE.md section 2). Call once from
+	the project-specific startup script (its own onCreate/onStart -- e.g.
+	PATCHDECK/gaia_services/lifecycle.py) with an IDEMPOTENT registration
+	function (safe to call repeatedly; it must skip work already done, same
+	contract as register_all() there). This module's state -- including
+	this pointer -- is wiped on every hot-reload of THIS file, so the
+	caller should also re-arm it periodically (a cheap poll, not a full
+	self-heal reimplementation) rather than only from onCreate/onStart."""
+	global _registrar
+	_registrar = fn
+
+
+def reregister():
+	"""Manually retry project service registration -- wired to the
+	Re-register pulse par (see mqtt_control_callbacks-style docked
+	callback), also callable directly. No-op (logged) if no project
+	registrar has been set."""
+	if _registrar is None:
+		print('[GAIA Agent] Re-register requested but no project registrar is set '
+			'(register_project_registrar() never called)')
+		return
+	print('[GAIA Agent] Re-registering project services...')
+	_registrar()
+
+
+def _self_check():
+	"""Called every frame from perf_tick() (independent of the Devicestatus
+	toggle -- registration matters even when status publishing is off).
+	Empty _services/_params is legitimate for a project that never calls
+	register_project_registrar() (nothing declared, nothing expected) --
+	this only fires for projects that DID declare intent, catching the
+	documented silent-empty-registry failure mode (a hot-reloaded module
+	whose onCreate/onStart never reran, GAIA_INTERFACE.md section 2)."""
+	global _last_registrar_check
+	if _registrar is None or _services or _params:
+		return
+	now = time.time()
+	if (now - _START_TS) < _REGISTRAR_GRACE_S:
+		return
+	if (now - _last_registrar_check) < _REGISTRAR_CHECK_S:
+		return
+	_last_registrar_check = now
+	print('[GAIA Agent] WARNING: project registrar set but no services/params '
+		'registered -- retrying')
+	_registrar()
+
+
+def _check_identity():
+	"""Called every frame from perf_tick(). Deviceid/Family must never be
+	silently inherited from a clone and forgotten (GAIA_INTERFACE.md
+	sections 1/1b) -- when either is blank, the component tile turns red
+	in the network editor and Identitystatus names what's missing. Cached
+	against _last_identity_state so this only writes color/par on an
+	actual transition, not every frame."""
+	global _last_identity_state
+	host = me.parent()
+	missing = []
+	if not host.par.Deviceid.eval():
+		missing.append('Deviceid')
+	if not host.par.Family.eval():
+		missing.append('Family')
+	state = tuple(missing)
+	if state == _last_identity_state:
+		return
+	_last_identity_state = state
+	if missing:
+		host.par.Identitystatus = 'MISSING: %s -- set explicitly before cloning/deploying' % ', '.join(missing)
+		host.color = _IDENTITY_WARN_COLOR
+		print('[GAIA Agent] WARNING: %s not set on %s' % (', '.join(missing), host.path))
+	else:
+		host.par.Identitystatus = 'ok'
+		host.color = _IDENTITY_OK_COLOR
+
+
 def _mqtt():
 	return me.parent().op('mqtt_device')
 
@@ -196,6 +283,7 @@ def _read_config():
 		"device_id": par("Deviceid", default_id),
 		"stanza":    par("Stanza", "unknown"),
 		"name":      par("Name", project.name),
+		"family":    par("Family", ""),
 	}
 
 
@@ -241,6 +329,7 @@ def _publish_status():
 		"device_id":      cfg["device_id"],
 		"name":           cfg["name"],
 		"stanza":         cfg["stanza"],
+		"family":         cfg["family"],
 		"role":           "touchdesigner",
 		"ip":             _get_ip(),
 		"services":       {n: _service_status(n) for n in _services},
@@ -262,6 +351,7 @@ def _publish_profile(dat, cfg):
 	profile = {
 		"device_id":    cfg["device_id"],
 		"role":         "touchdesigner",
+		"family":       cfg["family"],
 		"room":         cfg["stanza"],
 		"ip":           _get_ip(),
 		"capabilities": _capabilities(),

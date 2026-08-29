@@ -75,18 +75,30 @@ def _build_matrix():
 def publish_matrix():
 	"""Pubblica la matrice servizi su MQTT, retained -- sopravvive a
 	riconnessioni del device, resta sul broker finche' non viene
-	sovrascritta da una futura repubblica."""
+	sovrascritta da una futura repubblica.
+
+	Nome del topic costruito dal parametro custom Family su /gaia_client
+	(gaia/devices/{id}/{family}_matrix -- GAIA_INTERFACE.md sezione 1b
+	"Gaia Agent Universale", 2026-08-29): oggi Family='patchdeck' quindi
+	il nome coincide con il vecchio hardcoded 'patchdeck_matrix', ma il
+	nome ora e' dichiarato dal parametro invece che scelto a mano qui."""
 	dat = op('/gaia_client/mqtt_device')
 	if not dat or not dat.isConnected:
 		print('[PatchDeck Services] mqtt_device non connesso, matrice non pubblicata')
 		return False
 	agent = op('/gaia_client/gaia_device_agent').module
-	device_id = agent._read_config()['device_id']
+	cfg = agent._read_config()
+	device_id = cfg['device_id']
+	family = cfg['family']
+	if not family:
+		print('[PatchDeck Services] Family non impostato su /gaia_client, matrice non pubblicata')
+		return False
 	payload = _build_matrix()
 	payload['device_id'] = device_id
 	payload['ts'] = int(time.time() * 1000)
-	dat.publish('gaia/devices/%s/patchdeck_matrix' % device_id, json.dumps(payload).encode('utf-8'), retain=True)
-	print('[PatchDeck Services] Matrice pubblicata su gaia/devices/%s/patchdeck_matrix' % device_id)
+	topic = 'gaia/devices/%s/%s_matrix' % (device_id, family)
+	dat.publish(topic, json.dumps(payload).encode('utf-8'), retain=True)
+	print('[PatchDeck Services] Matrice pubblicata su %s' % topic)
 	return True
 
 
