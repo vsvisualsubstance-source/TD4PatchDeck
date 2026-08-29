@@ -283,7 +283,7 @@ def _read_config():
 		"device_id": par("Deviceid", default_id),
 		"stanza":    par("Stanza", "unknown"),
 		"name":      par("Name", project.name),
-		"family":    par("Family", ""),
+		"family":    par("Family", "").strip().lower(),
 	}
 
 
