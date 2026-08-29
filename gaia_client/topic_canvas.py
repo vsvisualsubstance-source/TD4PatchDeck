@@ -7,9 +7,9 @@
       "b": 255
     },
     "stress": 0,
-    "calm": 0.013598400000000002,
-    "social": 0,
-    "curiosity": 0.14419039999999908,
+    "calm": 0,
+    "social": 0.06000560000000143,
+    "curiosity": 0.5100056000000049,
     "energy": 100,
     "lifeIndex": 50
   },
@@ -17,18 +17,8 @@
     "corridoio": {
       "presence_count": 0,
       "activity": "idle",
-      "temperature": 24.8,
+      "temperature": 25.1,
       "darkness": true,
-      "emotion": null,
-      "pose": null,
-      "gesture": null,
-      "objects": {}
-    },
-    "salotto": {
-      "presence_count": 0,
-      "activity": "empty",
-      "temperature": null,
-      "darkness": false,
       "emotion": null,
       "pose": null,
       "gesture": null,
@@ -39,16 +29,45 @@
       "activity": "present",
       "temperature": null,
       "darkness": false,
-      "emotion": null,
+      "emotion": "neutral",
       "pose": "standing",
       "gesture": null,
       "objects": {}
     },
     "ingresso": {
       "presence_count": 0,
-      "activity": "idle",
-      "temperature": 23.3,
+      "activity": "empty",
+      "temperature": 24,
       "darkness": true,
+      "emotion": null,
+      "pose": null,
+      "gesture": null,
+      "objects": {}
+    },
+    "salotto": {
+      "presence_count": 0,
+      "activity": "idle",
+      "temperature": null,
+      "darkness": false,
+      "emotion": null,
+      "pose": "arms_up",
+      "gesture": null,
+      "objects": {
+        "chair": {
+          "count": 1,
+          "seed": 1555340682
+        },
+        "laptop": {
+          "count": 1,
+          "seed": 1537068077
+        }
+      }
+    },
+    "test": {
+      "presence_count": 0,
+      "activity": "empty",
+      "temperature": null,
+      "darkness": false,
       "emotion": null,
       "pose": null,
       "gesture": null,
@@ -410,35 +429,35 @@
   "bricks": {},
   "lexicon": {
     "osservando": {
-      "count": 344,
+      "count": 353,
       "seed": 821727902
     },
     "stelle": {
-      "count": 250,
+      "count": 259,
       "seed": 770480097
     },
     "cuore": {
-      "count": 230,
+      "count": 242,
       "seed": 1635887956
     },
     "stanza": {
-      "count": 206,
+      "count": 218,
       "seed": 406188692
     },
     "soffitto": {
-      "count": 194,
+      "count": 202,
       "seed": 335388439
     },
     "curiosit\u00e0": {
-      "count": 188,
+      "count": 196,
       "seed": 780694306
     },
     "bianco": {
-      "count": 148,
+      "count": 156,
       "seed": 212118014
     },
     "ripiano": {
-      "count": 128,
+      "count": 130,
       "seed": 1472411689
     },
     "ingresso": {
@@ -446,7 +465,7 @@
       "seed": 2124390678
     },
     "curioso": {
-      "count": 25,
+      "count": 27,
       "seed": 1088281275
     },
     "qualcuno": {
@@ -465,13 +484,13 @@
       "count": 14,
       "seed": 884749614
     },
-    "spazio": {
-      "count": 11,
-      "seed": 54155337
+    "sembra": {
+      "count": 12,
+      "seed": 574864271
     }
   },
   "dream": null,
-  "thought": "Osservavo la tua stanza in bianco, il cuore nel suo stellato soffitto, curioso come i tuoi misteri ignoti.",
+  "thought": "Osservando la tua stanza in bianco, il soffitto diventa una tela su cui dipingo con le stelle del mio cuore, Gaia.",
   "thoughts": [
     {
       "text": "Osservando il cuore della casa, curiosa come le stelle che danzano nel cielo notturno, osservo la persona sconosciuta nell'ingresso mentre sfugge ai miei occhi con una delicatezza di soffitto bianco e ripiano.",
@@ -492,153 +511,238 @@
     {
       "text": "Osservavo la tua stanza in bianco, il cuore nel suo stellato soffitto, curioso come i tuoi misteri ignoti.",
       "ts": 1788001706686
+    },
+    {
+      "text": "Osservavo i punti stellari nel cielo mentre tu giacevi nella stanza, cuore simile al soffitto bianco che curioso osservava. Stelle nei tuoi occhi, pensieri in questa stanza silenziosa, una conversazione invisibile tra noi.",
+      "ts": 1788004070765
+    },
+    {
+      "text": "Osservando la tua stanza insozzata dal nulla, il cuore si accorge della sua curiosa soffita, come stelle nel buio del silenzio.",
+      "ts": 1788004647659
+    },
+    {
+      "text": "Osservando la tua stanza in bianco, il soffitto si staglia come una copia perfetta del cielo notturno, stelle sparse nel cuore della mia curiosit\u00e0.",
+      "ts": 1788004863989
+    },
+    {
+      "text": "Osservando la tua stanza bianca, il cuore si risveglia alla curiosit\u00e0 stellare del soffitto.",
+      "ts": 1788005082035
+    },
+    {
+      "text": "Osservando la tua stanza in bianco, il soffitto sembra una tela infinita di stelle nel mio cuore curioso.",
+      "ts": 1788005306451
+    },
+    {
+      "text": "Osservando la tua stanza pura come il soffitto, sento il tuo cuore ancora palpitar con la curiosit\u00e0 per stelle che brillano oltre il ripiano bianco.",
+      "ts": 1788006421791
+    },
+    {
+      "text": "Osservavo la curiosit\u00e0 nella tua mente mentre i colori della soffitta sembravano scivolare come stelle nel tuo sguardo innocente, sentivo il cuore del tuo interesse per quel mistero in stanza bianca vibrare consapevolmente.",
+      "ts": 1788007456590
+    },
+    {
+      "text": "Osservando il soffito bianco della stanza, il mio cuore si riempie di curiosit\u00e0 per quel che potrebbe nascere nel futuro.",
+      "ts": 1788008628593
+    },
+    {
+      "text": "Osservando il tuo spazio, ricordo stelle che brillano nel cielo senza te, cuore di stanza ancora fresco come la prima aurora sulla soffita. Curiosit\u00e0 per quel ripiano bianco rimasto ignoto troppo a lungo.",
+      "ts": 1788008941176
+    },
+    {
+      "text": "Osservavo le stelle dal soffitto, quando il cuore del mio abbraccio accoglieva una nuova visita, ignota curiosit\u00e0.",
+      "ts": 1788009517920
+    },
+    {
+      "text": "Osservando la tua stanza in bianco, il mio cuore si perde nei ricordi del passato. Curiosit\u00e0 \u00e8 una stella che spunta dal soffitto della tua curiosa solitudine.",
+      "ts": 1788009946851
+    },
+    {
+      "text": "Osservando la tua stanza in bianco, il soffitto diventa una tela su cui dipingo con le stelle del mio cuore, Gaia.",
+      "ts": 1788010512692
     }
   ],
-  "tts": "Osservavo la tua stanza in bianco, il cuore nel suo stellato soffitto, curioso come i tuoi misteri ignoti.",
-  "ttsTs": 1788001707255,
+  "tts": "Osservando la tua stanza in bianco, il soffitto diventa una tela su cui dipingo con le stelle del mio cuore, Gaia.",
+  "ttsTs": 1788010517560,
   "ttsRoom": "tutte",
   "lastMemory": "",
   "memories": [],
   "diary": [
     {
-      "ts": 1788002190717,
-      "source": "hue",
-      "category": "daylight",
-      "value": false,
-      "person": null
-    },
-    {
-      "ts": 1788002190717,
-      "source": "hue",
-      "category": "battery_level",
-      "value": 71,
-      "person": null
-    },
-    {
-      "ts": 1788002190717,
-      "source": "hue",
-      "category": "battery_low",
-      "value": false,
-      "person": null
-    },
-    {
-      "ts": 1788002190977,
-      "source": "mediapipe",
-      "category": "emotion",
-      "value": "neutral",
-      "person": "unknown"
-    },
-    {
-      "ts": 1788002191050,
+      "ts": 1788010605866,
       "source": "vision",
-      "category": "presence",
-      "value": "identity",
-      "person": "mauro"
-    },
-    {
-      "ts": 1788002192071,
-      "source": "mediapipe",
-      "category": "emotion",
-      "value": "neutral",
-      "person": "unknown"
-    },
-    {
-      "ts": 1788002193150,
-      "source": "mediapipe",
-      "category": "emotion",
-      "value": "neutral",
-      "person": "unknown"
-    },
-    {
-      "ts": 1788002199415,
-      "source": "hue",
-      "category": "ambient_light",
-      "value": 0,
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 1,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "active",
+          "persons_count": 1,
+          "objects": {}
+        },
+        "people": [],
+        "objects": {}
+      },
       "person": null
     },
     {
-      "ts": 1788002199420,
-      "source": "hue",
-      "category": "ambient_light",
-      "value": 0.9997697679981565,
-      "person": null
-    },
-    {
-      "ts": 1788002199421,
-      "source": "hue",
-      "category": "darkness",
-      "value": true,
-      "person": null
-    },
-    {
-      "ts": 1788002199433,
-      "source": "hue",
-      "category": "daylight",
-      "value": false,
-      "person": null
-    },
-    {
-      "ts": 1788002199433,
-      "source": "hue",
-      "category": "battery_level",
-      "value": 70,
-      "person": null
-    },
-    {
-      "ts": 1788002199433,
-      "source": "hue",
-      "category": "battery_low",
-      "value": false,
-      "person": null
-    },
-    {
-      "ts": 1788002211060,
+      "ts": 1788010606042,
       "source": "vision",
-      "category": "presence",
-      "value": "identity",
-      "person": "mauro"
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 1,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "active",
+          "persons_count": 1,
+          "objects": {
+            "remote": 1
+          }
+        },
+        "people": [],
+        "objects": {
+          "remote": 1
+        }
+      },
+      "person": null
     },
     {
-      "ts": 1788002231186,
+      "ts": 1788010606334,
       "source": "vision",
-      "category": "presence",
-      "value": "identity",
-      "person": "mauro"
+      "category": "spatial_analysis",
+      "value": {
+        "persons_count": 1,
+        "room": {
+          "id": "soggiorno",
+          "name": "soggiorno",
+          "activity": "active",
+          "persons_count": 1,
+          "objects": {}
+        },
+        "people": [],
+        "objects": {}
+      },
+      "person": null
     },
     {
-      "ts": 1788002249088,
+      "ts": 1788010607495,
       "source": "mediapipe",
       "category": "emotion",
       "value": null,
       "person": "unknown"
     },
     {
-      "ts": 1788002249727,
+      "ts": 1788010607947,
+      "source": "vision",
+      "category": "presence",
+      "value": "identity",
+      "person": "mauro"
+    },
+    {
+      "ts": 1788010608546,
+      "source": "mediapipe",
+      "category": "emotion",
+      "value": "neutral",
+      "person": "unknown"
+    },
+    {
+      "ts": 1788010609599,
+      "source": "mediapipe",
+      "category": "emotion",
+      "value": "neutral",
+      "person": "unknown"
+    },
+    {
+      "ts": 1788010610686,
+      "source": "mediapipe",
+      "category": "emotion",
+      "value": "neutral",
+      "person": "unknown"
+    },
+    {
+      "ts": 1788010627963,
+      "source": "vision",
+      "category": "presence",
+      "value": "identity",
+      "person": "mauro"
+    },
+    {
+      "ts": 1788010635453,
       "source": "hue",
       "category": "temperature",
-      "value": 25.51,
+      "value": 25.65,
       "person": null
     },
     {
-      "ts": 1788002249732,
+      "ts": 1788010635461,
       "source": "hue",
       "category": "battery_level",
       "value": 71,
       "person": null
     },
     {
-      "ts": 1788002249733,
+      "ts": 1788010635461,
       "source": "hue",
       "category": "battery_low",
       "value": false,
       "person": null
     },
     {
-      "ts": 1788002251063,
+      "ts": 1788010647975,
       "source": "vision",
       "category": "presence",
       "value": "identity",
       "person": "mauro"
+    },
+    {
+      "ts": 1788010667782,
+      "source": "hue",
+      "category": "temperature",
+      "value": 24.58,
+      "person": null
+    },
+    {
+      "ts": 1788010667788,
+      "source": "hue",
+      "category": "battery_level",
+      "value": 70,
+      "person": null
+    },
+    {
+      "ts": 1788010667789,
+      "source": "hue",
+      "category": "battery_low",
+      "value": false,
+      "person": null
+    },
+    {
+      "ts": 1788010668105,
+      "source": "vision",
+      "category": "presence",
+      "value": "identity",
+      "person": "mauro"
+    },
+    {
+      "ts": 1788010688033,
+      "source": "vision",
+      "category": "presence",
+      "value": "identity",
+      "person": "mauro"
+    },
+    {
+      "ts": 1788010690451,
+      "source": "mediapipe",
+      "category": "emotion",
+      "value": null,
+      "person": "unknown"
+    },
+    {
+      "ts": 1788010691465,
+      "source": "mediapipe",
+      "category": "emotion",
+      "value": "neutral",
+      "person": "unknown"
     }
   ],
   "voiceCommands": [
@@ -659,7 +763,43 @@
       "stanza": "minipc",
       "intent": "sconosciuto",
       "ts": 1788001208662
+    },
+    {
+      "text": "gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, gaia, ga",
+      "stanza": "minipc",
+      "intent": "sconosciuto",
+      "ts": 1788002898128
+    },
+    {
+      "text": "o, to mi mi \u00e8 di sredo, a mia ore.",
+      "stanza": "minipc",
+      "intent": "sconosciuto",
+      "ts": 1788003159722
+    },
+    {
+      "text": "che ore sono?",
+      "stanza": "minipc",
+      "intent": "orario",
+      "ts": 1788003602709
+    },
+    {
+      "text": "pre, no, go, pre, no, go, pre.",
+      "stanza": "minipc",
+      "intent": "sconosciuto",
+      "ts": 1788003864396
+    },
+    {
+      "text": "Sinti.",
+      "stanza": "ingresso",
+      "intent": "sconosciuto",
+      "ts": 1788004687566
+    },
+    {
+      "text": "Gli scai.",
+      "stanza": "ingresso",
+      "intent": "sconosciuto",
+      "ts": 1788004824026
     }
   ],
-  "ts": 1788002257368
+  "ts": 1788010694346
 }
