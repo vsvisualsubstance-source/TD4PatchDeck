@@ -64,8 +64,8 @@ path	type	strategy	rel_file_path	timestamp	dirty	build	touch_build	node_x	node_y
 /PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1/B	button	tox	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1/B.tox	2026-08-24 10:42:18 UTC		1	2025.33070	-375	-175	0.3250,0.8000,0.3000
 /PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1/A/color	table	tsv	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1/A/color.tsv	2026-08-24 10:42:18 UTC				275	425	0.9000,0.3000,0.4000
 /PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1/A	button	tox	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1/A.tox	2026-08-24 10:42:18 UTC		1	2025.33070	-350	100	0.3250,0.8000,0.3000
-/PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1	container	tox	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1.tox	2026-08-29 13:37:26 UTC		45	2025.33070	25	350	0.3250,0.8000,0.3000
-/PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0	container	tox	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0.tox	2026-08-29 13:37:26 UTC		58	2025.33070	-175	-325	0.3250,0.8000,0.3000
+/PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1	container	tox	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0/container_master1.tox	2026-08-30 17:03:43 UTC		54	2025.33070	25	350	0.3250,0.8000,0.3000
+/PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0	container	tox	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/tab0.tox	2026-08-30 17:03:43 UTC		68	2025.33070	-175	-325	0.3250,0.8000,0.3000
 /PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/selectexec	chopexec	py	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/selectexec.py	2026-08-24 10:42:18 UTC				-475	25	0.9000,0.3000,0.4000
 /PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/select1	select	tox	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/select1.tox	2026-08-24 10:42:18 UTC		1	2025.33070	50	-50	0.3250,0.8000,0.3000
 /PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/replicator1_callbacks	text	py	PATCHDECK/UI/MAIN_INTERFACE/2_PATCHES/replicator1_callbacks.py	2026-08-24 10:42:18 UTC				-180	-485	0.9000,0.3000,0.4000
@@ -331,11 +331,11 @@ path	type	strategy	rel_file_path	timestamp	dirty	build	touch_build	node_x	node_y
 /PATCHDECK/PATCHES/X29/FluidPOP/POP_Fluid_Solver/glsl1_compute2	text	glsl	PATCHDECK/PATCHES/X29/FluidPOP/POP_Fluid_Solver/glsl1_compute2.glsl	2026-08-24 10:42:25 UTC				3625	0	0.9000,0.3000,0.4000
 /PATCHDECK/PATCHES/X29/FluidPOP/POP_Fluid_Solver/glsl1_compute	text	glsl	PATCHDECK/PATCHES/X29/FluidPOP/POP_Fluid_Solver/glsl1_compute.glsl	2026-08-24 10:42:25 UTC				1300	-150	0.9000,0.3000,0.4000
 /PATCHDECK/PATCHES/X29/FluidPOP/POP_Fluid_Solver	base	tox	PATCHDECK/PATCHES/X29/FluidPOP/POP_Fluid_Solver.tox	2026-08-24 10:42:25 UTC		1	2025.33070	925	-125	0.3250,0.8000,0.3000
-/PATCHDECK/PATCHES/X29/FluidPOP	container	tox	PATCHDECK/PATCHES/X29/FluidPOP.tox	2026-08-24 10:42:25 UTC		1	2025.33070	1025	-175	0.3250,0.8000,0.3000
+/PATCHDECK/PATCHES/X29/FluidPOP	container	tox	PATCHDECK/PATCHES/X29/FluidPOP.tox	2026-08-30 17:03:44 UTC		2	2025.33070	1025	-175	0.3250,0.8000,0.3000
 /PATCHDECK/PATCHES/X29/CTRL/index	table	tsv	PATCHDECK/PATCHES/X29/CTRL/index.tsv	2026-08-24 10:42:25 UTC				-2950	1875	0.9000,0.3000,0.4000
 /PATCHDECK/PATCHES/X29/CTRL/execute1	execute	py	PATCHDECK/PATCHES/X29/CTRL/execute1.py	2026-08-24 10:42:25 UTC				-2950	1975	0.9000,0.3000,0.4000
 /PATCHDECK/PATCHES/X29/CTRL	base	tox	PATCHDECK/PATCHES/X29/CTRL.tox	2026-08-24 10:42:25 UTC		1	2025.33070	50	-125	0.3250,0.8000,0.3000
-/PATCHDECK/PATCHES/X29	base	tox	PATCHDECK/PATCHES/X29.tox	2026-08-24 10:42:25 UTC		1	2025.33070	-2225	-766	0.3250,0.8000,0.3000
+/PATCHDECK/PATCHES/X29	base	tox	PATCHDECK/PATCHES/X29.tox	2026-08-30 17:03:44 UTC		2	2025.33070	-2225	-766	0.3250,0.8000,0.3000
 /PATCHDECK/PATCHES/X28/ndiin1_grouptable	table	tsv	PATCHDECK/PATCHES/X28/ndiin1_grouptable.tsv	2026-08-24 10:42:26 UTC				1050	-220	0.9000,0.3000,0.4000
 /PATCHDECK/PATCHES/X28/chan_info	table	tsv	PATCHDECK/PATCHES/X28/chan_info.tsv	2026-08-24 10:42:26 UTC				850	350	0.9000,0.3000,0.4000
 /PATCHDECK/PATCHES/X28/CTRL/index	table	tsv	PATCHDECK/PATCHES/X28/CTRL/index.tsv	2026-08-24 10:42:26 UTC				-2950	1875	0.9000,0.3000,0.4000
@@ -664,7 +664,7 @@ path	type	strategy	rel_file_path	timestamp	dirty	build	touch_build	node_x	node_y
 /PATCHDECK/PATCHES/CTRL/index	table	tsv	PATCHDECK/PATCHES/CTRL/index.tsv	2026-08-24 10:42:31 UTC				-2950	1875	0.9000,0.3000,0.4000
 /PATCHDECK/PATCHES/CTRL/execute1	execute	py	PATCHDECK/PATCHES/CTRL/execute1.py	2026-08-24 10:42:31 UTC				-2950	1975	0.9000,0.3000,0.4000
 /PATCHDECK/PATCHES/CTRL	base	tox	PATCHDECK/PATCHES/CTRL.tox	2026-08-24 10:42:31 UTC		1	2025.33070	-1050	-672	0.3250,0.8000,0.3000
-/PATCHDECK/PATCHES	base	tox	PATCHDECK/PATCHES.tox	2026-08-28 09:20:13 UTC		6	2025.33070	0	475	0.3250,0.8000,0.3000
+/PATCHDECK/PATCHES	base	tox	PATCHDECK/PATCHES.tox	2026-08-30 14:49:54 UTC		7	2025.33070	0	475	0.3250,0.8000,0.3000
 /PATCHDECK/DMX_PERFORM	window	tox	PATCHDECK/DMX_PERFORM.tox	2026-08-24 15:28:23 UTC		2	2025.33070	925	475	0.3250,0.8000,0.3000
 /PATCHDECK/DMX/dmxout1_routingtable	table	tsv	PATCHDECK/DMX/dmxout1_routingtable.tsv	2026-08-24 10:42:31 UTC				825	-200	0.9000,0.3000,0.4000
 /PATCHDECK/DMX/dmx_audio_chase/pixel_preview_exec	execute	py	PATCHDECK/DMX/dmx_audio_chase/pixel_preview_exec.py	2026-08-24 10:42:31 UTC				250	700	0.9000,0.3000,0.4000
@@ -713,7 +713,7 @@ path	type	strategy	rel_file_path	timestamp	dirty	build	touch_build	node_x	node_y
 /PATCHDECK/CTRL/MIDI_MAPPING_REFERENCE	container	tox	PATCHDECK/CTRL/MIDI_MAPPING_REFERENCE.tox	2026-08-24 10:42:32 UTC		1	2025.33070	3700	125	0.3250,0.8000,0.3000
 /PATCHDECK/CTRL/Execute	execute	py	PATCHDECK/CTRL/Execute.py	2026-08-24 10:42:32 UTC				500	10175	0.9000,0.3000,0.4000
 /PATCHDECK/CTRL	base	tox	PATCHDECK/CTRL.tox	2026-08-27 16:27:03 UTC		3	2025.33070	0	300	0.3250,0.8000,0.3000
-/PATCHDECK	container	tox	PATCHDECK.tox	2026-08-29 13:37:28 UTC		13	2025.33070	-175	75	0.3250,0.8000,0.3000
+/PATCHDECK	container	tox	PATCHDECK.tox	2026-08-30 14:49:56 UTC		14	2025.33070	-175	75	0.3250,0.8000,0.3000
 /Embody1/wizard/track/fill	container	tox	Embody1/wizard/track/fill.tox	2026-08-24 10:42:35 UTC		1	2025.33070	0	0	0.3250,0.8000,0.3000
 /Embody1/wizard/track	container	tox	Embody1/wizard/track.tox	2026-08-24 10:42:35 UTC		1	2025.33070	0	-150	0.3250,0.8000,0.3000
 /Embody1/wizard/topspacer	container	tox	Embody1/wizard/topspacer.tox	2026-08-24 10:42:35 UTC		1	2025.33070	480	-450	0.3250,0.8000,0.3000
@@ -848,8 +848,8 @@ path	type	strategy	rel_file_path	timestamp	dirty	build	touch_build	node_x	node_y
 /Embody1/tdn_export_progress/dialog/title_callbacks	text	py	Embody1/tdn_export_progress/dialog/title_callbacks.py	2026-08-24 10:42:37 UTC				200	-160	0.9000,0.3000,0.4000
 /Embody1/tdn_export_progress/dialog/title	text	tox	Embody1/tdn_export_progress/dialog/title.tox	2026-08-24 10:42:37 UTC		1	2025.33070	200	0	0.3250,0.8000,0.3000
 /Embody1/tdn_export_progress/dialog/status_callbacks	text	py	Embody1/tdn_export_progress/dialog/status_callbacks.py	2026-08-24 10:42:37 UTC				200	-360	0.9000,0.3000,0.4000
-/Embody1/tdn_export_progress/dialog/status	text	tox	Embody1/tdn_export_progress/dialog/status.tox	2026-08-24 12:34:55 UTC		2	2025.33070	200	-200	0.3250,0.8000,0.3000
-/Embody1/tdn_export_progress/dialog/bar_bg/bar_fill	container	tox	Embody1/tdn_export_progress/dialog/bar_bg/bar_fill.tox	2026-08-24 12:34:55 UTC		2	2025.33070	200	0	0.3250,0.8000,0.3000
+/Embody1/tdn_export_progress/dialog/status	text	tox	Embody1/tdn_export_progress/dialog/status.tox	2026-08-30 09:12:09 UTC		5	2025.33070	200	-200	0.3250,0.8000,0.3000
+/Embody1/tdn_export_progress/dialog/bar_bg/bar_fill	container	tox	Embody1/tdn_export_progress/dialog/bar_bg/bar_fill.tox	2026-08-30 09:12:09 UTC		5	2025.33070	200	0	0.3250,0.8000,0.3000
 /Embody1/tdn_export_progress/dialog/bar_bg	container	tox	Embody1/tdn_export_progress/dialog/bar_bg.tox	2026-08-24 10:42:37 UTC		1	2025.33070	200	-400	0.3250,0.8000,0.3000
 /Embody1/tdn_export_progress/dialog	container	tox	Embody1/tdn_export_progress/dialog.tox	2026-08-24 10:42:37 UTC		1	2025.33070	200	200	0.3250,0.8000,0.3000
 /Embody1/tdn_export_progress	base	tox	Embody1/tdn_export_progress.tox	2026-08-24 10:42:37 UTC		1	2025.33070	1000	475	0.3250,0.8000,0.3000
@@ -924,11 +924,11 @@ path	type	strategy	rel_file_path	timestamp	dirty	build	touch_build	node_x	node_y
 /Embody1/Collection/CollectionExt	text	py	Embody1/Collection/CollectionExt.py	2026-08-24 10:42:39 UTC				200	0	0.9000,0.3000,0.4000
 /Embody1/Collection	base	tox	Embody1/Collection.tox	2026-08-24 10:42:39 UTC		2	2025.33070	200	-550	0.3250,0.8000,0.3000
 /Embody1/CatalogManagerExt	text	py	Embody1/CatalogManagerExt.py	2026-08-24 10:42:39 UTC				-700	500	0.9000,0.3000,0.4000
-/Embody1	container	tox	Embody1.tox	2026-08-29 13:37:25 UTC		1227	2025.33070	350	500	0.3250,0.8000,0.3000
-/	base	tdn	PATCHDECK_V8.tdn	2026-08-24 12:35:25 UTC			099.2025.33070			
+/Embody1	container	tox	Embody1.tox	2026-08-30 14:50:15 UTC		1231	2025.33070	350	500	0.3250,0.8000,0.3000
+/	base	tdn	PATCHDECK_V8.tdn	2026-08-30 09:11:52 UTC			099.2025.33070			
 /PATCHDECK/PATCHES/master_directndi_exec	parexec	py	PATCHDECK/PATCHES/master_directndi_exec.py	2026-08-27 16:20:57 UTC				926	-1095	0.9000,0.3000,0.4000
 /PATCHDECK/CTRL/master_toggle_exec	chopexec	py	PATCHDECK/CTRL/master_toggle_exec.py	2026-08-27 16:26:27 UTC				-3845	7733	0.9000,0.3000,0.4000
-/gaia_client	base	tox	gaia_client.tox	2026-08-29 13:37:25 UTC		35	2025.33070	775	175	0.6700,0.6700,0.6700
+/gaia_client	base	tox	gaia_client.tox	2026-08-30 14:50:15 UTC		40	2025.33070	775	200	0.6700,0.6700,0.6700
 /gaia_client/mqtt_ingest_callbacks	text	py	gaia_client/mqtt_ingest_callbacks.py	2026-08-28 07:13:07 UTC				0	580	0.9000,0.3000,0.4000
 /gaia_client/topic_canvas	text	py	gaia_client/topic_canvas.py	2026-08-28 07:13:08 UTC				400	700	0.9000,0.3000,0.4000
 /gaia_client/topic_brainstate	text	py	gaia_client/topic_brainstate.py	2026-08-28 07:13:08 UTC				400	300	0.9000,0.3000,0.4000
@@ -955,9 +955,11 @@ path	type	strategy	rel_file_path	timestamp	dirty	build	touch_build	node_x	node_y
 /PATCHDECK/gaia_services	base	tox	PATCHDECK/gaia_services.tox	2026-08-29 12:46:56 UTC		6	2025.33070	700	300	0.3250,0.8000,0.3000
 /gaia_client/pre_release	text	py	gaia_client/pre_release.py	2026-08-29 08:01:11 UTC				0	-5550	0.9000,0.3000,0.4000
 /gaia_client/reregister_watch	parexec	py	gaia_client/reregister_watch.py	2026-08-29 08:15:34 UTC				1200	-3200	0.9000,0.3000,0.4000
-/gaia_dmx_client	base	tox	gaia_dmx_client.tox	2026-08-29 13:37:29 UTC		6	2025.33070	393	200	0.6700,0.6700,0.6700
+/gaia_dmx_client	base	tox	gaia_dmx_client.tox	2026-08-30 14:50:15 UTC		8	2025.33070	393	200	0.6700,0.6700,0.6700
 /gaia_dmx_client/gaia_device_agent	text	py	gaia_dmx_client/gaia_device_agent.py	2026-08-29 12:47:46 UTC				400	0	0.9000,0.3000,0.4000
 /gaia_dmx_client/agent_lifecycle	execute	py	gaia_dmx_client/agent_lifecycle.py	2026-08-29 12:48:16 UTC				800	0	0.9000,0.3000,0.4000
 /gaia_dmx_client/mqtt_device_callbacks	text	py	gaia_dmx_client/mqtt_device_callbacks.py	2026-08-29 12:48:47 UTC				0	-120	0.9000,0.3000,0.4000
 /gaia_dmx_client/dmx_services	text	py	gaia_dmx_client/dmx_services.py	2026-08-29 12:49:17 UTC				1200	0	0.9000,0.3000,0.4000
 /gaia_dmx_client/dmx_services_lifecycle	execute	py	gaia_dmx_client/dmx_services_lifecycle.py	2026-08-29 12:49:48 UTC				1600	0	0.9000,0.3000,0.4000
+/gaia_client/devices_table	table	tsv	gaia_client/devices_table.tsv	2026-08-30 08:06:22 UTC				800	-4200	0.9000,0.3000,0.4000
+/PATCHDECK/UI/MAIN_INTERFACE/container2	container	tox	PATCHDECK/UI/MAIN_INTERFACE/container2.tox	2026-08-30 08:06:22 UTC		1	2025.33070	4928	6563	0.3250,0.8000,0.3000

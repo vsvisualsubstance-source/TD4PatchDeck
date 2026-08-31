@@ -1,0 +1,118 @@
+device_id	name	stanza	role	service	state	offline
+minipc-core-node-0	core	salotto	core	mediaplayer	active	False
+minipc-core-node-0	core	salotto	core	kiosk	inactive	False
+minipc-core-node-0	core	salotto	core	yolo	active	False
+minipc-core-node-0	core	salotto	core	mediapipe	active	False
+minipc-core-node-0	core	salotto	core	scene	active	False
+minipc-core-node-0	core	salotto	core	mosquitto	active	False
+minipc-core-node-0	core	salotto	core	qdrant	active	False
+minipc-core-node-0	core	salotto	core	ollama	active	False
+minipc-core-node-0	core	salotto	core	openhab	active	False
+ops-silvermini2	ops	soggiorno	ops	camera	active	True
+ops-silvermini2	ops	soggiorno	ops	yolo	active	True
+ops-silvermini2	ops	soggiorno	ops	mediapipe	active	True
+ops-silvermini2	ops	soggiorno	ops	voice	inactive	True
+ops-silvermini2	ops	soggiorno	ops	kiosk	inactive	True
+ops-silvermini2	ops	soggiorno	ops	mediaplayer	active	True
+ops-silvermini2	ops	soggiorno	ops	ollama	active	True
+pi-b2c8db	Pi Ingresso	ingresso	pi	yolo	active	False
+pi-b2c8db	Pi Ingresso	ingresso	pi	mediapipe	inactive	False
+pi-b2c8db	Pi Ingresso	ingresso	pi	voice	inactive	False
+pi-b2c8db	Pi Ingresso	ingresso	pi	camera	active	False
+pi-b2c8db	Pi Ingresso	ingresso	pi	screen	inactive	False
+pi-b2c8db	Pi Ingresso	ingresso	pi	kiosk	inactive	False
+pi-b2c8db	Pi Ingresso	ingresso	pi	mediaplayer	inactive	False
+pi-b2c8db	Pi Ingresso	ingresso	pi	herbarium	active	False
+pi-b2c8db	Pi Ingresso	ingresso	pi	herbsim	active	False
+pi-b2c8db	Pi Ingresso	ingresso	pi	herbmp	inactive	False
+pi-b2c8db	Pi Ingresso	ingresso	pi	livestream	inactive	False
+td-controller-macmauro	Controller	salotto	touchdesigner	audio_device	active	True
+td-controller-macmauro	Controller	salotto	touchdesigner	audio_source_live	inactive	True
+td-controller-macmauro	Controller	salotto	touchdesigner	audio_source_file	active	True
+td-dmx-ops	DMXRIG	soggiorno	touchdesigner	dmx_a_kick_enable	active	False
+td-dmx-ops	DMXRIG	soggiorno	touchdesigner	dmx_a_use_file_input	inactive	False
+td-dmx-ops	DMXRIG	soggiorno	touchdesigner	dmx_a_apply_fixture_profile	unknown	False
+td-dmx-ops	DMXRIG	soggiorno	touchdesigner	dmx_b_kick_enable	active	False
+td-dmx-ops	DMXRIG	soggiorno	touchdesigner	dmx_b_use_file_input	inactive	False
+td-dmx-ops	DMXRIG	soggiorno	touchdesigner	dmx_b_apply_fixture_profile	unknown	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	deck_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	deck_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x1_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x1_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x2_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x2_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x3_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x3_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x4_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x4_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x5_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x5_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x6_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x6_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x7_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x7_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x8_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x8_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x9_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x9_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x10_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x10_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x11_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x11_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x12_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x12_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x13_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x13_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x14_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x14_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x15_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x15_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x16_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x16_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x17_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x17_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x18_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x18_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x19_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x19_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x20_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x20_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x21_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x21_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x22_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x22_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x23_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x23_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x24_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x24_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x25_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x25_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x26_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x26_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x27_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x27_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x28_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x28_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x29_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x29_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x30_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x30_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x31_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x31_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x32_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x32_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x33_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x33_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x34_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x34_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x35_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x35_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x36_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x36_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x37_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x37_b	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x38_a	inactive	False
+td-pd-macmauro	PatchDeck	studio	touchdesigner	load_x38_b	inactive	False
+td-pddmx-macmauro	PD_DMX	studio	touchdesigner	dmx_a_kick_enable	inactive	False
+td-pddmx-macmauro	PD_DMX	studio	touchdesigner	dmx_a_use_file_input	inactive	False
+td-pddmx-macmauro	PD_DMX	studio	touchdesigner	dmx_a_apply_fixture_profile	unknown	False
