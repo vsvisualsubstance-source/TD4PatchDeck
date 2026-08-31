@@ -13,6 +13,15 @@ Eseguito da lifecycle.onCreate()/onStart(). Non tocca gaia_client/gaia_device_ag
 (percorso dei pad fisici APC40, invariato) -- chiama solo i 3 metodi aggiunti
 a led_controller (loadPatchToDeck/clearDeck/deckStatus), stessa fonte di
 verita' (MIDI_status, extra_active) usata dai pad fisici.
+
+Aggiunti 2026-08-31: i primi 5 knob POST_FX di control_ui (EDGE, FEEDBACK,
+FB SCALE, FB BLUR, MIRROR -- le prime 5 colonne di
+PATCHDECK/PATCHES/POST_FX/fx_lables.tsv, custom par Fx1..Fx5 su
+control_ui) esposti come Gaia continuous param via
+gaia_device_agent.register_param() (stesso 'action:set' via MQTT gia'
+usato per gli altri controlli di questo device -- vedi i servizi deck_a/
+deck_b sopra), cosi' TD4Gaia puo' pilotarli allo stesso modo dei deck.
+FX6/FX7/FX8 (BRIGHTNESS/BLACK LVL/Strobo) restano fuori, non richiesti.
 """
 
 import json
@@ -23,6 +32,21 @@ _last_patch = {'A': 0, 'B': 0}  # memoria locale per il resume di start_deck_a/b
 
 def _led():
 	return op('/PATCHDECK/CTRL/led_controller').ext.PATCHDECKCTRLledcontroller1
+
+
+def _ctrl():
+	return op('/PATCHDECK/UI/MAIN_INTERFACE/control_ui')
+
+
+# name esposto via MQTT -> custom par su control_ui (Fx1..Fx5, vedi
+# PATCHDECK/PATCHES/POST_FX/fx_lables.tsv per la mappa completa FX1..FX8)
+_FX_PARAMS = [
+	('edge', 'Fx1'),
+	('feedback', 'Fx2'),
+	('fb_scale', 'Fx3'),
+	('fb_blur', 'Fx4'),
+	('mirror', 'Fx5'),
+]
 
 
 def _register_deck_services(agent, deck):
@@ -52,11 +76,26 @@ def _register_patch_service(agent, patch_num, deck):
 	agent.register_service('load_x%d_%s' % (patch_num, deck.lower()), start=start, stop=None, status=status)
 
 
+def _register_fx_params(agent):
+	"""Espone i primi 5 knob POST_FX di control_ui come Gaia continuous
+	param (get/set su Fx1..Fx5, 0..1 float -- vedi _FX_PARAMS)."""
+	for name, par_name in _FX_PARAMS:
+		def get(par_name=par_name):
+			return float(_ctrl().par[par_name].eval())
+
+		def set_(value, par_name=par_name):
+			_ctrl().par[par_name] = float(value)
+
+		agent.register_param(name, get=get, set=set_)
+
+
 def _build_matrix():
 	"""Struttura meccanica dei 78 servizi (quali sono deck toggle, quali
 	load_x{N}_{deck}) -- NON descrizioni creative delle patch, solo la
 	matrice pulsanti cosi' chi costruisce l'interfaccia lato Gaia non
-	deve fare parsing dei nomi servizio."""
+	deve fare parsing dei nomi servizio. Stesso principio per fx_params
+	(nome MQTT -> label originale + range), cosi' TD4Gaia puo' disegnare
+	gli slider senza indovinare la mappa Fx1..Fx5 -> EDGE..MIRROR."""
 	services = {
 		'deck_a': {'kind': 'deck_toggle', 'deck': 'A'},
 		'deck_b': {'kind': 'deck_toggle', 'deck': 'B'},
@@ -65,10 +104,15 @@ def _build_matrix():
 		for deck in ('A', 'B'):
 			name = 'load_x%d_%s' % (patch_num, deck.lower())
 			services[name] = {'kind': 'load_patch', 'patch': patch_num, 'deck': deck}
+	fx_labels = {'edge': 'EDGE', 'feedback': 'FEEDBACK', 'fb_scale': 'FB SCALE',
+		'fb_blur': 'FB BLUR', 'mirror': 'MIRROR'}
+	fx_params = {name: {'label': fx_labels[name], 'min': 0.0, 'max': 1.0}
+		for name, _ in _FX_PARAMS}
 	return {
 		'decks': ['A', 'B'],
 		'patches': list(range(1, 39)),
 		'services': services,
+		'fx_params': fx_params,
 	}
 
 
@@ -117,4 +161,7 @@ def register_all():
 			for deck in ('A', 'B'):
 				_register_patch_service(agent, patch_num, deck)
 		print('[PatchDeck Services] %d servizi registrati' % len(agent._services))
+	if 'edge' not in agent._params:
+		_register_fx_params(agent)
+		print('[PatchDeck Services] %d param FX registrati' % len(agent._params))
 	publish_matrix()
