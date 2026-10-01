@@ -1,0 +1,43 @@
+"""CollectionExt -- embody.tools community/platform integration.
+
+Owns the untrusted-content layer for community TDXN (source == "embody.tools"):
+the capability scanner and the default-inert safe-import. Trusted own-network
+Copy/Paste lives in TDXNExt and never reaches here. The scan/inert logic lives in
+the self-contained `scanner` and `safe_import` DATs beside this extension, loaded
+independently (no cross-import chain). This class is the thin TD glue, and the
+future home of the rest of the platform client (browse / fetch / submit).
+ASCII only.
+"""
+
+
+class CollectionExt:
+    def __init__(self, ownerComp):
+        self.ownerComp = ownerComp
+
+    def ScanTdxn(self, tdn):
+        """Return the C2 capability report for a TDXN dict."""
+        return self.ownerComp.op('scanner').module.scan_tdxn(tdn if isinstance(tdn, dict) else {})
+
+    def PlanCommunityPaste(self, tdn):
+        """Scan a community TDXN dict and return the import plan (live or inert).
+
+        Reached only for source == "embody.tools" -- TDXNExt unwraps the envelope
+        and hands over the inner tdn. Nothing here executes.
+
+        Live-if-scanned-clean: a specimen whose only expressions are PROVABLY PURE
+        value reads (par reads, absTime, math.*, Par.eval(), arithmetic) and which
+        has no execute-DAT / extension / IO / storage / denylisted surface scans
+        'clean' and imports LIVE -- fully working, the whole point of the gallery.
+        Anything 'flagged'/'blocked' is disarmed by make_inert, which now PRESERVES
+        the pure expressions (so the specimen still renders) and neutralizes only
+        the genuinely side-effecting surfaces. The purity predicate is the scanner's
+        own is_pure_value_expression, so the verdict and the neutralization agree.
+        """
+        scanner = self.ownerComp.op('scanner').module
+        safe_import = self.ownerComp.op('safe_import').module
+        # Pure logic lives in safe_import.plan_community_paste so it is tested
+        # off-TD. Global shortcuts are stripped on the LIVE path too: the
+        # palette carve-out is sound only if the pasted network cannot
+        # register an op.TD<Name> itself (issue #94 review).
+        return safe_import.plan_community_paste(
+            tdn, scanner.scan_tdxn, scanner.is_pure_value_expression)

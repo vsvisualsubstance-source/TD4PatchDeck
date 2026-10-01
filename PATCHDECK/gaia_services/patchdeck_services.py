@@ -4,8 +4,8 @@ caricamento patch) come servizi Gaia via gaia_device_agent.register_service().
 
 Ported 2026-08-28 dal vecchio /PATCHDECK/gaia_device_agent/patchdeck_services.py
 quando gaia_client ha sostituito gaia_agent/gaia_device_agent (ora ritirati,
-Cooking flag off) come unico client Gaia attivo -- senza questa porta i 78
-servizi (deck_a/deck_b + 38 patch x 2 deck) restavano vuoti in gaia_client,
+Cooking flag off) come unico client Gaia attivo -- senza questa porta i 86
+servizi (deck_a/deck_b + 42 patch x 2 deck) restavano vuoti in gaia_client,
 lasciando PatchDeck incontrollabile via MQTT lato Gaia.
 
 Eseguito da lifecycle.onCreate()/onStart(). Non tocca gaia_client/gaia_device_agent.py
@@ -100,7 +100,7 @@ def _build_matrix():
 		'deck_a': {'kind': 'deck_toggle', 'deck': 'A'},
 		'deck_b': {'kind': 'deck_toggle', 'deck': 'B'},
 	}
-	for patch_num in range(1, 39):
+	for patch_num in range(1, 43):
 		for deck in ('A', 'B'):
 			name = 'load_x%d_%s' % (patch_num, deck.lower())
 			services[name] = {'kind': 'load_patch', 'patch': patch_num, 'deck': deck}
@@ -110,7 +110,7 @@ def _build_matrix():
 		for name, _ in _FX_PARAMS}
 	return {
 		'decks': ['A', 'B'],
-		'patches': list(range(1, 39)),
+		'patches': list(range(1, 43)),
 		'services': services,
 		'fx_params': fx_params,
 	}
@@ -157,7 +157,7 @@ def register_all():
 	if 'deck_a' not in agent._services:
 		for deck in ('A', 'B'):
 			_register_deck_services(agent, deck)
-		for patch_num in range(1, 39):
+		for patch_num in range(1, 43):
 			for deck in ('A', 'B'):
 				_register_patch_service(agent, patch_num, deck)
 		print('[PatchDeck Services] %d servizi registrati' % len(agent._services))

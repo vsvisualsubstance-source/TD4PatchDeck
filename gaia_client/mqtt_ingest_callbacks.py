@@ -68,4 +68,6 @@ def onMessage(dat: mqttclientDAT, topic: str, payload: str, qos: int,
 		target.text = text
 
 	parent.GaiaClient.par.Lastmessage = '%s @ %s' % (topic, time.strftime('%H:%M:%S'))
+	# read by constant_status msg_age (status output connector)
+	parent.GaiaClient.store('lastmsg_seconds', absTime.seconds)
 	return

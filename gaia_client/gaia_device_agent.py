@@ -67,12 +67,30 @@ with no code changes involved).
 """
 import hashlib
 import json
+import os
+import queue
+import shutil
 import socket
+import subprocess
+import threading
 import time
+
+# Version of THIS component (gaia_client), not of the host project -- bump
+# on every portable release (GAIA_INTERFACE.md section 1c). Published as
+# sw_version in profile AND status so Gaia can tell which instances still
+# run an older build after a new portable .tox ships. 1.0 = every build
+# up to 2026-09-29; 1.1.0 = tailscale_ip/internet, broadcast beacon,
+# per-device MQTT client_id, mocap remote control + sender discovery;
+# 1.2.0 = stable output connectors (soul, mocap, status, words, word, thought).
+# 1.2.1 = _self_check ignores gaia_client's own built-in params (Mocapingest/
+#         Opsdevice): with them registered the project registrar never ran
+#         (PatchDeck showed 0 services after upgrading to 1.2.0).
+SW_VERSION = "1.2.1"
 
 _START_TS = time.time()
 _services = {}   # name -> {"start": fn, "stop": fn, "status": fn}
 _params = {}     # name -> {"get": fn, "set": fn(value)} -- continuous values
+_builtin_params = set()  # _params keys owned by gaia_client itself, not the project
 
 _HEARTBEAT_S = 30
 _last_heartbeat = 0.0
@@ -109,12 +127,110 @@ _perf_last_time = None
 _perf_dropped_window = 0
 
 
+# ---- tailscale_ip / internet self-report ---------------------------------
+# GAIA_INTERFACE.md sezione 3 + richiesta Core 2026-09-29: stesso nome
+# campo/schema gia' in produzione su Pi/OPS/Core (net_resolve.py) cosi'
+# Gaia puo' aprire un secondo client OSC/MQTT verso l'IP Tailscale quando
+# quello LAN non e' raggiungibile (mocap/canvas multi-rete). Popolato
+# leggendo l'interfaccia Tailscale locale se presente, altrimenti None
+# (mai bloccante, mai un requisito online -- stesso principio "Gaia resta
+# offline" del beacon discovery).
+#
+# Plain threading.Thread invece del Palette Thread Manager: questo resta
+# un .tox senza dipendenze esterne (ExportPortableTox promette "funziona
+# in qualunque progetto TD senza missing file"), ed e' lavoro one-shot per
+# refresh, non un loop long-lived -- vedi /td-api-reference
+# background-work.md rung 5 (il worker non tocca nessun oggetto TD, i
+# risultati tornano via una queue.Queue drenata ogni frame da perf_tick(),
+# stesso contratto richiesto dalla ladder).
+_NET_TTL_S = 90.0
+_ts_ip_cache = None
+_internet_cache = False
+_net_cache_ts = 0.0
+_net_inflight = False
+_net_queue = queue.Queue()
+
+
+def _tailscale_binary():
+	"""Trova il binario tailscale sul PATH, altrimenti il path di
+	installazione standard Windows (stesso identico gotcha documentato in
+	gaia's net_resolve.py -- pythonw.exe/LaunchAgent spesso hanno un PATH
+	ridotto che lo omette anche se installato)."""
+	exe = 'tailscale.exe' if os.name == 'nt' else 'tailscale'
+	found = shutil.which(exe)
+	if found:
+		return found
+	if os.name == 'nt':
+		candidates = [r'C:\Program Files\Tailscale\tailscale.exe']
+	else:
+		# macOS: Tailscale.app (App Store / standalone) ships its CLI inside
+		# the bundle and does NOT put it on PATH -- and TD launched from
+		# Finder gets a minimal PATH anyway. Homebrew paths cover the
+		# open-source tailscaled install.
+		candidates = ['/Applications/Tailscale.app/Contents/MacOS/Tailscale',
+			'/opt/homebrew/bin/tailscale', '/usr/local/bin/tailscale']
+	for path in candidates:
+		if os.path.exists(path):
+			return path
+	return None
+
+
+def _probe_tcp(host, port, timeout=1.5):
+	try:
+		with socket.create_connection((host, port), timeout=timeout):
+			return True
+	except OSError:
+		return False
+
+
+def _refresh_net_worker(out):
+	"""WORKER thread -- non tocca nessun oggetto TD. _tailscale_binary()
+	(shutil.which, un giro sul filesystem PATH) va calcolato QUI e non sul
+	main thread prima di lanciare il worker -- altrimenti e' esattamente
+	l'I/O sincrono sul main thread che questa architettura serve a
+	evitare. Stessi probe di net_resolve.py: 'tailscale ip -4' per l'IP
+	tailscale locale, una TCP connect nuda verso due resolver DNS
+	pubblici per la reachability internet."""
+	exe = _tailscale_binary()
+	ts_ip = None
+	if exe is not None:
+		try:
+			result = subprocess.run([exe, 'ip', '-4'], capture_output=True, text=True, timeout=1.5)
+			if result.returncode == 0 and result.stdout.strip():
+				ts_ip = result.stdout.strip().splitlines()[0].strip()
+		except Exception:
+			ts_ip = None
+	internet = _probe_tcp('1.1.1.1', 53) or _probe_tcp('8.8.8.8', 53)
+	out.put((ts_ip, internet))
+
+
+def _maybe_refresh_net():
+	"""Chiamata ogni frame da perf_tick() -- throttled internamente a
+	_NET_TTL_S. Drena prima un eventuale worker completato, poi ne lancia
+	uno nuovo solo se la cache e' scaduta e nessun refresh e' gia' in
+	corso."""
+	global _net_inflight, _ts_ip_cache, _internet_cache, _net_cache_ts
+	now = time.time()
+	try:
+		while True:
+			_ts_ip_cache, _internet_cache = _net_queue.get_nowait()
+			_net_cache_ts = now
+			_net_inflight = False
+	except queue.Empty:
+		pass
+	if _net_inflight or (now - _net_cache_ts) < _NET_TTL_S:
+		return
+	_net_inflight = True
+	threading.Thread(target=_refresh_net_worker, args=(_net_queue,), daemon=True).start()
+
+
 def perf_tick():
 	"""Call EVERY frame from onFrameStart (agent_lifecycle.py), unthrottled
 	unlike tick()."""
 	global _perf_last_time, _perf_dropped_window
 	_check_identity()
 	_self_check()
+	_maybe_refresh_net()
 	now = time.time()
 	if _perf_last_time is not None:
 		dt = now - _perf_last_time
@@ -160,12 +276,18 @@ def register_service(name, start=None, stop=None, status=None):
 	_services[name] = {"start": start, "stop": stop, "status": status}
 
 
-def register_param(name, get=None, set=None):
+def register_param(name, get=None, set=None, builtin=False):
 	"""Call from your project-specific script to expose a CONTINUOUS
 	controllable value (gain, threshold, ...), not a simple on/off. get()
 	returns the current value (any JSON-serializable type); set(value)
-	applies a new one."""
+	applies a new one. builtin=True is for gaia_client's own params only
+	(mocap_lifecycle): they don't count as "the project registered" in
+	_self_check()."""
 	_params[name] = {"get": get, "set": set}
+	if builtin:
+		_builtin_params.add(name)
+	else:
+		_builtin_params.discard(name)
 
 
 def register_project_registrar(fn):
@@ -204,7 +326,7 @@ def _self_check():
 	documented silent-empty-registry failure mode (a hot-reloaded module
 	whose onCreate/onStart never reran, GAIA_INTERFACE.md section 2)."""
 	global _last_registrar_check
-	if _registrar is None or _services or _params:
+	if _registrar is None or _services or (_params.keys() - _builtin_params):
 		return
 	now = time.time()
 	if (now - _START_TS) < _REGISTRAR_GRACE_S:
@@ -332,6 +454,9 @@ def _publish_status():
 		"family":         cfg["family"],
 		"role":           "touchdesigner",
 		"ip":             _get_ip(),
+		"tailscale_ip":   _ts_ip_cache,
+		"internet":       _internet_cache,
+		"sw_version":     SW_VERSION,
 		"services":       {n: _service_status(n) for n in _services},
 		"params":         {n: _param_value(n) for n in _params},
 		"uptime":         int(time.time() - _START_TS),
@@ -354,9 +479,11 @@ def _publish_profile(dat, cfg):
 		"family":       cfg["family"],
 		"room":         cfg["stanza"],
 		"ip":           _get_ip(),
+		"tailscale_ip": _ts_ip_cache,
+		"internet":     _internet_cache,
 		"capabilities": _capabilities(),
 		"services":     {n: _service_status(n) for n in _services},
-		"sw_version":   "1.0",
+		"sw_version":   SW_VERSION,
 		"ts":           int(time.time() * 1000),
 	}
 	dat.publish(f"gaia/devices/{cfg['device_id']}/profile", json.dumps(profile).encode('utf-8'), retain=True)
@@ -382,7 +509,12 @@ def _apply_command(cmd):
 		except Exception as e:
 			_record_error(f"{label}({service or param})", e)
 
-	if action == "set":
+	if action == "reregister":
+		# Remote recovery (GAIA_INTERFACE.md, Core 12 point 2, 2026-09-30):
+		# same as the Re-register pulse inside TD, reachable from Admin with
+		# {"action":"reregister"} -- no service/param field needed.
+		_run(reregister, "reregister")
+	elif action == "set":
 		if not prm or not prm.get("set"):
 			print(f"[GAIA Agent] Param '{param}' not registered or not writable")
 		else:

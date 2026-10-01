@@ -1,19 +1,25 @@
 """
-Auto-discovery/self-correction of the Gaia broker host via gaia_beacon (UDP
+Zero-config LAN discovery of the Gaia broker host via gaia_beacon (UDP
 8899, GAIA_DISCOVER protocol, documented in the gaia repo's
 docs/discovery-protocol.md). Ported from TD-Gaia's proven
 Bridge/gaia_config/beacon_discovery.py, trimmed to Brokerhost only (this
 component has no OSC-out consumer that would need a mirrored "Corehost").
 
-WHAT IT COVERS: only Brokerhost. Every _PROBE_INTERVAL_S, sends
-'GAIA_DISCOVER' to whatever Brokerhost is CURRENTLY set to; if that host
-answers as service=='gaia-core', Brokerhost is corrected to the reported
-mqtt_host. This is self-correction, not zero-config network-wide discovery
--- it only helps when the current Brokerhost is already reachable (a small
-drift, e.g. someone hand-edited it, or the deployment's Gaia Core changed
-IP while remaining on the same subnet/reachable path). If Brokerhost points
-at an address nothing answers on, this does nothing and the fixed value
-stays in use -- no regression versus not having it.
+WHAT IT COVERS: only Brokerhost. Every _PROBE_INTERVAL_S, `beacon_probe`
+(the UDP Out DAT this module is docked to) sends 'GAIA_DISCOVER' to
+255.255.255.255:8899 -- a genuine LAN BROADCAST, not a probe of whatever
+Brokerhost currently holds (`beacon_probe.par.address` is the constant
+'255.255.255.255', verified live 2026-09-29: TD's udpoutDAT broadcasts
+with no SO_BROADCAST wrangling needed and no exception). Any device that
+answers as service=='gaia-core' corrects Brokerhost to the reported
+mqtt_host -- this finds Core on a fresh, never-configured deployment with
+zero prior Brokerhost value, not just re-validates a value already close
+to right. Broadcast is subnet-local by nature: it never crosses a router,
+which is exactly why _maybe_failover_tailscale below exists as the next
+tier when this LAN is not Core's LAN. Windows note (from the UDP Out DAT
+doc): a strict Windows Firewall can block this; if broadcast discovery
+never finds Core on a machine that should reach it, check the firewall
+before assuming the network topology is the problem.
 
 FRAMING GOTCHA (cost real debugging time to find on TD-Gaia, will bite
 again if re-derived from scratch): the beacon's reply is bare JSON with NO

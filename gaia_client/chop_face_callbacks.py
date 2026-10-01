@@ -8,6 +8,7 @@ scriptOp - the OP which is cooking
 
 from typing import Any
 import re
+import numpy as np
 
 def onSetupParameters(scriptOp: scriptCHOP):
 	return
@@ -36,13 +37,32 @@ def onCook(scriptOp: scriptCHOP):
 	if src is None:
 		return
 
-	# region -> {numeric_idx -> full_channel_name}. Sorting the remainder as
+	# explicit names: copyNumpyArray(baseName=) numbers from 1, the
+	# published contract numbers from 0 ('f0' is the first channel)
+	idx = sourceRows(src)
+	scriptOp.numSamples = 1
+	for i, v in enumerate(src.numpyArray()[idx, -1].tolist()):
+		scriptOp.appendChan('f%d' % i)[0] = v
+	return
+
+# Source row indexes, rebuilt only when oscin_mocap's channel list changes:
+# parsing its ~4k channel names every frame cost ~11.5 ms (2026-09-30).
+_rows = {'key': None, 'idx': np.zeros(0, dtype=np.int64)}
+
+def sourceRows(src: CHOP) -> np.ndarray:
+	"""Row indexes of the face contour channels in src, in output order, cached per channel layout."""
+	n = src.numChans
+	key = (n, src[0].name, src[n - 1].name) if n else (0, '', '')
+	if _rows['key'] == key:
+		return _rows['idx']
+
+	# region -> {numeric_idx -> source row}. Sorting the remainder as
 	# a STRING scrambles contour order (e.g. 'eye_left11' < 'eye_left2') --
 	# split the trailing digits out and sort numerically so consecutive
 	# output values trace the actual contour in order.
 	by_person = {}
 	name_re = re.compile(r'([a-zA-Z_]+)(\d+)$')
-	for c in src.chans():
+	for row, c in enumerate(src.chans()):
 		if CATEGORY not in c.name:
 			continue
 		seg = c.name.split(CATEGORY, 1)[1]
@@ -54,18 +74,16 @@ def onCook(scriptOp: scriptCHOP):
 		if not m:
 			continue
 		region, idx = m.group(1), int(m.group(2))
-		by_person.setdefault(person, {}).setdefault(region, {})[idx] = c.name
+		by_person.setdefault(person, {}).setdefault(region, {})[idx] = row
 
-	scriptOp.numSamples = 1
-	i = 0
+	rows = []
 	for person in sorted(by_person)[:PERSON_BUDGET]:
 		regions = by_person[person]
 		for region in sorted(regions):
-			for idx in sorted(regions[region]):
-				chan = scriptOp.appendChan('f%d' % i)
-				chan[0] = src[regions[region][idx]].eval()
-				i += 1
-	return
+			rows.extend(regions[region][idx] for idx in sorted(regions[region]))
+	_rows['idx'] = np.array(rows, dtype=np.int64)
+	_rows['key'] = key
+	return _rows['idx']
 
 def onGetCookLevel(scriptOp: scriptCHOP) -> CookLevel:
 	return CookLevel.WHEN_USED

@@ -16,11 +16,11 @@ opshortcut (global-shortcut collision across instances), and Family
 built-in default ('GaiaClient') rather than blank -- same treatment
 already used for the previous portable export (verified live before this
 hook existed: Name='GaiaClient' in gaia_client_portable.tox, not '').
-Deliberately leaves Brokerhost/Brokerport/Opsdevice/Mocapport and every
-Services toggle untouched -- those are deployment-wide LAN defaults, not
-per-instance identity, and changing them here would fight the deliberate
-opt-in defaults already baked into the component (see gaia-client-
-portable-component memory).
+Deliberately leaves Brokerhost/Brokerport/Tailscalehost/Opsdevice/Mocapport
+and every Services toggle untouched -- those are deployment-wide LAN/
+Tailscale defaults, not per-instance identity, and changing them here would
+fight the deliberate opt-in defaults already baked into the component (see
+gaia-client-portable-component memory).
 """
 
 comp = parent()
