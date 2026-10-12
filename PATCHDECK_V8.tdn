@@ -2,8 +2,8 @@ format: tdxn
 version: '2.1'
 generator: Embody/6.2.65
 td_build: 099.2025.33230
-source_file: PATCHDECK_V8.20.toe
-exported_at: '2026-10-12T11:50:23Z'
+source_file: PATCHDECK_V8.21.toe
+exported_at: '2026-10-12T11:58:57Z'
 network_path: /
 options:
   include_dat_content: false
@@ -322,6 +322,7 @@ type_defaults:
     size: [130, 90]
   moviefileinTOP:
     parameters:
+      hwdecode: false
       index: =me.time.frame
       play: false
       timecodeop: =tdu.Timecode()
@@ -26995,8 +26996,6 @@ operators:
               - comp2
             - name: a_active
               type: levelTOP
-              parameters:
-                opacity: 0
               flags:
               - viewer
               position: [625, 525]
@@ -27005,8 +27004,6 @@ operators:
               - A_red
             - name: b_active
               type: levelTOP
-              parameters:
-                opacity: 0
               flags:
               - viewer
               position: [625, 400]
@@ -58233,7 +58230,7 @@ operators:
               position: [275, 655]
               size: [567, 135]
               dat_content:
-              - - ' B'
+              - - ''
               dat_content_format: table
             - name: in
               type: selectTOP
@@ -58363,6 +58360,8 @@ operators:
               - A_red
             - name: b_active
               type: levelTOP
+              parameters:
+                opacity: 0
               flags:
               - viewer
               position: [625, 400]
@@ -58712,7 +58711,7 @@ operators:
               position: [275, 655]
               size: [567, 135]
               dat_content:
-              - - ' A'
+              - - ''
               dat_content_format: table
             - name: in
               type: selectTOP
@@ -58832,6 +58831,8 @@ operators:
               - comp2
             - name: a_active
               type: levelTOP
+              parameters:
+                opacity: 0
               flags:
               - viewer
               position: [625, 525]
@@ -309570,19 +309571,19 @@ operators:
       - tox
       storage:
         state:
-          bass_env: 1.00683e-05
-          mid_env: 1.00683e-05
-          high_env: 1.00683e-05
-          smooth_level: 2.08761e-05
-          level_min: 1.57501e-05
-          level_max: 3.40793e-05
+          bass_env: 1.06729e-05
+          mid_env: 1.06729e-05
+          high_env: 1.06729e-05
+          smooth_level: 1.98725e-05
+          level_min: 1.62659e-05
+          level_max: 3.22005e-05
           smooth_r:
-          - 250.3982426145
-          - 250.3982426145
-          - 250.3982426145
-          - 250.3982426145
-          - 250.3982426145
-          - 250.3982426145
+          - 249.135093388
+          - 249.135093388
+          - 249.135093388
+          - 249.135093388
+          - 249.135093388
+          - 249.135093388
           smooth_g:
           - 0
           - 0
@@ -309591,17 +309592,17 @@ operators:
           - 0
           - 0
           smooth_b:
-          - 4.6017573855
-          - 4.6017573855
-          - 4.6017573855
-          - 4.6017573855
-          - 4.6017573855
-          - 4.6017573855
-          prev_bass_env: 1.00683e-05
+          - 5.864906612
+          - 5.864906612
+          - 5.864906612
+          - 5.864906612
+          - 5.864906612
+          - 5.864906612
+          prev_bass_env: 1.06729e-05
           punch: 0
           punch_smooth: 0
           last_kick_time: 33486.2333333333
-          color_t_smooth: 0.0046130954
+          color_t_smooth: 0.0045178779
       children:
       - name: out1
         type: outTOP
@@ -309794,9 +309795,9 @@ operators:
       - name: pixel_preview
         type: constantTOP
         parameters:
-          colorr: 0.767266449
+          colorr: 0.7651682489
           colorg: 0
-          colorb: 0.0170528591
+          colorb: 0.0191520515
           resolutionw: 200
           resolutionh: 200
         flags:
@@ -309954,8 +309955,8 @@ operators:
         ch3n60: true
         ch2n60: false
         ch8n60: false
-      state_59: 0
-      state_60: 1
+      state_59: 1
+      state_60: 0
     children:
     - name: PAD
       type: selectCHOP
@@ -310579,159 +310580,525 @@ operators:
       tags:
       - tox
       storage:
+        _pe_orig: 60
         _probe:
         - $type: tuple
-          $value: [419962, 1028417.2036905, 3.7, 294.5]
-        - $type: tuple
-          $value: [419963, 1028417.2351681, 2.9, 20.2]
-        - $type: tuple
-          $value: [419964, 1028417.268151, 2.8, 19.5]
-        - $type: tuple
-          $value: [419965, 1028417.3016984, 2.5, 19.8]
-        - $type: tuple
-          $value: [419966, 1028417.3365021, 2.7, 19.6]
-        - $type: tuple
-          $value: [419967, 1028417.3716723, 3.8, 0.8]
-        - $type: tuple
-          $value: [419968, 1028417.4040366, 3.3, 20.7]
-        - $type: tuple
-          $value: [419969, 1028417.4383884, 4.5, 21.1]
-        - $type: tuple
-          $value: [419970, 1028417.4705292, 5.3, 22.3]
-        - $type: tuple
-          $value: [419971, 1028417.5023473, 4.2, 20.2]
-        - $type: tuple
-          $value: [419972, 1028417.536178, 3.6, 20.8]
-        - $type: tuple
-          $value: [419973, 1028417.5703405, 3.5, 0.8]
-        - $type: tuple
-          $value: [419974, 1028417.6037889, 3.1, 19.6]
-        - $type: tuple
-          $value: [419975, 1028417.6349054, 3, 19.5]
-        - $type: tuple
-          $value: [419976, 1028417.6691295, 2.7, 19.6]
-        - $type: tuple
-          $value: [419977, 1028417.7040281, 2.7, 19.6]
-        - $type: tuple
-          $value: [419978, 1028417.7357417, 2.6, 19.7]
-        - $type: tuple
-          $value: [419979, 1028417.7698477, 3.2, 0.8]
-        - $type: tuple
-          $value: [419980, 1028417.8016728, 2.7, 19.9]
-        - $type: tuple
-          $value: [419981, 1028417.8370065, 2.9, 19.6]
-        - $type: tuple
-          $value: [419982, 1028417.8691471, 2.7, 20.9]
-        - $type: tuple
-          $value: [419983, 1028417.9024179, 3.2, 19]
-        - $type: tuple
-          $value: [419984, 1028417.9393011, 2.8, 21.3]
-        - $type: tuple
-          $value: [419985, 1028417.970048, 3.1, 0.8]
-        - $type: tuple
-          $value: [419986, 1028418.0032924, 2.8, 19.9]
-        - $type: tuple
-          $value: [419987, 1028418.0370769, 3, 19.6]
-        - $type: tuple
-          $value: [419988, 1028418.0702378, 2.8, 19.5]
-        - $type: tuple
-          $value: [419989, 1028418.1016691, 2.6, 19.5]
-        - $type: tuple
-          $value: [419990, 1028418.1354376, 2.6, 19.8]
-        - $type: tuple
-          $value: [419991, 1028418.1686984, 3.4, 0.8]
-        - $type: tuple
-          $value: [419992, 1028418.2033315, 2.9, 19.8]
-        - $type: tuple
-          $value: [419993, 1028418.2349121, 2.8, 19.6]
-        - $type: tuple
-          $value: [419994, 1028418.2681422, 2.7, 19.4]
-        - $type: tuple
-          $value: [419995, 1028418.3038947, 2.9, 20.2]
-        - $type: tuple
-          $value: [419996, 1028418.3360161, 2.5, 20.2]
-        - $type: tuple
-          $value: [419997, 1028418.3707151, 2.8, 0.8]
-        - $type: tuple
-          $value: [419998, 1028418.4031679, 3, 20]
-        - $type: tuple
-          $value: [419999, 1028418.4360772, 3.6, 20.2]
-        - $type: tuple
-          $value: [420000, 1028418.4710726, 3.3, 20.8]
-        - $type: tuple
-          $value: [420001, 1028418.5033423, 3.2, 20.1]
-        - $type: tuple
-          $value: [420002, 1028418.5370575, 3.3, 19.8]
-        - $type: tuple
-          $value: [420003, 1028418.5692589, 3.4, 0.8]
-        - $type: tuple
-          $value: [420004, 1028418.603002, 3.1, 19.9]
-        - $type: tuple
-          $value: [420005, 1028418.6375719, 3, 20.1]
-        - $type: tuple
-          $value: [420006, 1028418.6690616, 2.8, 20.6]
-        - $type: tuple
-          $value: [420007, 1028418.7046448, 3.9, 19.2]
-        - $type: tuple
-          $value: [420008, 1028418.7362779, 3, 20.1]
-        - $type: tuple
-          $value: [420009, 1028418.7707105, 3, 0.8]
-        - $type: tuple
-          $value: [420010, 1028418.8024812, 2.7, 19.9]
-        - $type: tuple
-          $value: [420011, 1028418.8371227, 3, 19.3]
-        - $type: tuple
-          $value: [420012, 1028418.8690155, 3.2, 19.7]
-        - $type: tuple
-          $value: [420013, 1028418.9031037, 2.7, 19.9]
-        - $type: tuple
-          $value: [420014, 1028418.9371457, 2.7, 19.6]
-        - $type: tuple
-          $value: [420015, 1028418.9703318, 3.1, 0.8]
-        - $type: tuple
-          $value: [420016, 1028419.0019614, 2.7, 20]
-        - $type: tuple
-          $value: [420017, 1028419.035178, 2.9, 20.6]
-        - $type: tuple
-          $value: [420018, 1028419.0687263, 2.8, 20]
-        - $type: tuple
-          $value: [420019, 1028419.1031654, 3, 20.1]
-        - $type: tuple
-          $value: [420020, 1028419.134861, 2.6, 19.7]
-        - $type: tuple
-          $value: [420021, 1028419.1683073, 2.7, 0.8]
-        - $type: tuple
-          $value: [420022, 1028419.2035633, 2.7, 20.2]
-        - $type: tuple
-          $value: [420023, 1028419.2367874, 3.1, 19.8]
-        - $type: tuple
-          $value: [420024, 1028419.2701578, 2.5, 19.3]
-        - $type: tuple
-          $value: [420025, 1028419.3032763, 2.5, 20.2]
-        - $type: tuple
-          $value: [420026, 1028419.3353763, 2.5, 19.6]
-        - $type: tuple
-          $value: [420027, 1028419.3683003, 3.6, 0.8]
-        - $type: tuple
-          $value: [420028, 1028419.4026385, 2.6, 20.5]
-        - $type: tuple
-          $value: [420029, 1028419.4369905, 2.7, 19.7]
-        - $type: tuple
-          $value: [420030, 1028419.4703297, 2.5, 20]
-        - $type: tuple
-          $value: [420031, 1028419.5026586, 3, 19.8]
-        - $type: tuple
-          $value: [420032, 1028419.5365179, 2.6, 18.9]
-        - $type: tuple
-          $value: [420033, 1028419.5703341, 3.1, 0.8]
-        - $type: tuple
-          $value: [420034, 1028419.6022157, 2.7, 20.2]
-        - $type: tuple
-          $value: [420035, 1028419.6359792, 2.9, 20.5]
-        - $type: tuple
-          $value: [420036, 1028419.6708379, 2.8, 19.8]
-        - $type: tuple
-          $value: [420037, 1028419.7039761, 2.6, 20.1]
+          $value:
+          - 451104
+          - 1029522.010316
+          - 14.2
+          - 31
+          - 9413
+        - $type: tuple
+          $value:
+          - 451106
+          - 1029522.0608463
+          - 19
+          - 32.9
+          - 9414
+        - $type: tuple
+          $value:
+          - 451107
+          - 1029522.1024882
+          - 17.7
+          - 25.4
+          - 9415
+        - $type: tuple
+          $value:
+          - 451109
+          - 1029522.1407719
+          - 15.2
+          - 19.6
+          - 9416
+        - $type: tuple
+          $value:
+          - 451110
+          - 1029522.1755596
+          - 14.2
+          - 21
+          - 9417
+        - $type: tuple
+          $value:
+          - 451111
+          - 1029522.2094818
+          - 13.2
+          - 19.9
+          - 9418
+        - $type: tuple
+          $value:
+          - 451112
+          - 1029522.2424235
+          - 12.9
+          - 19.2
+          - 9419
+        - $type: tuple
+          $value:
+          - 451113
+          - 1029522.2766512
+          - 14.1
+          - 20.3
+          - 9420
+        - $type: tuple
+          $value:
+          - 451114
+          - 1029522.3108442
+          - 13.2
+          - 19.5
+          - 9421
+        - $type: tuple
+          $value:
+          - 451115
+          - 1029522.3443086
+          - 13.3
+          - 20.2
+          - 9422
+        - $type: tuple
+          $value:
+          - 451116
+          - 1029522.3774497
+          - 13.1
+          - 19.8
+          - 9423
+        - $type: tuple
+          $value:
+          - 451117
+          - 1029522.4157814
+          - 13.7
+          - 20.4
+          - 9424
+        - $type: tuple
+          $value:
+          - 451118
+          - 1029522.4528912
+          - 14.4
+          - 21.6
+          - 9425
+        - $type: tuple
+          $value:
+          - 451119
+          - 1029522.4905312
+          - 15.6
+          - 22.5
+          - 9426
+        - $type: tuple
+          $value:
+          - 451120
+          - 1029522.5257435
+          - 13.5
+          - 21.2
+          - 9427
+        - $type: tuple
+          $value:
+          - 451121
+          - 1029522.5600365
+          - 13.2
+          - 20.6
+          - 9428
+        - $type: tuple
+          $value:
+          - 451122
+          - 1029522.5930033
+          - 13
+          - 19.5
+          - 9429
+        - $type: tuple
+          $value:
+          - 451123
+          - 1029522.6249329
+          - 12.5
+          - 18.9
+          - 9430
+        - $type: tuple
+          $value:
+          - 451124
+          - 1029522.6571988
+          - 13.1
+          - 19.6
+          - 9431
+        - $type: tuple
+          $value:
+          - 451125
+          - 1029522.6897724
+          - 12.6
+          - 19
+          - 9432
+        - $type: tuple
+          $value:
+          - 451126
+          - 1029522.7296327
+          - 12.6
+          - 25.8
+          - 9433
+        - $type: tuple
+          $value:
+          - 451127
+          - 1029522.7643181
+          - 14.4
+          - 19.5
+          - 9434
+        - $type: tuple
+          $value:
+          - 451128
+          - 1029522.7990239
+          - 14.6
+          - 21
+          - 9435
+        - $type: tuple
+          $value:
+          - 451129
+          - 1029522.8324397
+          - 13.7
+          - 20.2
+          - 9436
+        - $type: tuple
+          $value:
+          - 451130
+          - 1029522.8659672
+          - 13
+          - 20.2
+          - 9437
+        - $type: tuple
+          $value:
+          - 451131
+          - 1029522.9062006
+          - 20.4
+          - 26.5
+          - 9438
+        - $type: tuple
+          $value:
+          - 451133
+          - 1029522.9443333
+          - 13.3
+          - 20.7
+          - 9439
+        - $type: tuple
+          $value:
+          - 451134
+          - 1029522.9789176
+          - 13
+          - 19.5
+          - 9440
+        - $type: tuple
+          $value:
+          - 451135
+          - 1029523.0129568
+          - 13.6
+          - 19.7
+          - 9441
+        - $type: tuple
+          $value:
+          - 451136
+          - 1029523.0467244
+          - 13.2
+          - 19.7
+          - 9442
+        - $type: tuple
+          $value:
+          - 451137
+          - 1029523.0798432
+          - 12.7
+          - 19
+          - 9443
+        - $type: tuple
+          $value:
+          - 451138
+          - 1029523.1143178
+          - 13.5
+          - 19.9
+          - 9444
+        - $type: tuple
+          $value:
+          - 451139
+          - 1029523.148178
+          - 13.5
+          - 19.3
+          - 9445
+        - $type: tuple
+          $value:
+          - 451140
+          - 1029523.1815435
+          - 13.3
+          - 19.7
+          - 9446
+        - $type: tuple
+          $value:
+          - 451141
+          - 1029523.2136252
+          - 12.7
+          - 18.3
+          - 9447
+        - $type: tuple
+          $value:
+          - 451142
+          - 1029523.2531102
+          - 17.1
+          - 24
+          - 9448
+        - $type: tuple
+          $value:
+          - 451143
+          - 1029523.2883279
+          - 14.5
+          - 20.9
+          - 9449
+        - $type: tuple
+          $value:
+          - 451144
+          - 1029523.3216789
+          - 12.9
+          - 19.4
+          - 9450
+        - $type: tuple
+          $value:
+          - 451145
+          - 1029523.3623531
+          - 19.4
+          - 26.1
+          - 9451
+        - $type: tuple
+          $value:
+          - 451146
+          - 1029523.3960604
+          - 13.3
+          - 20.3
+          - 9452
+        - $type: tuple
+          $value:
+          - 451147
+          - 1029523.43141
+          - 13.8
+          - 20.7
+          - 9453
+        - $type: tuple
+          $value:
+          - 451148
+          - 1029523.4647555
+          - 13.2
+          - 19.9
+          - 9454
+        - $type: tuple
+          $value:
+          - 451149
+          - 1029523.4988619
+          - 13.9
+          - 20.6
+          - 9455
+        - $type: tuple
+          $value:
+          - 451150
+          - 1029523.5339283
+          - 14.7
+          - 21.7
+          - 9456
+        - $type: tuple
+          $value:
+          - 451151
+          - 1029523.566669
+          - 13.6
+          - 20.3
+          - 9457
+        - $type: tuple
+          $value:
+          - 451152
+          - 1029523.6020562
+          - 15.8
+          - 22.8
+          - 9458
+        - $type: tuple
+          $value:
+          - 451154
+          - 1029523.6364004
+          - 12.5
+          - 19.6
+          - 9459
+        - $type: tuple
+          $value:
+          - 451155
+          - 1029523.6693015
+          - 13.5
+          - 17
+          - 9460
+        - $type: tuple
+          $value:
+          - 451156
+          - 1029523.7018948
+          - 13.2
+          - 20.1
+          - 9461
+        - $type: tuple
+          $value:
+          - 451157
+          - 1029523.7352304
+          - 13.5
+          - 20
+          - 9462
+        - $type: tuple
+          $value:
+          - 451158
+          - 1029523.7691192
+          - 13.7
+          - 20.5
+          - 9463
+        - $type: tuple
+          $value:
+          - 451159
+          - 1029523.8026801
+          - 13.7
+          - 20.7
+          - 9464
+        - $type: tuple
+          $value:
+          - 451160
+          - 1029523.8355075
+          - 13
+          - 19.6
+          - 9465
+        - $type: tuple
+          $value:
+          - 451161
+          - 1029523.8692892
+          - 13.6
+          - 20.4
+          - 9466
+        - $type: tuple
+          $value:
+          - 451162
+          - 1029523.9022125
+          - 13.2
+          - 19.9
+          - 9467
+        - $type: tuple
+          $value:
+          - 451163
+          - 1029523.9376696
+          - 13.6
+          - 20.9
+          - 9468
+        - $type: tuple
+          $value:
+          - 451164
+          - 1029523.9754237
+          - 14.7
+          - 19.8
+          - 9469
+        - $type: tuple
+          $value:
+          - 451165
+          - 1029524.0086424
+          - 13.4
+          - 19.9
+          - 9470
+        - $type: tuple
+          $value:
+          - 451166
+          - 1029524.0432744
+          - 13.6
+          - 20.1
+          - 9471
+        - $type: tuple
+          $value:
+          - 451167
+          - 1029524.0778284
+          - 13.4
+          - 20.1
+          - 9472
+        - $type: tuple
+          $value:
+          - 451168
+          - 1029524.110642
+          - 13.4
+          - 19.8
+          - 9473
+        - $type: tuple
+          $value:
+          - 451169
+          - 1029524.1438491
+          - 13
+          - 19.8
+          - 9474
+        - $type: tuple
+          $value:
+          - 451170
+          - 1029524.1774699
+          - 13.1
+          - 19.8
+          - 9475
+        - $type: tuple
+          $value:
+          - 451171
+          - 1029524.2100792
+          - 12.8
+          - 21.6
+          - 9476
+        - $type: tuple
+          $value:
+          - 451172
+          - 1029524.2437081
+          - 13.2
+          - 20
+          - 9477
+        - $type: tuple
+          $value:
+          - 451173
+          - 1029524.2810496
+          - 14.2
+          - 21.4
+          - 9478
+        - $type: tuple
+          $value:
+          - 451174
+          - 1029524.316824
+          - 14.3
+          - 20.8
+          - 9479
+        - $type: tuple
+          $value:
+          - 451175
+          - 1029524.3559804
+          - 12.8
+          - 21.6
+          - 9480
+        - $type: tuple
+          $value:
+          - 451176
+          - 1029524.3923019
+          - 15.9
+          - 24.4
+          - 9481
+        - $type: tuple
+          $value:
+          - 451177
+          - 1029524.4261244
+          - 12.7
+          - 19.8
+          - 9482
+        - $type: tuple
+          $value:
+          - 451178
+          - 1029524.4602364
+          - 13.3
+          - 20.5
+          - 9483
+        - $type: tuple
+          $value:
+          - 451179
+          - 1029524.4952752
+          - 13.7
+          - 21.2
+          - 9484
+        - $type: tuple
+          $value:
+          - 451180
+          - 1029524.5282134
+          - 13.3
+          - 19.6
+          - 9485
+        _prof:
+          n: 35
+          det: 54.3333997484
+          trk: 0.8615003899
+          draw: 87.7651999472
+          blobs: 35
         extra_active_patches: []
         preload_done: []
         preload_queue: []
@@ -361696,7 +362063,6 @@ operators:
               parameters:
                 file: =app.samplesFolder + '/Map/Nature/Movie.2.mp4'
                 reload: true
-                hwdecode: false
               flags:
               - viewer
               position: [75, 25]
@@ -362042,7 +362408,6 @@ operators:
                 parameters:
                   file: =app.samplesFolder + '/Map/BoxMap.tif'
                   premultrgbbyalpha: 'off'
-                  hwdecode: false
                 flags:
                 - viewer
                 position: [-750, 0]
@@ -365050,7 +365415,6 @@ operators:
               parameters:
                 file: =app.samplesFolder + '/Map/Trillium.jpg'
                 premultrgbbyalpha: 'off'
-                hwdecode: false
               flags:
               - viewer
               position: [-1830, -530]
@@ -366609,7 +366973,6 @@ operators:
             parameters:
               file: =app.samplesFolder + '/Map/Nature/Movie.2.mp4'
               reload: true
-              hwdecode: false
             flags:
             - viewer
             position: [75, 25]
@@ -371483,7 +371846,6 @@ operators:
           type: moviefileinTOP
           parameters:
             file: =app.samplesFolder + '/Map/Nature/Movie.1.mp4'
-            hwdecode: false
           position: [6300, -75]
           size: [130, 90]
       - name: select_b
@@ -377825,7 +378187,6 @@ operators:
               parameters:
                 file: =app.samplesFolder + '/Map/Nature/Movie.2.mp4'
                 reload: true
-                hwdecode: false
               flags:
               - viewer
               position: [75, 25]
@@ -384086,7 +384447,6 @@ operators:
             parameters:
               file: =app.samplesFolder + '/Map/Nature/Movie.2.mp4'
               reload: true
-              hwdecode: false
             flags:
             - viewer
             position: [75, 25]
@@ -388920,7 +389280,6 @@ operators:
             parameters:
               file: =app.samplesFolder + '/Map/Nature/Movie.2.mp4'
               reload: true
-              hwdecode: false
             flags:
             - viewer
             position: [75, 25]
@@ -389676,7 +390035,6 @@ operators:
             parameters:
               file: =app.samplesFolder + '/Map/Nature/Movie.2.mp4'
               premultrgbbyalpha: 'off'
-              hwdecode: false
             flags:
             - viewer
             position: [575, 25]
@@ -394850,7 +395208,7 @@ operators:
           - name: tok0
             type: textTOP
             parameters:
-              text: CONST
+              text: CUORE
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394862,7 +395220,7 @@ operators:
           - name: tok1
             type: textTOP
             parameters:
-              text: MI
+              text: IL
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394874,7 +395232,7 @@ operators:
           - name: tok2
             type: textTOP
             parameters:
-              text: OVEN,
+              text: ==
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394886,7 +395244,7 @@ operators:
           - name: tok3
             type: textTOP
             parameters:
-              text: 0)
+              text: D'AUTUNNO
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394898,7 +395256,7 @@ operators:
           - name: tok4
             type: textTOP
             parameters:
-              text: CUORE
+              text: ROCCIE
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394910,7 +395268,7 @@ operators:
           - name: tok5
             type: textTOP
             parameters:
-              text: BECAUSE
+              text: FERN
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394922,7 +395280,7 @@ operators:
           - name: tok6
             type: textTOP
             parameters:
-              text: HEART)
+              text: RESTA
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394946,7 +395304,7 @@ operators:
           - name: tok8
             type: textTOP
             parameters:
-              text: ABISSO);AWAIT
+              text: FRU
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394958,7 +395316,7 @@ operators:
           - name: tok9
             type: textTOP
             parameters:
-              text: D'INESAURIBILE
+              text: THE
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394994,7 +395352,7 @@ operators:
           - name: tok10
             type: textTOP
             parameters:
-              text: NAVE.PONTE.WAT
+              text: A
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -395006,7 +395364,7 @@ operators:
           - name: tok11
             type: textTOP
             parameters:
-              text: TUNING
+              text: HEART)
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -395018,7 +395376,7 @@ operators:
           - name: tok12
             type: textTOP
             parameters:
-              text: ==
+              text: (CUORE)
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -395030,7 +395388,7 @@ operators:
           - name: tok13
             type: textTOP
             parameters:
-              text: PERSON
+              text: SILENZIO
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -395042,7 +395400,7 @@ operators:
           - name: tok14
             type: textTOP
             parameters:
-              text: IS
+              text: 'SALOTTO:'
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -395054,7 +395412,7 @@ operators:
           - name: tok15
             type: textTOP
             parameters:
-              text: '}'
+              text: LE
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -395543,12 +395901,13 @@ operators:
             sequences:
               const:
               - name: d
-                value: 56.9998915895
+                value: 70.1552134691
               - name: env
-                value: 0.0412217779
+                value: 0.7824764689
               - name: heroz
-                value: -88.9964
+                value: -63.9045534652
               - name: heros
+                value: 1.55235
             position: [0, -250]
             size: [130, 90]
             color: [0.67, 0.67, 0.67]
@@ -395836,7 +396195,7 @@ operators:
           - name: tok_hero
             type: textTOP
             parameters:
-              text: KZ
+              text: TRI
               font: Consolas
               fontsizex: =parent().par.Fontsize
               resolutionw: 512
@@ -396986,9 +397345,10 @@ operators:
             sequences:
               const:
               - name: rotx
-              - name: roty
                 value: 90
+              - name: roty
               - name: rotz
+                value: 110
               - name: attract
                 value: 1
             flags:
@@ -397089,14 +397449,14 @@ operators:
           - name: text1
             type: textTOP
             parameters:
-              text: 'Mauro (45%)\ncucina: oven, potted_plant, refrigerator\nMauro (45%)\nsalotto: chair, cup, person\nMauro (45%)\nsalotto: chair, cup, person\nsalotto: chair, cup, person\nMauro (45%)\nMauro (45%)\nsalotto: chair, cup, person\ncucina: oven, potted_plant, refrigerator\ncucina: oven, potted_plant, refrigerator\nsalotto: chair, cup, person'
+              text: 'Mauro (45%)\ncucina: oven, potted_plant, refrigerator\nMauro (45%)\nsalotto: chair, cup, person\ncucina: oven, potted_plant, refrigerator\nsalotto: chair, cup, person\ncucina: oven, potted_plant, refrigerator\ncucina: oven, potted_plant, refrigerator\ncucina: oven, potted_plant, refrigerator\nsalotto: chair, cup, person\ncucina: oven, potted_plant, refrigerator\ncucina: oven, potted_plant, refrigerator\nMauro (45%)'
               legacyparsing: true
               font: Consolas
               fontsizex: =parent().par.Size1
               aligny: top
-              fontcolorr: 0.7353525025
-              fontcolorg: 0.7963307167
-              fontcolorb: 0.4285102433
+              fontcolorr: 0.6539976946
+              fontcolorg: 0.8550774462
+              fontcolorb: 0.2543051128
               resolutionw: 1280
               resolutionh: 720
             flags:
@@ -398074,12 +398434,12 @@ operators:
             sequences:
               const:
               - name: level
-                value: 0.2461829334
+                value: 0.2316787541
               - name: pulse
               - name: count
-                value: 174
+                value: 176
               - name: trigger
-                value: 0.6720877755
+                value: 0.5877822107
             flags:
             - viewer
             position: [350, -125]
@@ -398910,7 +399270,7 @@ operators:
       flags:
       - viewer
       - -allowCooking
-      position: [-1700, -925]
+      position: [-1625, -925]
       size: [160, 130]
       color: [0.325, 0.8, 0.3]
       tags:
@@ -403174,10 +403534,9 @@ operators:
         - name: ndiin1
           type: ndiinTOP
           parameters:
-            active: =op('switch1').par.index.eval() == 2
-            name: SILVERMINI2 (HerbarumOPS)
+            name: SILVERMINI2 (yolo)
             grouptable: ndiin1_grouptable
-          position: [-500, 175]
+          position: [-525, 375]
         - name: switch1
           type: switchTOP
           flags:
@@ -403186,10 +403545,7 @@ operators:
           size: [130, 90]
           color: [0.67, 0.67, 0.67]
           inputs:
-          - videodevin1
-          - moviefilein1
           - ndiin1
-          - syphonspoutin1
         - name: blob_audio
           type: baseCOMP
           custom_pars:
@@ -403198,10 +403554,12 @@ operators:
               style: Toggle
               label: Audio attivo
               default: true
+              value: false
             - name: Sendcc
               style: Toggle
               label: Invia CC
               default: true
+              value: false
             - name: Testnote
               style: Pulse
               label: Nota di prova
@@ -404201,17 +404559,6 @@ operators:
             tags:
             - py
             dock: blob_voices
-        - name: videodevin1
-          type: videodeviceinTOP
-          parameters:
-            active: =op('switch1').par.index.eval() == 0
-            device: V1|||\\?\root#media#0001#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\vidsource0|||0|||0|||NDI Webcam Video 1
-            signalformat: f1920x1080p-29.97hz
-          flags:
-          - viewer
-          position: [-500, 425]
-          size: [130, 90]
-          color: [0.67, 0.67, 0.67]
         - name: audiodevout1
           type: audiodeviceoutCHOP
           parameters:
@@ -404955,7 +405302,7 @@ operators:
             parameters:
               file: PATCHDECK/PATCHES/X41/project1/blob_tracker/blob_table.tsv
               syncfile: true
-              rows: 1
+              rows: 2
               cols: 10
             position: [400, 250]
             size: [130, 90]
@@ -405009,22 +405356,6 @@ operators:
             color: [0.9, 0.3, 0.4]
             tags:
             - py
-        - name: moviefilein1
-          type: moviefileinTOP
-          parameters:
-            file: =app.samplesFolder+'/Map/Banana.tif'
-          flags:
-          - viewer
-          position: [-500, 300]
-          size: [130, 90]
-          color: [0.67, 0.67, 0.67]
-        - name: syphonspoutin1
-          type: syphonspoutinTOP
-          flags:
-          - viewer
-          position: [-500, 50]
-          size: [130, 90]
-          color: [0.67, 0.67, 0.67]
         - name: blob_audio_pulse
           type: parameterexecuteDAT
           parameters:
@@ -405053,13 +405384,10 @@ operators:
           - py
         - name: ndiin1_grouptable
           type: tableDAT
-          parameters:
-            file: PATCHDECK/PATCHES/X41/project1/ndiin1_grouptable.tsv
-            syncfile: true
           flags:
           - viewer
           - -showDocked
-          position: [-500, 55]
+          position: [-525, 255]
           size: [130, 90]
           color: [0.9, 0.3, 0.4]
           tags:
@@ -406450,8 +406778,6 @@ operators:
       parameters:
         chops: =parent(2).op('audio/audio')
         autoexportroot: =parent()
-      flags:
-      - viewer
       position: [-1050, -848]
       size: [183, 127]
       color: [0.67, 0.67, 0.67]
@@ -406533,8 +406859,6 @@ operators:
       parameters:
         chops: =parent(2).op('audio/audiointd')
         autoexportroot: =parent()
-      flags:
-      - viewer
       position: [-1050, -1000]
       size: [183, 127]
       color: [0.67, 0.67, 0.67]
@@ -408151,8 +408475,8 @@ operators:
       mode: annotate
       title: SHOW PATCHES
       text: 'This is the main Area where you can create Patches. '
-      position: [-7975, -1019]
-      size: [6569, 1028]
+      position: [-7975, -817]
+      size: [6569, 826]
       color: [0.5, 0.5, 0.05]
     - name: annotate10
       mode: annotate
@@ -408393,7 +408717,7 @@ operators:
       label: Last Message
       readOnly: true
       help: Topic and local time of the most recently received Gaia MQTT message.
-      value: gaia/td/canvas @ 13:50:21
+      value: gaia/td/canvas @ 13:58:56
     - name: Deviceagentstatus
       style: Str
       label: Device Agent Status
@@ -408419,7 +408743,7 @@ operators:
   tags:
   - tox
   storage:
-    lastmsg_seconds: 14614.5333333333
+    lastmsg_seconds: 15093.6333333333
   children:
   - name: soul
     type: outCHOP
@@ -408646,7 +408970,7 @@ operators:
     parameters:
       file: gaia_client/devices_table.tsv
       syncfile: true
-      rows: 118
+      rows: 32
       cols: 7
     position: [800, -4200]
     size: [130, 90]
@@ -409099,7 +409423,7 @@ operators:
   parameters:
     file: externalizations.tsv
     syncfile: true
-    rows: 1182
+    rows: 1181
     cols: 11
   position: [100, 675]
   size: [130, 90]

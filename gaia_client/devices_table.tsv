@@ -26,8 +26,8 @@ td-controller-macmauro	Controller	salotto	touchdesigner	audio_source_live	inacti
 td-controller-macmauro	Controller	salotto	touchdesigner	audio_source_file	active	False
 td-controller-macmauro	Controller	salotto	touchdesigner	touch_bands	active	False
 td-controller-macmauro	Controller	salotto	touchdesigner	touch_audio	active	False
-td-pd-win	PatchDeck	salotto	touchdesigner	deck_a	active	False
-td-pd-win	PatchDeck	salotto	touchdesigner	deck_b	active	False
+td-pd-win	PatchDeck	salotto	touchdesigner	deck_a	inactive	False
+td-pd-win	PatchDeck	salotto	touchdesigner	deck_b	inactive	False
 td-pd-win	PatchDeck	salotto	touchdesigner	load_x1_a	inactive	False
 td-pd-win	PatchDeck	salotto	touchdesigner	load_x1_b	inactive	False
 td-pd-win	PatchDeck	salotto	touchdesigner	load_x2_a	inactive	False
@@ -109,8 +109,8 @@ td-pd-win	PatchDeck	salotto	touchdesigner	load_x39_b	inactive	False
 td-pd-win	PatchDeck	salotto	touchdesigner	load_x40_a	inactive	False
 td-pd-win	PatchDeck	salotto	touchdesigner	load_x40_b	inactive	False
 td-pd-win	PatchDeck	salotto	touchdesigner	load_x41_a	inactive	False
-td-pd-win	PatchDeck	salotto	touchdesigner	load_x41_b	active	False
-td-pd-win	PatchDeck	salotto	touchdesigner	load_x42_a	active	False
+td-pd-win	PatchDeck	salotto	touchdesigner	load_x41_b	inactive	False
+td-pd-win	PatchDeck	salotto	touchdesigner	load_x42_a	inactive	False
 td-pd-win	PatchDeck	salotto	touchdesigner	load_x42_b	inactive	False
 td-pddmx-win	PD_DMX	salotto	touchdesigner	dmx_a_kick_enable	inactive	False
 td-pddmx-win	PD_DMX	salotto	touchdesigner	dmx_a_use_file_input	inactive	False

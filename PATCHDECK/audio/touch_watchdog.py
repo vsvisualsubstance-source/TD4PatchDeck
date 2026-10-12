@@ -43,8 +43,10 @@ def _checkTouchIn(name, now):
 	# Se nessun consumatore cuoce il Touch In, non leggere l'Info CHOP:
 	# leggerlo forzerebbe la cottura e smaltirebbe in un colpo solo tutto
 	# l'arretrato UDP (con l'audio 8001 erano ~350 ms di blocco al secondo).
+	# Un consumatore vero lo cuoce ~ogni frame; le cotture indotte dalla
+	# lettura stessa sono 1-2, quindi serve almeno meta' dei frame.
 	cooks = touch_in.totalCooks
-	consumed = cooks != st.get('cooks', -1)
+	consumed = (cooks - st.get('cooks', cooks)) >= CHECK_EVERY // 2
 	st['cooks'] = cooks
 	if not consumed:
 		st['frames'] = -1.0
