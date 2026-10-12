@@ -7,6 +7,7 @@ una riconnessione: alza il flag storage 'touch_kick_<nome>' sul COMP audio
 (l'espressione di Active lo legge -> active=0), e lo riabbassa dopo
 KICK_FRAMES frame (-> active=1, nuova connessione). Tra due tentativi
 sullo stesso Touch In passano almeno BACKOFF_SEC secondi.
+Un Touch In che nessuno cuoce viene ignorato (mai forzato a cuocere).
 """
 
 CHECK_EVERY = 30     # frame (~1 s a 30 fps)
@@ -35,6 +36,17 @@ def _checkTouchIn(name, now):
 
 	if not touch_in.par.active.eval():
 		# Spento (on-demand o durante un kick): niente da sorvegliare.
+		st['frames'] = -1.0
+		st['healthy_at'] = now
+		return
+
+	# Se nessun consumatore cuoce il Touch In, non leggere l'Info CHOP:
+	# leggerlo forzerebbe la cottura e smaltirebbe in un colpo solo tutto
+	# l'arretrato UDP (con l'audio 8001 erano ~350 ms di blocco al secondo).
+	cooks = touch_in.totalCooks
+	consumed = cooks != st.get('cooks', -1)
+	st['cooks'] = cooks
+	if not consumed:
 		st['frames'] = -1.0
 		st['healthy_at'] = now
 		return

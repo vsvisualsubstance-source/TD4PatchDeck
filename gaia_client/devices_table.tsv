@@ -22,8 +22,8 @@ ops-silvermini2	ops	soggiorno	ops	ollama	active	False
 solaro-qr1	Solaro QR1-UC		device		unknown	False
 tccm-ceiling	TCC M (Sennheiser)	zona-giorno	device		unknown	False
 td-controller-macmauro	Controller	salotto	touchdesigner	audio_device	active	False
-td-controller-macmauro	Controller	salotto	touchdesigner	audio_source_live	active	False
-td-controller-macmauro	Controller	salotto	touchdesigner	audio_source_file	inactive	False
+td-controller-macmauro	Controller	salotto	touchdesigner	audio_source_live	inactive	False
+td-controller-macmauro	Controller	salotto	touchdesigner	audio_source_file	active	False
 td-controller-macmauro	Controller	salotto	touchdesigner	touch_bands	active	False
 td-controller-macmauro	Controller	salotto	touchdesigner	touch_audio	active	False
 td-pd-win	PatchDeck	salotto	touchdesigner	deck_a	inactive	False

@@ -3,7 +3,7 @@
   "lifeIndex": 70,
   "gamification": {
     "level": 10,
-    "xp": 11099,
+    "xp": 11154,
     "xpNextLevel": 22400,
     "activeClass": "Guerriero",
     "unlockedAssets": [
@@ -19,12 +19,12 @@
     "stats": {
       "mago": 2141,
       "bardo": 332,
-      "guerriero": 3493,
+      "guerriero": 3504,
       "druido": 1867
     },
     "_cd": {
       "natura": 1791530299191,
-      "movimento": 1791796269566,
+      "movimento": 1791804193784,
       "voce": 1791191224378,
       "pensiero": 1790775649080,
       "presenza": 1790775770666,
@@ -40,25 +40,25 @@
     "corridoio": {
       "people": [],
       "objects": {},
-      "ambient_light": 0.9997697679981565,
+      "ambient_light": 1.1020467039630304,
       "darkness": true,
       "_temps": {
-        "hue_temperature_sensor_3_temperatura": 18.73,
-        "hue_temperature_sensor_5_temperatura": 18.51
+        "hue_temperature_sensor_3_temperatura": 19.02,
+        "hue_temperature_sensor_5_temperatura": 18.37
       },
-      "temperature": 18.6,
-      "lastMotion": 1791796333283
+      "temperature": 18.7,
+      "lastMotion": 1791803568984
     },
     "ingresso": {
       "people": [],
       "objects": {},
-      "ambient_light": 1.4328475980645916,
+      "ambient_light": 1.5427657898057587,
       "darkness": true,
       "_temps": {
         "hue_temperature_sensor_4_temperatura": 18.08
       },
       "temperature": 18.1,
-      "lastMotion": 1791794294449,
+      "lastMotion": 1791804321834,
       "lastUpdate": 1790959272282,
       "_mediapipe": true,
       "mediapipe": {
@@ -94,7 +94,7 @@
       "name": "soggiorno",
       "persons_count": 2,
       "objects": {},
-      "lastUpdate": 1791797215916,
+      "lastUpdate": 1791805471564,
       "people": [
         "mauro"
       ],
@@ -133,7 +133,7 @@
         "ts": 1791028578849
       },
       "_touchdesigner": true,
-      "lastTd": 1791797215916,
+      "lastTd": 1791805471564,
       "currentEmotion": null,
       "currentPose": "lying",
       "dmxPaletteA": "Warm",
@@ -144,7 +144,7 @@
       "name": "salotto",
       "persons_count": 1,
       "objects": {},
-      "lastUpdate": 1791797217338,
+      "lastUpdate": 1791805479435,
       "people": [],
       "main_user": null,
       "_mediapipe": true,
@@ -177,9 +177,9 @@
         "ts": 1791524918627
       },
       "_touchdesigner": true,
-      "lastTd": 1791797217338,
+      "lastTd": 1791805479435,
       "audioKick": 1,
-      "audioKickTs": 1791797221941,
+      "audioKickTs": 1791805484568,
       "dmxPaletteA": "Basic"
     },
     "zona-giorno": {
@@ -190,5 +190,5 @@
       "_tccmActive": false
     }
   },
-  "ts": 1791797222798
+  "ts": 1791805485214
 }
