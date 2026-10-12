@@ -2,8 +2,8 @@ format: tdxn
 version: '2.1'
 generator: Embody/6.2.65
 td_build: 099.2025.33230
-source_file: PATCHDECK_V8.18.toe
-exported_at: '2026-10-12T11:42:47Z'
+source_file: PATCHDECK_V8.20.toe
+exported_at: '2026-10-12T11:50:23Z'
 network_path: /
 options:
   include_dat_content: false
@@ -7280,23 +7280,21 @@ par_templates:
     name: Textbg
     size: 3
     style: RGBA
-  - default: Menlo
+  - default: Consolas
     label: Carattere
     menuNames:
-    - Menlo
-    - Monaco
+    - Consolas
+    - Lucida Console
     - Courier New
-    - Andale Mono
-    - PT Mono
-    - Helvetica
-    - Helvetica Neue
+    - Cascadia Mono
+    - Segoe UI
     - Arial
     - Verdana
-    - Futura
+    - Tahoma
+    - Bahnschrift
     - Impact
     - Georgia
     - Times New Roman
-    - Didot
     name: Textfont
     style: Menu
   fields_align:
@@ -26997,6 +26995,8 @@ operators:
               - comp2
             - name: a_active
               type: levelTOP
+              parameters:
+                opacity: 0
               flags:
               - viewer
               position: [625, 525]
@@ -27005,6 +27005,8 @@ operators:
               - A_red
             - name: b_active
               type: levelTOP
+              parameters:
+                opacity: 0
               flags:
               - viewer
               position: [625, 400]
@@ -58231,7 +58233,7 @@ operators:
               position: [275, 655]
               size: [567, 135]
               dat_content:
-              - - ''
+              - - ' B'
               dat_content_format: table
             - name: in
               type: selectTOP
@@ -58361,8 +58363,6 @@ operators:
               - A_red
             - name: b_active
               type: levelTOP
-              parameters:
-                opacity: 0
               flags:
               - viewer
               position: [625, 400]
@@ -58712,7 +58712,7 @@ operators:
               position: [275, 655]
               size: [567, 135]
               dat_content:
-              - - ''
+              - - ' A'
               dat_content_format: table
             - name: in
               type: selectTOP
@@ -58832,8 +58832,6 @@ operators:
               - comp2
             - name: a_active
               type: levelTOP
-              parameters:
-                opacity: 0
               flags:
               - viewer
               position: [625, 525]
@@ -309572,19 +309570,19 @@ operators:
       - tox
       storage:
         state:
-          bass_env: 6.8825e-06
-          mid_env: 6.8825e-06
-          high_env: 6.8825e-06
-          smooth_level: 2.71918e-05
-          level_min: 2.02603e-05
-          level_max: 3.98017e-05
+          bass_env: 1.00683e-05
+          mid_env: 1.00683e-05
+          high_env: 1.00683e-05
+          smooth_level: 2.08761e-05
+          level_min: 1.57501e-05
+          level_max: 3.40793e-05
           smooth_r:
-          - 240.6172957007
-          - 240.6172957007
-          - 240.6172957007
-          - 240.6172957007
-          - 240.6172957007
-          - 240.6172957007
+          - 250.3982426145
+          - 250.3982426145
+          - 250.3982426145
+          - 250.3982426145
+          - 250.3982426145
+          - 250.3982426145
           smooth_g:
           - 0
           - 0
@@ -309593,17 +309591,17 @@ operators:
           - 0
           - 0
           smooth_b:
-          - 14.3827042993
-          - 14.3827042993
-          - 14.3827042993
-          - 14.3827042993
-          - 14.3827042993
-          - 14.3827042993
-          prev_bass_env: 6.8825e-06
+          - 4.6017573855
+          - 4.6017573855
+          - 4.6017573855
+          - 4.6017573855
+          - 4.6017573855
+          - 4.6017573855
+          prev_bass_env: 1.00683e-05
           punch: 0
           punch_smooth: 0
           last_kick_time: 33486.2333333333
-          color_t_smooth: 0.0105360751
+          color_t_smooth: 0.0046130954
       children:
       - name: out1
         type: outTOP
@@ -309796,9 +309794,9 @@ operators:
       - name: pixel_preview
         type: constantTOP
         parameters:
-          colorr: 0.7425115894
+          colorr: 0.767266449
           colorg: 0
-          colorb: 0.0418097837
+          colorb: 0.0170528591
           resolutionw: 200
           resolutionh: 200
         flags:
@@ -309956,8 +309954,8 @@ operators:
         ch3n60: true
         ch2n60: false
         ch8n60: false
-      state_59: 1
-      state_60: 0
+      state_59: 0
+      state_60: 1
     children:
     - name: PAD
       type: selectCHOP
@@ -356390,7 +356388,7 @@ operators:
             parameters:
               specdat: chopto2
               legacyfontselection: true
-              font: Helvetica Neue
+              font: Arial
               dispmethod: polygon
               antialias: aa8mid
               fontsizex: 9.2
@@ -394290,6 +394288,7 @@ operators:
           Name: 39 Text
       flags:
       - viewer
+      - -allowCooking
       position: [-1875, -925]
       size: [160, 130]
       color: [0.325, 0.8, 0.3]
@@ -394851,7 +394850,7 @@ operators:
           - name: tok0
             type: textTOP
             parameters:
-              text: DAL
+              text: CONST
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394863,7 +394862,7 @@ operators:
           - name: tok1
             type: textTOP
             parameters:
-              text: NEBBIA.DISSOLV
+              text: MI
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394875,7 +394874,7 @@ operators:
           - name: tok2
             type: textTOP
             parameters:
-              text: DOMANDANO
+              text: OVEN,
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394887,7 +394886,7 @@ operators:
           - name: tok3
             type: textTOP
             parameters:
-              text: (CLOCK.ASLEEP)
+              text: 0)
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394899,7 +394898,7 @@ operators:
           - name: tok4
             type: textTOP
             parameters:
-              text: PER
+              text: CUORE
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394911,7 +394910,7 @@ operators:
           - name: tok5
             type: textTOP
             parameters:
-              text: IL
+              text: BECAUSE
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394923,7 +394922,7 @@ operators:
           - name: tok6
             type: textTOP
             parameters:
-              text: ONE
+              text: HEART)
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394935,7 +394934,7 @@ operators:
           - name: tok7
             type: textTOP
             parameters:
-              text: LA
+              text: COROLLA
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394947,7 +394946,7 @@ operators:
           - name: tok8
             type: textTOP
             parameters:
-              text: PERSON
+              text: ABISSO);AWAIT
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394959,7 +394958,7 @@ operators:
           - name: tok9
             type: textTOP
             parameters:
-              text: THE
+              text: D'INESAURIBILE
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -394995,7 +394994,7 @@ operators:
           - name: tok10
             type: textTOP
             parameters:
-              text: SOFFITTO
+              text: NAVE.PONTE.WAT
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -395007,7 +395006,7 @@ operators:
           - name: tok11
             type: textTOP
             parameters:
-              text: MORNING
+              text: TUNING
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -395019,7 +395018,7 @@ operators:
           - name: tok12
             type: textTOP
             parameters:
-              text: EVERY
+              text: ==
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -395031,7 +395030,7 @@ operators:
           - name: tok13
             type: textTOP
             parameters:
-              text: CHAIR,
+              text: PERSON
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -395043,7 +395042,7 @@ operators:
           - name: tok14
             type: textTOP
             parameters:
-              text: FEEL();
+              text: IS
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -395055,7 +395054,7 @@ operators:
           - name: tok15
             type: textTOP
             parameters:
-              text: WITH
+              text: '}'
               font: Consolas
               fontsizex: =parent().par.Fontsize
               alignx: left
@@ -395544,13 +395543,12 @@ operators:
             sequences:
               const:
               - name: d
-                value: 28.9398632259
+                value: 56.9998915895
               - name: env
-                value: 1
+                value: 0.0412217779
               - name: heroz
-                value: -88.9189560292
+                value: -88.9964
               - name: heros
-                value: 1.55235
             position: [0, -250]
             size: [130, 90]
             color: [0.67, 0.67, 0.67]
@@ -395838,7 +395836,7 @@ operators:
           - name: tok_hero
             type: textTOP
             parameters:
-              text: ?<
+              text: KZ
               font: Consolas
               fontsizex: =parent().par.Fontsize
               resolutionw: 512
@@ -396988,13 +396986,11 @@ operators:
             sequences:
               const:
               - name: rotx
-                value: -60
               - name: roty
-                value: -40
+                value: 90
               - name: rotz
-                value: -40
               - name: attract
-                value: 1.5
+                value: 1
             flags:
             - viewer
             position: [350, -375]
@@ -397093,13 +397089,14 @@ operators:
           - name: text1
             type: textTOP
             parameters:
-              text: 'cucina: oven, potted_plant, refrigerator\ncucina: oven, potted_plant, refrigerator\ncucina: oven, potted_plant, refrigerator\ncucina: oven, potted_plant, refrigerator\nsalotto: chair, cup, person\nsalotto: chair, cup, person\nMauro (45%)\nMauro (45%)\nsalotto: chair, cup, person\nsalotto: chair, cup, person\ncucina: oven, potted_plant, refrigerator\ncucina: oven, potted_plant, refrigerator\ncucina: oven, potted_plant, refrigerator'
+              text: 'Mauro (45%)\ncucina: oven, potted_plant, refrigerator\nMauro (45%)\nsalotto: chair, cup, person\nMauro (45%)\nsalotto: chair, cup, person\nsalotto: chair, cup, person\nMauro (45%)\nMauro (45%)\nsalotto: chair, cup, person\ncucina: oven, potted_plant, refrigerator\ncucina: oven, potted_plant, refrigerator\nsalotto: chair, cup, person'
               legacyparsing: true
               font: Consolas
               fontsizex: =parent().par.Size1
               aligny: top
-              fontcolorr: 0.6476125367
-              fontcolorb: 0.396536453
+              fontcolorr: 0.7353525025
+              fontcolorg: 0.7963307167
+              fontcolorb: 0.4285102433
               resolutionw: 1280
               resolutionh: 720
             flags:
@@ -398077,12 +398074,12 @@ operators:
             sequences:
               const:
               - name: level
-                value: 0.0243225582
+                value: 0.2461829334
               - name: pulse
               - name: count
-                value: 85
+                value: 174
               - name: trigger
-                value: 0.5657900579
+                value: 0.6720877755
             flags:
             - viewer
             position: [350, -125]
@@ -402929,7 +402926,6 @@ operators:
           Name: 41 Blob
       flags:
       - viewer
-      - -allowCooking
       position: [-2975, -1075]
       size: [160, 130]
       color: [0.325, 0.8, 0.3]
@@ -404959,6 +404955,8 @@ operators:
             parameters:
               file: PATCHDECK/PATCHES/X41/project1/blob_tracker/blob_table.tsv
               syncfile: true
+              rows: 1
+              cols: 10
             position: [400, 250]
             size: [130, 90]
             color: [0.9, 0.3, 0.4]
@@ -404979,6 +404977,8 @@ operators:
             parameters:
               file: PATCHDECK/PATCHES/X41/project1/blob_tracker/links_table.tsv
               syncfile: true
+              rows: 1
+              cols: 3
             position: [400, 120]
             size: [130, 90]
             color: [0.9, 0.3, 0.4]
@@ -405190,7 +405190,6 @@ operators:
           Name: 42 Asemico
       flags:
       - viewer
-      - -allowCooking
       position: [-2775, -1075]
       size: [160, 130]
       color: [0.325, 0.8, 0.3]
@@ -406208,6 +406207,7 @@ operators:
             parameters:
               file: PATCHDECK/PATCHES/X42/project1/asemic_marks/ramp_src_keys.tsv
               syncfile: true
+              cols: 5
             flags:
             - viewer
             - -showDocked
@@ -408393,7 +408393,7 @@ operators:
       label: Last Message
       readOnly: true
       help: Topic and local time of the most recently received Gaia MQTT message.
-      value: gaia/td/canvas @ 13:42:45
+      value: gaia/td/canvas @ 13:50:21
     - name: Deviceagentstatus
       style: Str
       label: Device Agent Status
@@ -408419,7 +408419,7 @@ operators:
   tags:
   - tox
   storage:
-    lastmsg_seconds: 14187.1666666667
+    lastmsg_seconds: 14614.5333333333
   children:
   - name: soul
     type: outCHOP
@@ -408646,7 +408646,7 @@ operators:
     parameters:
       file: gaia_client/devices_table.tsv
       syncfile: true
-      rows: 28
+      rows: 118
       cols: 7
     position: [800, -4200]
     size: [130, 90]

@@ -40,11 +40,11 @@
     "corridoio": {
       "people": [],
       "objects": {},
-      "ambient_light": 1.1020467039630304,
+      "ambient_light": 0.9997697679981565,
       "darkness": true,
       "_temps": {
-        "hue_temperature_sensor_3_temperatura": 19.02,
-        "hue_temperature_sensor_5_temperatura": 18.37
+        "hue_temperature_sensor_3_temperatura": 18.87,
+        "hue_temperature_sensor_5_temperatura": 18.51
       },
       "temperature": 18.7,
       "lastMotion": 1791803568984
@@ -55,9 +55,9 @@
       "ambient_light": 1.5427657898057587,
       "darkness": true,
       "_temps": {
-        "hue_temperature_sensor_4_temperatura": 18.08
+        "hue_temperature_sensor_4_temperatura": 18.22
       },
-      "temperature": 18.1,
+      "temperature": 18.2,
       "lastMotion": 1791804321834,
       "lastUpdate": 1790959272282,
       "_mediapipe": true,
@@ -94,7 +94,7 @@
       "name": "soggiorno",
       "persons_count": 2,
       "objects": {},
-      "lastUpdate": 1791805471564,
+      "lastUpdate": 1791805831795,
       "people": [
         "mauro"
       ],
@@ -133,7 +133,7 @@
         "ts": 1791028578849
       },
       "_touchdesigner": true,
-      "lastTd": 1791805471564,
+      "lastTd": 1791805831795,
       "currentEmotion": null,
       "currentPose": "lying",
       "dmxPaletteA": "Warm",
@@ -144,7 +144,7 @@
       "name": "salotto",
       "persons_count": 1,
       "objects": {},
-      "lastUpdate": 1791805479435,
+      "lastUpdate": 1791805848015,
       "people": [],
       "main_user": null,
       "_mediapipe": true,
@@ -177,9 +177,9 @@
         "ts": 1791524918627
       },
       "_touchdesigner": true,
-      "lastTd": 1791805479435,
+      "lastTd": 1791805848015,
       "audioKick": 1,
-      "audioKickTs": 1791805484568,
+      "audioKickTs": 1791805847919,
       "dmxPaletteA": "Basic"
     },
     "zona-giorno": {
@@ -190,5 +190,5 @@
       "_tccmActive": false
     }
   },
-  "ts": 1791805485214
+  "ts": 1791805848239
 }
