@@ -17,7 +17,7 @@
     "corridoio": {
       "presence_count": 0,
       "activity": "idle",
-      "temperature": 20.8,
+      "temperature": 18.6,
       "humidity": null,
       "ambient_light": 0.9997697679981565,
       "darkness": true,
@@ -31,13 +31,13 @@
     },
     "ingresso": {
       "presence_count": 0,
-      "activity": "idle",
-      "temperature": 19.8,
+      "activity": "present",
+      "temperature": 18.1,
       "humidity": null,
-      "ambient_light": 4.0775566175021245,
+      "ambient_light": 1.4328475980645916,
       "darkness": true,
       "emotion": null,
-      "pose": null,
+      "pose": "arms_up",
       "gesture": null,
       "objects": {},
       "touchdesignerActive": false,
@@ -52,11 +52,14 @@
       "ambient_light": null,
       "darkness": false,
       "emotion": null,
-      "pose": "arms_up",
-      "gesture": null,
+      "pose": "lying",
+      "gesture": "fist",
       "objects": {},
-      "touchdesignerActive": false,
-      "dmxPalette": null,
+      "touchdesignerActive": true,
+      "dmxPalette": {
+        "a": "Warm",
+        "b": "Warm"
+      },
       "audioKick": 0
     },
     "salotto": {
@@ -68,47 +71,14 @@
       "darkness": false,
       "emotion": "neutral",
       "pose": "standing",
-      "gesture": null,
+      "gesture": "three",
       "objects": {},
       "touchdesignerActive": true,
       "dmxPalette": {
-        "a": "Warm",
+        "a": "Basic",
         "b": null
       },
-      "audioKick": 0
-    },
-    "ConsolleDmx": {
-      "presence_count": 0,
-      "activity": "idle",
-      "temperature": null,
-      "humidity": null,
-      "ambient_light": null,
-      "darkness": false,
-      "emotion": null,
-      "pose": null,
-      "gesture": null,
-      "objects": {},
-      "touchdesignerActive": true,
-      "dmxPalette": {
-        "a": "Amber",
-        "b": "Fire"
-      },
-      "audioKick": 0
-    },
-    "test": {
-      "presence_count": 0,
-      "activity": "idle",
-      "temperature": null,
-      "humidity": null,
-      "ambient_light": null,
-      "darkness": false,
-      "emotion": null,
-      "pose": null,
-      "gesture": null,
-      "objects": {},
-      "touchdesignerActive": false,
-      "dmxPalette": null,
-      "audioKick": 0
+      "audioKick": 1
     },
     "zona-giorno": {
       "presence_count": 0,
@@ -146,21 +116,21 @@
     "Tutte_le_luci_Colore": {
       "power": false,
       "brightness": 0,
-      "color": "0,0,0",
+      "color": "73,2,100",
       "colorTemp": null,
       "colorTempKelvin": null,
       "room": null
     },
     "Tutte_le_luci_Luminosita": {
       "power": false,
-      "brightness": 0,
+      "brightness": 100,
       "color": "0,0,0",
       "colorTemp": null,
       "colorTempKelvin": null,
       "room": null
     },
     "Tutte_le_luci_Potenza": {
-      "power": false,
+      "power": true,
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
@@ -171,8 +141,8 @@
       "power": false,
       "brightness": 0,
       "color": "0,0,0",
-      "colorTemp": 0,
-      "colorTempKelvin": 2000,
+      "colorTemp": 28,
+      "colorTempKelvin": 3260,
       "room": null
     },
     "Tutte_le_luci_Color_Temperature_Abs": {
@@ -180,7 +150,7 @@
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
-      "colorTempKelvin": 2702,
+      "colorTempKelvin": 4000,
       "room": null
     },
     "Zona_Notte_Zone_Colore": {
@@ -300,7 +270,7 @@
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
-      "colorTempKelvin": 2702,
+      "colorTempKelvin": 2710,
       "room": "ingresso"
     },
     "Luce_Salotto_Colore": {
@@ -338,21 +308,21 @@
     "Sala_Colore": {
       "power": false,
       "brightness": 0,
-      "color": "0,0,0",
+      "color": "73,2,100",
       "colorTemp": null,
       "colorTempKelvin": null,
       "room": "salotto"
     },
     "Sala_Luminosita": {
       "power": false,
-      "brightness": 0,
+      "brightness": 100,
       "color": "0,0,0",
       "colorTemp": null,
       "colorTempKelvin": null,
       "room": "salotto"
     },
     "Sala_Potenza": {
-      "power": false,
+      "power": true,
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
@@ -363,8 +333,8 @@
       "power": false,
       "brightness": 0,
       "color": "0,0,0",
-      "colorTemp": 0,
-      "colorTempKelvin": 2000,
+      "colorTemp": 28,
+      "colorTempKelvin": 3260,
       "room": "salotto"
     },
     "Sala_Color_Temperature_Abs": {
@@ -372,7 +342,7 @@
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
-      "colorTempKelvin": 2000,
+      "colorTempKelvin": 4000,
       "room": "salotto"
     },
     "Hue_tap_switch_1_Stato_interruttore_a_pulsante": {
@@ -428,7 +398,7 @@
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
-      "colorTempKelvin": 2000,
+      "colorTempKelvin": 6535,
       "room": "soggiorno"
     },
     "unknown": {
@@ -498,7 +468,7 @@
     "Soggiorno_Abajure_Colore": {
       "power": false,
       "brightness": 0,
-      "color": "290.2412,88.42600,0",
+      "color": "73,2,0",
       "colorTemp": null,
       "colorTempKelvin": null,
       "room": "soggiorno"
@@ -507,8 +477,8 @@
       "power": false,
       "brightness": 0,
       "color": "0,0,0",
-      "colorTemp": 10,
-      "colorTempKelvin": 2450,
+      "colorTemp": 28,
+      "colorTempKelvin": 3260,
       "room": "soggiorno"
     },
     "Soggiorno_Abajure_Color_Temperature_Abs": {
@@ -516,7 +486,7 @@
       "brightness": 0,
       "color": "0,0,0",
       "colorTemp": null,
-      "colorTempKelvin": 5347,
+      "colorTempKelvin": 4000,
       "room": "soggiorno"
     },
     "Soggiorno_Abajure_Allerta": {
@@ -601,160 +571,153 @@
   "dream": null,
   "thought": "",
   "thoughts": [],
-  "tts": "Non sono sicura di aver capito. Puoi riformulare?",
-  "ttsTs": 1790844178433,
-  "ttsRoom": "minipc",
+  "tts": "",
+  "ttsTs": 0,
+  "ttsRoom": null,
   "lastMemory": "",
   "memories": [],
   "diary": [
     {
-      "ts": 1790856834057,
+      "ts": 1791796939022,
       "source": "hue",
       "category": "battery_level",
-      "value": 67,
+      "value": 66,
       "person": null
     },
     {
-      "ts": 1790856834058,
+      "ts": 1791796939022,
       "source": "hue",
       "category": "battery_low",
       "value": false,
       "person": null
     },
     {
-      "ts": 1790856929480,
-      "source": "hue",
-      "category": "temperature",
-      "value": 20.49,
-      "person": null
-    },
-    {
-      "ts": 1790856929485,
-      "source": "hue",
-      "category": "battery_level",
-      "value": 67,
-      "person": null
-    },
-    {
-      "ts": 1790856929485,
-      "source": "hue",
-      "category": "battery_low",
-      "value": false,
-      "person": null
-    },
-    {
-      "ts": 1790856982234,
-      "source": "hue",
-      "category": "temperature",
-      "value": 19.78,
-      "person": null
-    },
-    {
-      "ts": 1790856982239,
-      "source": "hue",
-      "category": "battery_level",
-      "value": 100,
-      "person": null
-    },
-    {
-      "ts": 1790856982240,
-      "source": "hue",
-      "category": "battery_low",
-      "value": false,
-      "person": null
-    },
-    {
-      "ts": 1790857070824,
-      "source": "hue",
-      "category": "ambient_light",
-      "value": 6105,
-      "person": null
-    },
-    {
-      "ts": 1790857070824,
-      "source": "hue",
-      "category": "ambient_light",
-      "value": 4.0775566175021245,
-      "person": null
-    },
-    {
-      "ts": 1790857070825,
-      "source": "hue",
-      "category": "darkness",
-      "value": true,
-      "person": null
-    },
-    {
-      "ts": 1790857070825,
-      "source": "hue",
-      "category": "daylight",
-      "value": false,
-      "person": null
-    },
-    {
-      "ts": 1790857070825,
-      "source": "hue",
-      "category": "battery_level",
-      "value": 100,
-      "person": null
-    },
-    {
-      "ts": 1790857070826,
-      "source": "hue",
-      "category": "battery_low",
-      "value": false,
-      "person": null
-    },
-    {
-      "ts": 1790857071852,
+      "ts": 1791796972334,
       "source": "hue",
       "category": "ambient_light",
       "value": 0,
       "person": null
     },
     {
-      "ts": 1790857071858,
+      "ts": 1791796972339,
       "source": "hue",
       "category": "ambient_light",
       "value": 0.9997697679981565,
       "person": null
     },
     {
-      "ts": 1790857071859,
+      "ts": 1791796972340,
       "source": "hue",
       "category": "darkness",
       "value": true,
       "person": null
     },
     {
-      "ts": 1790857071860,
+      "ts": 1791796972340,
       "source": "hue",
       "category": "daylight",
       "value": false,
       "person": null
     },
     {
-      "ts": 1790857071877,
+      "ts": 1791796972352,
       "source": "hue",
       "category": "battery_level",
-      "value": 67,
+      "value": 66,
       "person": null
     },
     {
-      "ts": 1790857071878,
+      "ts": 1791796972352,
+      "source": "hue",
+      "category": "battery_low",
+      "value": false,
+      "person": null
+    },
+    {
+      "ts": 1791797005190,
+      "source": "hue",
+      "category": "ambient_light",
+      "value": 1563,
+      "person": null
+    },
+    {
+      "ts": 1791797005197,
+      "source": "hue",
+      "category": "ambient_light",
+      "value": 1.4328475980645916,
+      "person": null
+    },
+    {
+      "ts": 1791797005198,
+      "source": "hue",
+      "category": "darkness",
+      "value": true,
+      "person": null
+    },
+    {
+      "ts": 1791797005198,
+      "source": "hue",
+      "category": "daylight",
+      "value": false,
+      "person": null
+    },
+    {
+      "ts": 1791797005198,
+      "source": "hue",
+      "category": "battery_level",
+      "value": 100,
+      "person": null
+    },
+    {
+      "ts": 1791797005198,
+      "source": "hue",
+      "category": "battery_low",
+      "value": false,
+      "person": null
+    },
+    {
+      "ts": 1791797146475,
+      "source": "hue",
+      "category": "temperature",
+      "value": 18.08,
+      "person": null
+    },
+    {
+      "ts": 1791797146481,
+      "source": "hue",
+      "category": "battery_level",
+      "value": 100,
+      "person": null
+    },
+    {
+      "ts": 1791797146481,
+      "source": "hue",
+      "category": "battery_low",
+      "value": false,
+      "person": null
+    },
+    {
+      "ts": 1791797174369,
+      "source": "hue",
+      "category": "temperature",
+      "value": 18.73,
+      "person": null
+    },
+    {
+      "ts": 1791797174374,
+      "source": "hue",
+      "category": "battery_level",
+      "value": 66,
+      "person": null
+    },
+    {
+      "ts": 1791797174375,
       "source": "hue",
       "category": "battery_low",
       "value": false,
       "person": null
     }
   ],
-  "voiceCommands": [
-    {
-      "text": ".  ma si si mi fa, ti avrei.  ma le stiamo so che tre non siamo si no,  e le ne stiamo in un'amolo,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma la fai il fuori,  ma lo uso lo carriventi,  viene usato per fare i provosi,  quindi non sanno il cuo in quale sal\u00e0,  si metteranno a non perch\u00e9 sono qua,  qua,  tu c'ingue sempre sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,  ma ti sei,",
-      "stanza": "minipc",
-      "intent": "sconosciuto",
-      "ts": 1790844197692
-    }
-  ],
-  "ts": 1790857087878
+  "voiceCommands": [],
+  "ts": 1791797223112
 }
