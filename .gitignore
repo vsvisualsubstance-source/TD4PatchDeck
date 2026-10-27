@@ -1,4 +1,10 @@
 
+# TouchDesigner: numbered copies from incremental save (PatchDeckV8.toe is
+# the project file), temporary exports, macOS resource forks
+*.[0-9]*.toe
+_export_tmp*.toe
+._*
+
 # Embody / Envoy (auto-managed)
 Backup/
 logs/
