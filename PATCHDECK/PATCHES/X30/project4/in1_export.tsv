@@ -1,0 +1,6 @@
+name	index	path	parameter	enable
+low	1	math1	preoff	1
+mid	2	math3	preoff	1
+rythm	6	math2	preoff	1
+low	1	math4	preoff	1
+high	3	math5	preoff	1

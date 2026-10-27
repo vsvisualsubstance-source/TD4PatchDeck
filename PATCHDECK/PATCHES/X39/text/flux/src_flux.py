@@ -1,0 +1,7 @@
+# TESTI SOLO PER FLUX - una riga = una frase (# = ignorata)
+CHIMERA
+SEGNALE
+FLUSSO
+NOTTE
+DATA
+FRAMMENTI

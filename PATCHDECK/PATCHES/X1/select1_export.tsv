@@ -1,0 +1,5 @@
+name	index	path	parameter	enable
+s1	0	s1_Speed	Speed	1
+s2	1	s2_offset	Value	1
+s3	2	s3_harmonic_gain	Value	1
+s4	3	s4_vertical_scale	Value	1

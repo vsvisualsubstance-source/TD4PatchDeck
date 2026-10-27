@@ -1,0 +1,11 @@
+name	label	r	g	b
+Red	Red	1.0	0.0	0.0
+Blue	Blue	0.0	0.0	1.0
+Green	Green	0.0	1.0	0.0
+Purple	Purple	0.588	0.0	1.0
+Amber	Amber	1.0	0.588	0.0
+White	White	1.0	1.0	1.0
+Cyan	Cyan	0.0	1.0	1.0
+Magenta	Magenta	1.0	0.0	1.0
+Yellow	Yellow	1.0	1.0	0.0
+Pink	Pink	1.0	0.0	0.588

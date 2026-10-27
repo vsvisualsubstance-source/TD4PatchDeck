@@ -1,0 +1,39 @@
+Parameter Style	Size	Widget Name	Settings Dict
+Str		fieldString	
+StrMenu		dropDownButton	
+Float		sliderHorz	{'Sliderlabeldisplay':'False'}
+Float	2	float2	
+Float	3	float3	
+Float	4	float4	
+Int		sliderHorz	{'Sliderlabeldisplay':'False', 'Numericfieldtype': '"integer"'}
+Int	2	int2	
+Int	3	int3	
+Int	4	int4	
+Toggle		buttonRocker	
+Momentary		buttonMomentary	
+Pulse		buttonMomentary	
+Python		fieldString	
+Menu		dropDownMenu	
+RGB		slider3Rgb	
+RGBA		slider4Rgba	
+UV		float2	
+UVW		float3	
+WH		int2	
+XY		float2	
+XYZ		float3	
+OBJ		referenceOP	
+Object		referenceOP	
+PanelCOMP		referenceOP	
+COMP		referenceOP	
+SOP		referenceOP	
+MAT		referenceOP	
+CHOP		referenceOP	
+TOP		referenceOP	
+DAT		referenceOP	
+OP		referenceOP	
+File		fieldFileBrowser	
+Folder		fieldFolderBrowser	
+Header		label	{'Labeloffsetx':'3', 'Labelbgcolora': '0.25', 'bgcolorr': '0.25', 'bgcolorg': '0.25', 'bgcolorb': '0.25'}
+*Layout		layout	
+*Pages		folderTabs	
+*Header		header	

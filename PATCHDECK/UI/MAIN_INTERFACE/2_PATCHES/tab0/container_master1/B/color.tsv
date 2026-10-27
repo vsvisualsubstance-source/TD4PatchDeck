@@ -1,0 +1,5 @@
+state	font	background	border
+off	0	0.0	0.43
+on	1	0.9	0.6
+rollover	1	0.7	0.5
+rolloveron	1	0.9	0.8

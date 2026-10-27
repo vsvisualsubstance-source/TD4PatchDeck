@@ -2,70 +2,51 @@
   "mood": "neutra",
   "lifeIndex": 70,
   "gamification": {
-    "level": 10,
-    "xp": 11159,
-    "xpNextLevel": 22400,
-    "activeClass": "Guerriero",
+    "level": 1,
+    "xp": 115,
+    "xpNextLevel": 1000,
+    "activeClass": "Neutro",
     "unlockedAssets": [
-      "base_grid",
-      "ambient_particles_low",
-      "shield_dome",
-      "rune_circle",
-      "glyph_trail",
-      "crystal_garden",
-      "starfield",
-      "phoenix_core"
+      "base_grid"
     ],
     "stats": {
-      "mago": 2141,
-      "bardo": 332,
-      "guerriero": 3505,
-      "druido": 1867
+      "mago": 3,
+      "bardo": 1,
+      "guerriero": 0,
+      "druido": 0
     },
     "_cd": {
-      "natura": 1791530299191,
-      "movimento": 1791806045831,
-      "voce": 1791191224378,
-      "pensiero": 1790775649080,
-      "presenza": 1790775770666,
-      "riflessione": 1786827611348,
-      "rituale": 1791791223630
+      "presenza": 1792050719751,
+      "voce": 1792052354929
     },
-    "_lastMemCount": 3,
-    "_lastVoiceTs": 1791191240062,
-    "_lastThoughtTs": 1790775648467
+    "_lastMemCount": 0,
+    "_lastVoiceTs": 1792052371932,
+    "_lastThoughtTs": 1792050729879
   },
   "presence": {},
   "rooms": {
-    "corridoio": {
-      "people": [],
-      "objects": {},
-      "ambient_light": 1.8736997549896575,
-      "darkness": true,
-      "_temps": {
-        "hue_temperature_sensor_3_temperatura": 18.73,
-        "hue_temperature_sensor_5_temperatura": 18.37
+    "soggiorno": {
+      "id": "soggiorno",
+      "name": "soggiorno",
+      "persons_count": 3,
+      "objects": {
+        "mouse": 2,
+        "chair": 1,
+        "keyboard": 1
       },
-      "temperature": 18.6,
-      "lastMotion": 1791806221186
-    },
-    "ingresso": {
-      "people": [],
-      "objects": {},
-      "ambient_light": 1.3225131530409457,
-      "darkness": true,
-      "_temps": {
-        "hue_temperature_sensor_4_temperatura": 18.65
-      },
-      "temperature": 18.7,
-      "lastMotion": 1791804321834,
-      "lastUpdate": 1790959272282,
+      "lastUpdate": 1793104952581,
+      "people": [
+        "unknown_1792053668225_0"
+      ],
+      "main_user": "unknown_1792053406407_0",
       "_mediapipe": true,
+      "activity": "present",
+      "currentPose": "sitting",
       "mediapipe": {
-        "emotion": null,
-        "pose": "arms_up",
-        "attention": "unknown",
-        "smile_score": 0,
+        "emotion": "neutral",
+        "pose": "sitting",
+        "attention": "right",
+        "smile_score": 19,
         "mouth_open": false,
         "eyes_open": true,
         "gesture": null,
@@ -73,80 +54,41 @@
         "people": [
           {
             "id": 0,
-            "emotion": null,
-            "smile_score": 0,
-            "attention": "unknown",
+            "emotion": "neutral",
+            "smile_score": 19,
+            "attention": "right",
             "mouth_open": false,
             "eyes_open": true,
-            "pose": "arms_up",
+            "pose": "sitting",
             "gestures": []
           }
         ],
-        "ts": 1790959272282
+        "ts": 1792649874259
       },
-      "persons_count": 1,
-      "activity": "present",
-      "currentPose": "arms_up",
-      "currentEmotion": null
-    },
-    "soggiorno": {
-      "id": "soggiorno",
-      "name": "soggiorno",
-      "persons_count": 2,
-      "objects": {},
-      "lastUpdate": 1791806462297,
-      "people": [
-        "mauro"
-      ],
-      "main_user": "mauro",
+      "currentEmotion": "neutral",
       "zone": "unknown",
       "_yolo": true,
-      "lastYolo": 1790662412782,
-      "activity": "present",
-      "_activityCandidate": "present",
-      "_activityCandidateSince": 1790662357292,
-      "_activityCommitted": "present",
-      "_mediapipe": true,
-      "mediapipe": {
-        "emotion": null,
-        "pose": "lying",
-        "attention": "unknown",
-        "smile_score": 0,
-        "mouth_open": false,
-        "eyes_open": true,
-        "gesture": "fist",
-        "people_count": 1,
-        "people": [
-          {
-            "id": 0,
-            "emotion": null,
-            "smile_score": 0,
-            "attention": "unknown",
-            "mouth_open": false,
-            "eyes_open": true,
-            "pose": "lying",
-            "gestures": [
-              "fist"
-            ]
-          }
-        ],
-        "ts": 1791028578849
-      },
+      "lastYolo": 1792053668225,
+      "_activityCandidate": "sitting",
+      "_activityCandidateSince": 1792053648101,
+      "_activityCommitted": "working",
       "_touchdesigner": true,
-      "lastTd": 1791806462297,
-      "currentEmotion": null,
-      "currentPose": "lying",
-      "dmxPaletteA": "Warm",
-      "dmxPaletteB": "Warm"
+      "lastTd": 1793104952581,
+      "dmxPaletteA": "Red",
+      "audioKick": 0,
+      "audioKickTs": 1793104961819,
+      "dmxPaletteB": "Red"
     },
-    "salotto": {
-      "id": "salotto",
-      "name": "salotto",
+    "ingresso": {
+      "id": "ingresso",
+      "name": "ingresso",
       "persons_count": 1,
       "objects": {},
-      "lastUpdate": 1791806477662,
-      "people": [],
-      "main_user": null,
+      "lastUpdate": 1792064855118,
+      "people": [
+        "unknown_1792064816453_0"
+      ],
+      "main_user": "unknown",
       "_mediapipe": true,
       "activity": "present",
       "currentEmotion": "neutral",
@@ -154,41 +96,33 @@
       "mediapipe": {
         "emotion": "neutral",
         "pose": "standing",
-        "attention": "center",
-        "smile_score": 37,
+        "attention": "left",
+        "smile_score": 56,
         "mouth_open": false,
         "eyes_open": true,
-        "gesture": "three",
+        "gesture": null,
         "people_count": 1,
         "people": [
           {
             "id": 0,
             "emotion": "neutral",
-            "smile_score": 37,
-            "attention": "center",
+            "smile_score": 56,
+            "attention": "left",
             "mouth_open": false,
             "eyes_open": true,
             "pose": "standing",
-            "gestures": [
-              "three"
-            ]
+            "gestures": []
           }
         ],
-        "ts": 1791524918627
+        "ts": 1792064855118
       },
-      "_touchdesigner": true,
-      "lastTd": 1791806477662,
-      "audioKick": 1,
-      "audioKickTs": 1791806486763,
-      "dmxPaletteA": "Basic"
-    },
-    "zona-giorno": {
-      "people": [],
-      "persons_count": 0,
-      "objects": {},
-      "lastUpdate": 1791805925519,
-      "_tccmActive": false
+      "zone": "citofono",
+      "_yolo": true,
+      "lastYolo": 1792064816453,
+      "_activityCandidate": "present",
+      "_activityCandidateSince": 1792064816453,
+      "_activityCommitted": "present"
     }
   },
-  "ts": 1791806487264
+  "ts": 1793104962691
 }

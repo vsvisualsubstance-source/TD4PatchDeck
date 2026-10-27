@@ -1,0 +1,4 @@
+name	index	path	parameter	enable
+FB_SCALE	0	../level1	opacity	0
+FB_SCALE	0	../transform1	sx	1
+FB_SCALE	0	../transform1	sy	1

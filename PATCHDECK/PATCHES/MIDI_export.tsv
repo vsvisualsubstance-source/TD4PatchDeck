@@ -1,0 +1,3 @@
+name	index	path	parameter	enable
+crossfade	9	crossfade	cross	1
+master	8	MASTER_DIM	brightness1	1
