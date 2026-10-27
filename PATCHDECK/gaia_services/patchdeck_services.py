@@ -22,12 +22,29 @@ gaia_device_agent.register_param() (stesso 'action:set' via MQTT gia'
 usato per gli altri controlli di questo device -- vedi i servizi deck_a/
 deck_b sopra), cosi' TD4Gaia puo' pilotarli allo stesso modo dei deck.
 FX6/FX7/FX8 (BRIGHTNESS/BLACK LVL/Strobo) restano fuori, non richiesti.
+
+Aggiunto 2026-10-27 (TD4Gaia OPS 16/27): deck_mix, il mix A/B come Gaia
+continuous param, 0 = solo deck A, 1 = solo deck B. Legge/scrive lo stesso
+custom par Crossfade di control_ui (range -1..1) che muove lo slider
+1_sliderHorzXFade (bind) e che arriva al Cross TOP PATCHES/crossfade via
+CTRL/parameters_ -> math1 -> lag3 -> ctrl_master, quindi tablet, bridge e
+UI restano sulla stessa fonte di verita'.
+
+Aggiunti 2026-10-27 (TD4Gaia OPS 15/27): patch_labels nella matrice (dal
+custom par Name di ogni PATCHES/X<n>) e le miniature, prese dal TOP
+'thumbnail' (Fit dell'out) che ogni patch ha gia': JPEG via
+saveByteArray(), retained su gaia/devices/{id}/patch_thumb/<n>. Il TOP
+tiene l'ultimo frame anche con la patch spenta, quindi si leggono tutte e
+42 senza accendere niente; la miniatura di una patch caricata da Gaia
+viene ripubblicata qualche secondo dopo il load, con l'immagine aggiornata.
 """
 
+import base64
 import json
 import time
 
 _last_patch = {'A': 0, 'B': 0}  # memoria locale per il resume di start_deck_a/b
+_THUMB_REFRESH_MS = 3000  # dopo un load, tempo per far girare la patch prima di riprendere la miniatura
 
 
 def _led():
@@ -69,6 +86,8 @@ def _register_deck_services(agent, deck):
 def _register_patch_service(agent, patch_num, deck):
 	def start():
 		_led().loadPatchToDeck(patch_num, deck)
+		run("op('/PATCHDECK/gaia_services/patchdeck_services').module.publish_thumb(%d)" % patch_num,
+			delayMilliSeconds=_THUMB_REFRESH_MS)
 
 	def status():
 		return _led().deckStatus(deck) == patch_num
@@ -87,6 +106,19 @@ def _register_fx_params(agent):
 			_ctrl().par[par_name] = float(value)
 
 		agent.register_param(name, get=get, set=set_)
+
+
+def _register_deck_mix(agent):
+	"""Espone il crossfader A/B come deck_mix 0..1 (0 = solo A, 1 = solo B),
+	convertito da/verso Crossfade di control_ui (-1..1)."""
+	def get():
+		return (float(_ctrl().par.Crossfade.eval()) + 1.0) / 2.0
+
+	def set_(value):
+		v = min(max(float(value), 0.0), 1.0)
+		_ctrl().par.Crossfade = v * 2.0 - 1.0
+
+	agent.register_param('deck_mix', get=get, set=set_)
 
 
 def _build_matrix():
@@ -108,12 +140,65 @@ def _build_matrix():
 		'fb_blur': 'FB BLUR', 'mirror': 'MIRROR'}
 	fx_params = {name: {'label': fx_labels[name], 'min': 0.0, 'max': 1.0}
 		for name, _ in _FX_PARAMS}
+	fx_params['deck_mix'] = {'label': 'A/B MIX', 'min': 0.0, 'max': 1.0,
+		'deck_at_min': 'A', 'deck_at_max': 'B'}
 	return {
 		'decks': ['A', 'B'],
 		'patches': list(range(1, 43)),
+		'patch_labels': {str(n): _patch_label(n) for n in range(1, 43)},
 		'services': services,
 		'fx_params': fx_params,
 	}
+
+
+def _patch_label(patch_num):
+	"""Nome leggibile della patch dal custom par Name di PATCHES/X<n>."""
+	comp = op('/PATCHDECK/PATCHES/X%d' % patch_num)
+	name = str(comp.par.Name.eval()).strip() if comp is not None and hasattr(comp.par, 'Name') else ''
+	return name or 'X%d' % patch_num
+
+
+def _mqtt_target():
+	"""(mqtt_device DAT, device_id) se connesso e configurato, altrimenti None."""
+	dat = op('/gaia_client/mqtt_device')
+	if not dat or not dat.isConnected:
+		return None
+	cfg = op('/gaia_client/gaia_device_agent').module._read_config()
+	return dat, cfg['device_id']
+
+
+def publish_thumb(patch_num, target=None):
+	"""Pubblica retained la miniatura JPEG di una patch (TOP 'thumbnail'
+	dentro PATCHES/X<n>) su gaia/devices/{id}/patch_thumb/<n>."""
+	target = target or _mqtt_target()
+	thumb = op('/PATCHDECK/PATCHES/X%d/thumbnail' % patch_num)
+	if target is None or thumb is None:
+		return False
+	dat, device_id = target
+	jpeg = thumb.saveByteArray('.jpg', quality=0.8)
+	payload = {
+		'patch': patch_num,
+		'label': _patch_label(patch_num),
+		'mime': 'image/jpeg',
+		'width': thumb.width,
+		'height': thumb.height,
+		'data': base64.b64encode(bytes(jpeg)).decode('ascii'),
+		'ts': int(time.time() * 1000),
+	}
+	topic = 'gaia/devices/%s/patch_thumb/%d' % (device_id, patch_num)
+	dat.publish(topic, json.dumps(payload).encode('utf-8'), retain=True)
+	return True
+
+
+def publish_all_thumbs():
+	"""Pubblica le miniature di tutte le 42 patch (retained)."""
+	target = _mqtt_target()
+	if target is None:
+		print('[PatchDeck Services] mqtt_device non connesso, miniature non pubblicate')
+		return 0
+	sent = sum(1 for n in range(1, 43) if publish_thumb(n, target))
+	print('[PatchDeck Services] %d miniature pubblicate' % sent)
+	return sent
 
 
 def publish_matrix():
@@ -164,4 +249,8 @@ def register_all():
 	if 'edge' not in agent._params:
 		_register_fx_params(agent)
 		print('[PatchDeck Services] %d param FX registrati' % len(agent._params))
-	publish_matrix()
+	if 'deck_mix' not in agent._params:
+		_register_deck_mix(agent)
+		print('[PatchDeck Services] deck_mix registrato')
+	if publish_matrix():
+		publish_all_thumbs()
