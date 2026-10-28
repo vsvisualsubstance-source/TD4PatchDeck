@@ -85,8 +85,7 @@ def onFrameStart(frame):
 		me.par.active = False
 		return
 	if elapsed % POLL_INTERVAL == 0:
-		fixed = ReconnectPanelWiring()
-		debug(f'ReconnectPanelWiring: reasserted {fixed} panel connection(s) (frame {frame}, +{elapsed})')
+		ReconnectPanelWiring()
 	return
 
 def onFrameEnd(frame):
