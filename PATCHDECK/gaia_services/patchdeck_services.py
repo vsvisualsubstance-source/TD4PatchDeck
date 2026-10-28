@@ -88,6 +88,10 @@ _LASER_PARAMS = [
 	('laser_audio_amount', 'Audioamount'),
 ]
 _LASER_PALETTE = ('Paletter', 'Paletteg', 'Paletteb')
+# lo status parte subito dopo il comando, prima del primo frame laser
+# (laser_points = 0), e poi solo col heartbeat di 30 s: dopo l'accensione
+# lo si ripubblica quando i frame stanno gia' uscendo (nota OPS 34)
+_LASER_STATUS_DELAY_MS = 1000
 
 
 def _register_deck_services(agent, deck):
@@ -180,6 +184,9 @@ def _register_laser_params(agent):
 
 		def set_(value, par_name=par_name):
 			_set_laser_value(_laser().par[par_name], value)
+			if par_name == 'Enable' and _laser().par.Enable.eval():
+				run("op.Gaia.op('gaia_device_agent').module._publish_status()",
+					delayMilliSeconds=_LASER_STATUS_DELAY_MS)
 
 		agent.register_param(name, get=get, set=set_)
 

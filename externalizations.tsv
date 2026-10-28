@@ -1095,7 +1095,7 @@ path	type	strategy	rel_file_path	timestamp	dirty	build	touch_build	node_x	node_y
 /gaia_dmx_client	base	tox	gaia_dmx_client.tox	2026-10-27 12:12:01 UTC		8	2025.33230	350	400	0.6700,0.6700,0.6700
 /PATCHDECK/local	base	tox	PATCHDECK/local.tox	2026-10-27 12:12:01 UTC		5	2025.33230	250	300	0.5500,0.5500,0.5500
 /PATCHDECK/gaia_services	base	tox	PATCHDECK/gaia_services.tox	2026-10-28 10:20:31 UTC		9	2025.33230	700	300	0.5500,0.5500,0.5500
-/PATCHDECK/laser	base	tox	PATCHDECK/laser.tox	2026-10-28 10:20:39 UTC		1	2025.33230	925	300	0.3250,0.8000,0.3000
+/PATCHDECK/laser	base	tox	PATCHDECK/laser.tox	2026-10-28 10:51:35 UTC		2	2025.33230	925	300	0.3250,0.8000,0.3000
 /PATCHDECK/laser/gaia_laser_out	text	py	PATCHDECK/laser/gaia_laser_out.py	2026-10-28 10:20:31 UTC				1600	-1200	0.9000,0.3000,0.4000
 /PATCHDECK/laser/laser_exec	execute	py	PATCHDECK/laser/laser_exec.py	2026-10-28 10:20:36 UTC				2000	-1200	0.9000,0.3000,0.4000
 /PATCHDECK/audio	base	tox	PATCHDECK/audio.tox	2026-10-27 12:12:01 UTC		15	2025.33230	450	300	0.5500,0.5500,0.5500
