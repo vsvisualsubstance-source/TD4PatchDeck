@@ -37,6 +37,12 @@ saveByteArray(), retained su gaia/devices/{id}/patch_thumb/<n>. Il TOP
 tiene l'ultimo frame anche con la patch spenta, quindi si leggono tutte e
 42 senza accendere niente; la miniatura di una patch caricata da Gaia
 viene ripubblicata qualche secondo dopo il load, con l'immagine aggiornata.
+
+Aggiunti 2026-10-28 (TD4Gaia OPS 33): i laser_* params, cioe' i custom
+par del COMP PATCHDECK/laser (sorgente 'patchdeck' del laser gateway di
+OPS: contorni dell'uscita video in frame GLF1). Range e opzioni vanno
+nella matrice sotto laser_params, letti dagli stessi par, cosi' la
+Plancia li disegna senza indovinare. laser_points e' in sola lettura.
 """
 
 import base64
@@ -55,6 +61,10 @@ def _ctrl():
 	return op('/PATCHDECK/UI/MAIN_INTERFACE/control_ui')
 
 
+def _laser():
+	return op('../laser')
+
+
 # name esposto via MQTT -> custom par su control_ui (Fx1..Fx5, vedi
 # PATCHDECK/PATCHES/POST_FX/fx_lables.tsv per la mappa completa FX1..FX8)
 _FX_PARAMS = [
@@ -64,6 +74,20 @@ _FX_PARAMS = [
 	('fb_blur', 'Fx4'),
 	('mirror', 'Fx5'),
 ]
+
+# name esposto via MQTT -> custom par su PATCHDECK/laser
+_LASER_PARAMS = [
+	('laser_enabled', 'Enable'),
+	('laser_target', 'Target'),
+	('laser_mode', 'Mode'),
+	('laser_threshold', 'Threshold'),
+	('laser_min_size', 'Minsize'),
+	('laser_max_points', 'Maxpoints'),
+	('laser_size', 'Size'),
+	('laser_color', 'Color'),
+	('laser_audio_amount', 'Audioamount'),
+]
+_LASER_PALETTE = ('Paletter', 'Paletteg', 'Paletteb')
 
 
 def _register_deck_services(agent, deck):
@@ -121,6 +145,81 @@ def _register_deck_mix(agent):
 	agent.register_param('deck_mix', get=get, set=set_)
 
 
+def _laser_value(par):
+	"""Valore JSON di un par del laser secondo il suo stile."""
+	if par.style == 'Toggle':
+		return bool(par.eval())
+	if par.style == 'Menu':
+		return str(par.eval())
+	if par.style == 'Int':
+		return int(par.eval())
+	return float(par.eval())
+
+
+def _set_laser_value(par, value):
+	"""Applica un valore arrivato via MQTT: toggle da bool/0-1/"true",
+	menu solo tra le opzioni del par, numeri dentro il range del par."""
+	if par.style == 'Toggle':
+		par.val = str(value).strip().lower() in ('1', '1.0', 'true', 'on')
+	elif par.style == 'Menu':
+		if str(value) not in par.menuNames:
+			raise ValueError('%s: %r non e\' tra %s' % (par.name, value, list(par.menuNames)))
+		par.val = str(value)
+	else:
+		v = min(max(float(value), par.min), par.max)
+		par.val = int(round(v)) if par.style == 'Int' else v
+
+
+def _register_laser_params(agent):
+	"""Espone i custom par di PATCHDECK/laser come laser_* (vedi
+	_LASER_PARAMS), piu' laser_palette [r, g, b] 0..1 e laser_points in
+	sola lettura (punti dell'ultimo frame mandato al gateway)."""
+	for name, par_name in _LASER_PARAMS:
+		def get(par_name=par_name):
+			return _laser_value(_laser().par[par_name])
+
+		def set_(value, par_name=par_name):
+			_set_laser_value(_laser().par[par_name], value)
+
+		agent.register_param(name, get=get, set=set_)
+
+	def get_palette():
+		return [float(_laser().par[p].eval()) for p in _LASER_PALETTE]
+
+	def set_palette(value):
+		for p, v in zip(_LASER_PALETTE, value):
+			_laser().par[p] = min(max(float(v), 0.0), 1.0)
+
+	agent.register_param('laser_palette', get=get_palette, set=set_palette)
+	agent.register_param('laser_points', get=lambda: int(_laser().par.Points.eval()))
+
+
+def _laser_matrix():
+	"""laser_params per la matrice: tipo, label, range o opzioni, letti
+	dai custom par di PATCHDECK/laser."""
+	laser = _laser()
+	if laser is None:
+		return {}
+	out = {}
+	for name, par_name in _LASER_PARAMS:
+		par = laser.par[par_name]
+		entry = {'label': par.label}
+		if par.style == 'Toggle':
+			entry['type'] = 'bool'
+		elif par.style == 'Menu':
+			entry['type'] = 'enum'
+			entry['options'] = list(par.menuNames)
+			entry['option_labels'] = list(par.menuLabels)
+		else:
+			entry['type'] = 'int' if par.style == 'Int' else 'float'
+			entry['min'] = par.min
+			entry['max'] = par.max
+		out[name] = entry
+	out['laser_palette'] = {'label': 'Palette color', 'type': 'rgb', 'min': 0.0, 'max': 1.0}
+	out['laser_points'] = {'label': 'Points sent', 'type': 'int', 'readonly': True}
+	return out
+
+
 def _build_matrix():
 	"""Struttura meccanica dei 78 servizi (quali sono deck toggle, quali
 	load_x{N}_{deck}) -- NON descrizioni creative delle patch, solo la
@@ -148,6 +247,7 @@ def _build_matrix():
 		'patch_labels': {str(n): _patch_label(n) for n in range(1, 43)},
 		'services': services,
 		'fx_params': fx_params,
+		'laser_params': _laser_matrix(),
 	}
 
 
@@ -252,5 +352,8 @@ def register_all():
 	if 'deck_mix' not in agent._params:
 		_register_deck_mix(agent)
 		print('[PatchDeck Services] deck_mix registrato')
+	if 'laser_enabled' not in agent._params and _laser() is not None:
+		_register_laser_params(agent)
+		print('[PatchDeck Services] laser params registrati')
 	if publish_matrix():
 		publish_all_thumbs()

@@ -1094,7 +1094,10 @@ path	type	strategy	rel_file_path	timestamp	dirty	build	touch_build	node_x	node_y
 /PATCHDECK/PATCHES/X14	base	tox	PATCHDECK/PATCHES/X14.tox	2026-10-27 13:02:39 UTC		5	2025.33230	-2020	-295	0.5500,0.5500,0.5500
 /gaia_dmx_client	base	tox	gaia_dmx_client.tox	2026-10-27 12:12:01 UTC		8	2025.33230	350	400	0.6700,0.6700,0.6700
 /PATCHDECK/local	base	tox	PATCHDECK/local.tox	2026-10-27 12:12:01 UTC		5	2025.33230	250	300	0.5500,0.5500,0.5500
-/PATCHDECK/gaia_services	base	tox	PATCHDECK/gaia_services.tox	2026-10-27 12:42:00 UTC		8	2025.33230	700	300	0.5500,0.5500,0.5500
+/PATCHDECK/gaia_services	base	tox	PATCHDECK/gaia_services.tox	2026-10-28 10:20:31 UTC		9	2025.33230	700	300	0.5500,0.5500,0.5500
+/PATCHDECK/laser	base	tox	PATCHDECK/laser.tox	2026-10-28 10:20:39 UTC		1	2025.33230	925	300	0.3250,0.8000,0.3000
+/PATCHDECK/laser/gaia_laser_out	text	py	PATCHDECK/laser/gaia_laser_out.py	2026-10-28 10:20:31 UTC				1600	-1200	0.9000,0.3000,0.4000
+/PATCHDECK/laser/laser_exec	execute	py	PATCHDECK/laser/laser_exec.py	2026-10-28 10:20:36 UTC				2000	-1200	0.9000,0.3000,0.4000
 /PATCHDECK/audio	base	tox	PATCHDECK/audio.tox	2026-10-27 12:12:01 UTC		15	2025.33230	450	300	0.5500,0.5500,0.5500
 /PATCHDECK/UI	base	tox	PATCHDECK/UI.tox	2026-10-27 13:03:17 UTC		15	2025.33230	250	475	0.5500,0.5500,0.5500
 /PATCHDECK/PERFORM	window	tox	PATCHDECK/PERFORM.tox	2026-10-27 12:12:02 UTC		2	2025.33230	475	475	0.5500,0.5500,0.5500
@@ -1113,7 +1116,7 @@ path	type	strategy	rel_file_path	timestamp	dirty	build	touch_build	node_x	node_y
 /PATCHDECK/DMX	base	tox	PATCHDECK/DMX.tox	2026-10-27 12:12:39 UTC		5	2025.33230	725	475	0.5500,0.5500,0.5500
 /PATCHDECK/CTRL/led_controller	base	tox	PATCHDECK/CTRL/led_controller.tox	2026-10-27 12:12:04 UTC		1	2025.33230	1675	10199	0.5500,0.5500,0.5500
 /PATCHDECK/CTRL	base	tox	PATCHDECK/CTRL.tox	2026-10-27 12:12:39 UTC		6	2025.33230	0	300	0.5500,0.5500,0.5500
-/PATCHDECK	container	tox	PATCHDECK.tox	2026-10-27 13:03:20 UTC		27	2025.33230	-125	75	0.5500,0.5500,0.5500
+/PATCHDECK	container	tox	PATCHDECK.tox	2026-10-28 10:20:42 UTC		30	2025.33230	-125	75	0.5500,0.5500,0.5500
 /gaia_client/topic_dream	text	py	gaia_client/topic_dream.py	2026-10-27 12:12:37 UTC				400	-100	0.9000,0.3000,0.4000
 /gaia_client/topic_canvas	text	py	gaia_client/topic_canvas.py	2026-10-27 12:12:37 UTC				400	700	0.9000,0.3000,0.4000
 /gaia_client/topic_brainstate	text	py	gaia_client/topic_brainstate.py	2026-10-27 12:12:37 UTC				400	300	0.9000,0.3000,0.4000
