@@ -40,10 +40,10 @@
       },
       "touchdesignerActive": true,
       "dmxPalette": {
-        "a": "Red",
+        "a": "Warm",
         "b": "Red"
       },
-      "audioKick": 0
+      "audioKick": 1
     },
     "ingresso": {
       "presence_count": 1,
@@ -75,187 +75,77 @@
   "memories": [],
   "diary": [
     {
-      "ts": 1793095809873,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "3",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793095819901,
+      "ts": 1793173645280,
       "source": "touchdesigner",
       "category": "clip",
       "value": {
         "patch": "1",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793096079351,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "3",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793096089417,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "1",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793096348886,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "3",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793096358954,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "1",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793096618402,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "3",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793096628333,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "1",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793096887880,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "3",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793096897864,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "1",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793097157384,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "3",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793097167316,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "1",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793097198182,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "3",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793102365281,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "12",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793104197359,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "26",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793104227391,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "25",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793104257396,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "1",
-        "deck": "A"
-      },
-      "person": null
-    },
-    {
-      "ts": 1793104674426,
-      "source": "touchdesigner",
-      "category": "clip",
-      "value": {
-        "patch": "2",
         "deck": "B"
       },
       "person": null
     },
     {
-      "ts": 1793104677236,
+      "ts": 1793174861264,
+      "source": "touchdesigner",
+      "category": "clip",
+      "value": {
+        "patch": "1",
+        "deck": "B"
+      },
+      "person": null
+    },
+    {
+      "ts": 1793176346856,
+      "source": "touchdesigner",
+      "category": "clip",
+      "value": {
+        "patch": "1",
+        "deck": "B"
+      },
+      "person": null
+    },
+    {
+      "ts": 1793178865401,
+      "source": "touchdesigner",
+      "category": "clip",
+      "value": {
+        "patch": "3",
+        "deck": "A"
+      },
+      "person": null
+    },
+    {
+      "ts": 1793182858100,
+      "source": "touchdesigner",
+      "category": "clip",
+      "value": {
+        "patch": "1",
+        "deck": "B"
+      },
+      "person": null
+    },
+    {
+      "ts": 1793184088808,
+      "source": "touchdesigner",
+      "category": "clip",
+      "value": {
+        "patch": "1",
+        "deck": "A"
+      },
+      "person": null
+    },
+    {
+      "ts": 1793184118846,
+      "source": "touchdesigner",
+      "category": "clip",
+      "value": {
+        "patch": "6",
+        "deck": "B"
+      },
+      "person": null
+    },
+    {
+      "ts": 1793184148847,
       "source": "touchdesigner",
       "category": "clip",
       "value": {
@@ -265,16 +155,26 @@
       "person": null
     },
     {
-      "ts": 1793104938092,
+      "ts": 1793184178872,
       "source": "touchdesigner",
       "category": "clip",
       "value": {
-        "patch": "1",
+        "patch": "10",
         "deck": "A"
+      },
+      "person": null
+    },
+    {
+      "ts": 1793190168614,
+      "source": "touchdesigner",
+      "category": "clip",
+      "value": {
+        "patch": "3",
+        "deck": "B"
       },
       "person": null
     }
   ],
   "voiceCommands": [],
-  "ts": 1793104962716
+  "ts": 1793190227153
 }

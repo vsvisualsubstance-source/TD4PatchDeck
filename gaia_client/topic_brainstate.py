@@ -34,7 +34,7 @@
         "chair": 1,
         "keyboard": 1
       },
-      "lastUpdate": 1793104952581,
+      "lastUpdate": 1793190203147,
       "people": [
         "unknown_1792053668225_0"
       ],
@@ -73,10 +73,10 @@
       "_activityCandidateSince": 1792053648101,
       "_activityCommitted": "working",
       "_touchdesigner": true,
-      "lastTd": 1793104952581,
-      "dmxPaletteA": "Red",
-      "audioKick": 0,
-      "audioKickTs": 1793104961819,
+      "lastTd": 1793190203147,
+      "dmxPaletteA": "Warm",
+      "audioKick": 1,
+      "audioKickTs": 1793190227745,
       "dmxPaletteB": "Red"
     },
     "ingresso": {
@@ -124,5 +124,5 @@
       "_activityCommitted": "present"
     }
   },
-  "ts": 1793104962691
+  "ts": 1793190228302
 }
