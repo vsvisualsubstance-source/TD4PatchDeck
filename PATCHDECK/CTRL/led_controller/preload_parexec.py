@@ -9,3 +9,9 @@ def onPulse(par):
 	elif par.name == 'Stoppreload':
 		par.owner.ext.PATCHDECKCTRLledcontroller1.stopPreload()
 	return
+
+
+def onValueChange(par, prev):
+	if par.name == 'Preloadtimeline' and par.eval():
+		par.owner.ext.PATCHDECKCTRLledcontroller1.preloadCueTable()
+	return

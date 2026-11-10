@@ -8,6 +8,11 @@
         self.status_table = op('/PATCHDECK/UI/MAIN_INTERFACE/MIDI_status') # Cache per performance
         self.max_extra_active = 4  # patch extra oltre Deck A/B, sempre selezionabili da Akai
         self.vram_budget = 0.70    # warm pool: soglia VRAM oltre cui si spengono le patch "pronte" (LRU)
+        self.preload_frame_budget_ms = 8.0  # preload: tempo massimo di cook per frame
+        self._preload = None       # stato del preload in corso (None = fermo)
+        self._preload_gen = 0      # invalida i passi gia' schedulati di un preload precedente
+        self._cue_table = None     # ultima tabella cue della Plancia: {'ts', 'entries'}
+        self._cue_table_errors = {}  # patch -> motivo per cui non puo' essere pronta
 
     # ---------------------------
     # Imposta l'offset UI
@@ -104,6 +109,11 @@
             warm.remove(patch_num)
             self._setWarm(warm)
 
+    def _hasAllocatedMemory(self, patch_comp):
+        """True se almeno un TOP della patch ha memoria GPU allocata. Le
+        thumbnail sono TOP locked e non contano."""
+        return any(t.gpuMemory > 0 for t in patch_comp.findChildren(type=TOP) if not t.lock)
+
     def retirePatch(self, patch_num):
         """Patch non piu' autorizzata (lasciata da un deck o da uno slot
         extra): la parcheggia nel warm pool invece di spegnerla, poi
@@ -115,6 +125,11 @@
             return
         if not bool(patch_comp.allowCooking):
             return  # mai accesa/gia' spenta: niente da tenere in caldo
+        if not self._hasAllocatedMemory(patch_comp):
+            # Non ha mai cucinato davvero: non puo' risultare "pronta".
+            patch_comp.allowCooking = False
+            self.releaseFromWarm(patch_num)
+            return
         warm = [n for n in self._getWarm() if n != patch_num]
         warm.append(patch_num)
         self._setWarm(warm)
@@ -155,14 +170,17 @@
             self._setWarm(keep)
             print(f"[CTRL] ❄️ VRAM oltre {int(self.vram_budget * 100)}%: spente dal warm pool {evicted}")
             self.refreshAll()
+            self._publishCueTableStates()
         return evicted
 
     # ---------------------------
-    # Preload scaletta: cuoce una patch alla volta (shader, texture, file,
-    # device) e la lascia nel warm pool, cosi' durante lo show il primo
-    # caricamento su un deck non causa freeze. Va lanciato a sala vuota:
-    # ogni patch pesante blocca il frame per il tempo del suo primo cook.
-    # Si ferma da solo quando la VRAM raggiunge self.vram_budget.
+    # Preload scaletta: cuoce una patch alla volta, da monte a valle, con un
+    # limite di tempo per frame (preload_frame_budget_ms), cosi' il primo cook
+    # si spalma su molti frame invece di bloccarne uno. Un singolo operatore
+    # non si spezza: le patch con nodi molto pesanti possono ancora scattare.
+    # La patch diventa "pronta" solo se ha davvero memoria allocata.
+    # Si ferma quando la VRAM raggiunge self.vram_budget, dopo aver spento le
+    # patch del warm pool che non servono a questo preload.
     # ---------------------------
     def _parseSetlist(self, text):
         import re
@@ -188,66 +206,287 @@
         print(f"[PRELOAD] {text}")
         if hasattr(self.ownerComp.par, 'Preloadstatus'):
             self.ownerComp.par.Preloadstatus = text
+        self._publishCueTableStates()
+
+    def prepareAfterStart(self):
+        """All'apertura la VRAM e' vuota: toglie le patch "pronte" rimaste
+        salvate nel progetto, poi precarica la timeline della Plancia se c'e',
+        altrimenti la Setlist se Preloadonstart e' attivo."""
+        self.reconcileCooking()
+        if self._isTimelinePreloadEnabled() and self._cue_table and self._cue_table['entries']:
+            self.preloadCueTable()
+        elif self.ownerComp.par.Preloadonstart.eval():
+            self.preloadSetlist()
 
     def preloadSetlist(self, setlist=None):
         """Avvia il preload. setlist: stringa tipo '5 11 26-30 40' (vuota =
         tutte le patch). Default: parametro Setlist del led_controller."""
         if setlist is None:
             setlist = self.ownerComp.par.Setlist.eval() if hasattr(self.ownerComp.par, 'Setlist') else ''
-        queue = self._parseSetlist(setlist)
-        self.ownerComp.store('preload_queue', queue)
-        self.ownerComp.store('preload_done', [])
+        self._startPreload(self._parseSetlist(setlist))
+
+    def _startPreload(self, queue, from_timeline=False):
+        self._abandonCurrentPreload()
+        self._preload_gen += 1
+        self._preload = {'queue': list(queue), 'wanted': set(queue), 'done': [], 'errors': [],
+                         'current': None, 'paths': [], 'index': 0, 'from_timeline': from_timeline}
         self._setPreloadStatus(f"avvio: {len(queue)} patch in coda")
-        run("me.ext.PATCHDECKCTRLledcontroller1._preloadStep()",
-            fromOP=self.ownerComp, delayFrames=2)
+        self._schedulePreloadStep(2)
 
-    def stopPreload(self):
-        self.ownerComp.store('preload_queue', [])
-        self._setPreloadStatus("interrotto")
+    def stopPreload(self, reason="interrotto"):
+        self._abandonCurrentPreload()
+        self._preload = None
+        self._preload_gen += 1
+        self._setPreloadStatus(reason)
+        self.refreshAll()
 
-    def _preloadStep(self):
-        queue = list(self.ownerComp.fetch('preload_queue', [], search=False))
-        done = list(self.ownerComp.fetch('preload_done', [], search=False))
-        if not queue:
-            if done:
-                self._setPreloadStatus(f"completato: {len(done)} patch pronte {done}")
-            self.refreshAll()
+    def _abandonCurrentPreload(self):
+        """Spegne la patch lasciata a meta' da un preload interrotto."""
+        state = self._preload
+        if not state or state['current'] is None:
+            return
+        num = state['current']
+        state['current'] = None
+        comp = op(f'/PATCHDECK/PATCHES/X{num}')
+        if comp and not self._isOnDeck(num) and num not in self._getExtraActive():
+            comp.allowCooking = False
+
+    def _schedulePreloadStep(self, frames):
+        run(f"me.ext.PATCHDECKCTRLledcontroller1._preloadStep({self._preload_gen})",
+            fromOP=self.ownerComp, delayFrames=frames)
+
+    def _isVramFull(self):
+        perf = self.ownerComp.op('perform_vram')
+        if not perf or float(perf['total_gpu_mem']) <= 0:
+            return False
+        return float(perf['gpu_mem_used']) >= float(perf['total_gpu_mem']) * self.vram_budget
+
+    def _evictWarmOutside(self, wanted):
+        """Spegne la patch warm meno recente che non serve a questo preload.
+        Ritorna True se ha liberato qualcosa."""
+        for n in self._getWarm():
+            if n not in wanted and not self._isOnDeck(n) and n not in self._getExtraActive():
+                comp = op(f'/PATCHDECK/PATCHES/X{n}')
+                if comp:
+                    comp.allowCooking = False
+                self.releaseFromWarm(n)
+                self._updateLedForPatch(n)
+                return True
+        return False
+
+    def _updateLedForPatch(self, patch_num):
+        button_idx = patch_num - 1 - self.ui_offset
+        if 0 <= button_idx < self.num_patches:
+            self.updateLed(button_idx)
+
+    def _preloadCookOrder(self, patch_comp):
+        """Percorsi degli operatori da cuocere, da monte a valle. Le TOP stanno
+        per ultime: Render e compagni trovano geometrie e canali gia' pronti."""
+        rank = {'CHOP': 0, 'SOP': 1, 'POP': 1, 'MAT': 2, 'COMP': 3, 'TOP': 4}
+        depth = {}
+        visiting = set()
+
+        def depthOf(o):
+            if o.path in depth:
+                return depth[o.path]
+            if o.path in visiting:
+                return 0
+            visiting.add(o.path)
+            value = 1 + max((depthOf(i) for i in o.inputs), default=-1)
+            visiting.discard(o.path)
+            depth[o.path] = value
+            return value
+
+        targets = [o for o in patch_comp.findChildren()
+                   if o.family in rank and not o.lock and '/annotation/' not in o.path
+                   and (o.family != 'COMP' or o.isObject)]
+        targets.sort(key=lambda o: (rank[o.family], depthOf(o)))
+        return [o.path for o in targets]
+
+    def _beginPreloadPatch(self, state, num):
+        comp = op(f'/PATCHDECK/PATCHES/X{num}')
+        if not comp:
+            state['errors'].append(num)
+            return
+        if bool(comp.allowCooking) and self._hasAllocatedMemory(comp):
+            state['done'].append(num)  # gia' pronta, o gia' su un deck
+            return
+        comp.allowCooking = True
+        state['current'] = num
+        state['paths'] = self._preloadCookOrder(comp)
+        state['index'] = 0
+        self._updateLedForPatch(num)
+
+    def _cookPreloadChunk(self, state):
+        """Cuoce operatori della patch corrente finche' non scade il tempo del frame."""
+        import time
+        deadline = time.perf_counter() + self.preload_frame_budget_ms / 1000.0
+        paths = state['paths']
+        while state['index'] < len(paths):
+            target = op(paths[state['index']])
+            state['index'] += 1
+            if target is not None:
+                try:
+                    target.cook(force=True)
+                except Exception as e:
+                    print(f"[PRELOAD] {target.path}: {e}")
+            if time.perf_counter() >= deadline:
+                break
+
+    def _completePreloadPatch(self, state):
+        num = state['current']
+        state['current'] = None
+        comp = op(f'/PATCHDECK/PATCHES/X{num}')
+        protected = self._isOnDeck(num) or num in self._getExtraActive()
+        if comp and bool(comp.allowCooking) and self._hasAllocatedMemory(comp):
+            if not protected:
+                self._setWarm([n for n in self._getWarm() if n != num] + [num])
+            state['done'].append(num)
+            self._setPreloadStatus(f"X{num} pronta ({len(state['done'])} fatte, {len(state['queue'])} in coda)")
+        else:
+            if comp and not protected:
+                comp.allowCooking = False
+            state['errors'].append(num)
+            self._cue_table_errors[num] = "nessuna memoria allocata dopo il preload"
+            self._setPreloadStatus(f"X{num} NON pronta: nessuna memoria allocata")
+        self._updateLedForPatch(num)
+
+    def _finishPreload(self, state, excluded=None):
+        self._preload = None
+        if excluded:
+            perf = self.ownerComp.op('perform_vram')
+            percent = int(float(perf['gpu_mem_used']) / float(perf['total_gpu_mem']) * 100)
+            summary = f"VRAM al {percent}%: fermato, pronte {state['done']}, escluse {excluded}"
+        else:
+            summary = f"completato: {len(state['done'])} patch pronte {state['done']}"
+        if state['errors']:
+            summary += f", errori {state['errors']}"
+        self._setPreloadStatus(summary)
+        self.refreshAll()
+
+    def _preloadStep(self, gen):
+        state = self._preload
+        if state is None or gen != self._preload_gen:
+            return
+        patches_comp = op('/PATCHDECK/PATCHES')
+        if not patches_comp or not bool(patches_comp.allowCooking):
+            self.stopPreload("interrotto: patch disattivate (panic)")
             return
 
-        perf = self.ownerComp.op('perform_vram')
-        if perf and float(perf['total_gpu_mem']) > 0:
-            used = float(perf['gpu_mem_used'])
-            total = float(perf['total_gpu_mem'])
-            if used >= total * self.vram_budget:
-                self.ownerComp.store('preload_queue', [])
-                self._setPreloadStatus(
-                    f"VRAM al {int(used / total * 100)}%: fermato, pronte {done}, escluse {queue}")
-                self.refreshAll()
+        if state['current'] is not None:
+            comp = op(f"/PATCHDECK/PATCHES/X{state['current']}")
+            if not comp or not bool(comp.allowCooking):
+                state['errors'].append(state['current'])  # spenta mentre si caricava
+                state['current'] = None
+            elif state['index'] >= len(state['paths']):
+                # Un frame dopo l'ultimo cook: la memoria GPU e' aggiornata.
+                self._completePreloadPatch(state)
+                self._schedulePreloadStep(10)  # aggiorna il Perform CHOP prima del controllo VRAM
+                return
+            else:
+                self._cookPreloadChunk(state)
+                self._schedulePreloadStep(1)
                 return
 
-        patch_num = queue.pop(0)
-        self.ownerComp.store('preload_queue', queue)
-        patch_comp = op(f'/PATCHDECK/PATCHES/X{patch_num}')
-        if patch_comp:
-            patch_comp.allowCooking = True
-            for o in patch_comp.findChildren():
-                if o.family in ('TOP', 'POP'):
-                    try:
-                        o.cook(force=True)
-                    except Exception as e:
-                        print(f"[PRELOAD] X{patch_num} {o.path}: {e}")
-            if not self._isOnDeck(patch_num) and patch_num not in self._getExtraActive():
-                warm = [n for n in self._getWarm() if n != patch_num]
-                warm.append(patch_num)
-                self._setWarm(warm)
-            done.append(patch_num)
-            self.ownerComp.store('preload_done', done)
-            self._setPreloadStatus(f"X{patch_num} pronta ({len(done)} fatte, {len(queue)} in coda)")
+        if not state['queue']:
+            self._finishPreload(state)
+            return
+        if self._isVramFull():
+            if self._evictWarmOutside(state['wanted']):
+                self._schedulePreloadStep(10)
+                return
+            self._finishPreload(state, excluded=state['queue'])
+            return
+        self._beginPreloadPatch(state, state['queue'].pop(0))
+        self._schedulePreloadStep(1)
 
-        # Pausa di qualche frame: lascia respirare UI/uscita e aggiorna il
-        # Perform CHOP prima del controllo VRAM successivo.
-        run("me.ext.PATCHDECKCTRLledcontroller1._preloadStep()",
-            fromOP=self.ownerComp, delayFrames=10)
+    # ---------------------------
+    # Timeline video della Plancia (GAIA_INTERFACE, OPS 56): la tabella
+    # retained gaia/show/video/cue_table elenca le patch dello show in ordine
+    # di primo uso. Le teniamo pronte e pubblichiamo lo stato di ognuna.
+    # ---------------------------
+    def _isTimelinePreloadEnabled(self):
+        return bool(self.ownerComp.par.Preloadtimeline.eval())
+
+    def _patchLabel(self, patch_num):
+        services = op('/PATCHDECK/gaia_services/patchdeck_services')
+        return services.module._patch_label(patch_num) if services else f'X{patch_num}'
+
+    def applyCueTable(self, payload):
+        """Riceve la tabella cue (JSON) e, dopo l'avvio, ne precarica le patch."""
+        import json
+        try:
+            table = json.loads(payload)
+            entries = sorted(table.get('patches') or [], key=lambda e: float(e.get('first_time', 0)))
+            for entry in entries:
+                entry['patch'] = int(entry['patch'])
+        except (ValueError, TypeError, KeyError, AttributeError) as e:
+            print(f"[PRELOAD] Tabella cue non valida: {e}")
+            return
+        self._cue_table = {'ts': table.get('ts'), 'entries': entries}
+        print(f"[PRELOAD] Tabella cue ricevuta: patch {[e['patch'] for e in entries]}")
+        # Nei primi secondi Embody e APC40 si stanno ancora inizializzando:
+        # ci pensa prepareAfterStart.
+        if absTime.seconds < 12:
+            return
+        self.preloadCueTable()
+
+    def preloadCueTable(self):
+        """Precarica le patch dell'ultima tabella cue, in ordine di primo uso."""
+        table = self._cue_table
+        if table is None:
+            return
+        self._cue_table_errors = {}
+        queue = []
+        for entry in table['entries']:
+            num = entry['patch']
+            expected = str(entry.get('name') or '').strip()
+            actual = self._patchLabel(num)
+            if not op(f'/PATCHDECK/PATCHES/X{num}'):
+                continue  # pubblicata come "missing"
+            if expected and expected.lower() != actual.lower():
+                self._cue_table_errors[num] = f"nome diverso: tabella '{expected}', PatchDeck '{actual}'"
+                continue
+            queue.append(num)
+
+        running = self._preload
+        if not self._isTimelinePreloadEnabled():
+            self._publishCueTableStates()
+        elif queue and running and running['from_timeline'] and running['wanted'] == set(queue):
+            self._publishCueTableStates()  # gia' in corso: non ripartire da capo
+        elif queue:
+            self._startPreload(queue, from_timeline=True)
+        elif running and running['from_timeline']:
+            self.stopPreload("timeline vuota")
+        else:
+            self._publishCueTableStates()
+
+    def _cueTablePatchState(self, num):
+        """Stato di una patch della tabella: (ready|loading|missing|error, motivo)."""
+        if num in self._cue_table_errors:
+            return 'error', self._cue_table_errors[num]
+        comp = op(f'/PATCHDECK/PATCHES/X{num}')
+        if not comp:
+            return 'missing', 'patch inesistente in PatchDeck'
+        running = self._preload
+        if running and (running['current'] == num or num in running['queue']):
+            return 'loading', ''
+        if bool(comp.allowCooking) and self._hasAllocatedMemory(comp):
+            return 'ready', ''
+        return 'missing', 'non in memoria'
+
+    def _publishCueTableStates(self):
+        """Pubblica lo stato delle patch della tabella (retained)."""
+        table = self._cue_table
+        services = op('/PATCHDECK/gaia_services/patchdeck_services')
+        if not table or not services:
+            return
+        patches = []
+        for entry in table['entries']:
+            num = entry['patch']
+            state, reason = self._cueTablePatchState(num)
+            patches.append({'patch': num, 'state': state, 'name': self._patchLabel(num), 'error': reason})
+        services.module.publish_patch_preload(table['ts'], patches)
 
     # ---------------------------
     # Percorso remoto (Gaia/MQTT) -- indexexec.py resta il percorso dei
@@ -324,8 +563,18 @@
         table = self.status_table
         deck_a = str(table[1, 0].val or "0") if table else "0"
         deck_b = str(table[1, 1].val or "0") if table else "0"
+        # Warm: restano solo le patch accese e con memoria davvero allocata.
+        warm = []
+        for n in self._getWarm():
+            comp = op(f'/PATCHDECK/PATCHES/X{n}')
+            if comp and bool(comp.allowCooking) and self._hasAllocatedMemory(comp):
+                warm.append(n)
+        self._setWarm(warm)
+
         authorized = set(str(n) for n in self._getExtraActive())
-        authorized.update(str(n) for n in self._getWarm())
+        authorized.update(str(n) for n in warm)
+        if self._preload and self._preload['current'] is not None:
+            authorized.add(str(self._preload['current']))
         authorized.add(deck_a)
         authorized.add(deck_b)
         authorized.discard("0")
@@ -447,6 +696,8 @@
             color = 21  # verde
         elif on_deck and not cooking:
             color = 9   # arancione
+        elif cooking and self._preload and self._preload['current'] == patch_num:
+            color = 9   # arancione: preload in corso
         elif cooking and patch_num in self._getWarm():
             color = 13  # giallo: pronta nel warm pool (non in onda)
         elif cooking:

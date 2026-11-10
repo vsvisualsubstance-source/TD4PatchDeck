@@ -308,6 +308,18 @@ def publish_all_thumbs():
 	return sent
 
 
+def publish_patch_preload(table_ts, patches):
+	"""Pubblica retained lo stato di precarico delle patch della timeline
+	video su gaia/devices/{id}/patch_preload (GAIA_INTERFACE, OPS 56)."""
+	target = _mqtt_target()
+	if target is None:
+		return False
+	dat, device_id = target
+	payload = {'v': 1, 'ts': int(time.time() * 1000), 'table_ts': table_ts, 'patches': patches}
+	dat.publish('gaia/devices/%s/patch_preload' % device_id, json.dumps(payload).encode('utf-8'), retain=True)
+	return True
+
+
 def publish_matrix():
 	"""Pubblica la matrice servizi su MQTT, retained -- sopravvive a
 	riconnessioni del device, resta sul broker finche' non viene
